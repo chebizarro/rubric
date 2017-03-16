@@ -2,6 +2,7 @@
 lib_LTLIBRARIES = librubric.la
 
 librubric_la_SOURCES = \
+	assemblyinfo.vala \
 	src/application/application.vala \
 	src/application/menu-manager.vala \
 	src/application/menu-extension.vala \

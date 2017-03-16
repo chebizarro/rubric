@@ -13,6 +13,9 @@
 		<glade-widget-class name="RubricGtkApplication" generic-name="Application" title="Application"  parent="GtkApplication"/>
 		<glade-widget-class name="RubricGtkShell" generic-name="Shell" title="Shell"  parent="GtkApplicationWindow"/>
 		<glade-widget-class name="RubricGtkMenuAdapterFactory" generic-name="MenuAdapterFactory" title="MenuAdapterFactory"  top-level="True"/>
+		<glade-widget-class name="RubricGtkMenuButtonAdapter" generic-name="MenuButtonAdapter" title="MenuButtonAdapter"  parent="RubricMenuAdapter"/>
+		<glade-widget-class name="RubricGtkPopoverAdapter" generic-name="PopoverAdapter" title="PopoverAdapter"  parent="RubricMenuAdapter"/>
+		<glade-widget-class name="RubricGtkMenuShellAdapter" generic-name="MenuShellAdapter" title="MenuShellAdapter"  parent="RubricMenuAdapter"/>
 		<glade-widget-class name="RubricGtkGtkBuilderResourceHandler" generic-name="GtkBuilderResourceHandler" title="GtkBuilderResourceHandler"  top-level="True"/>
 	</glade-widget-classes>
 
@@ -30,6 +33,9 @@
 		<glade-widget-class-ref name="RubricGtkApplication" />
 		<glade-widget-class-ref name="RubricGtkShell" />
 		<glade-widget-class-ref name="RubricGtkMenuAdapterFactory" />
+		<glade-widget-class-ref name="RubricGtkMenuButtonAdapter" />
+		<glade-widget-class-ref name="RubricGtkPopoverAdapter" />
+		<glade-widget-class-ref name="RubricGtkMenuShellAdapter" />
 		<glade-widget-class-ref name="RubricGtkGtkBuilderResourceHandler" />
 	</glade-widget-group>
 </glade-catalog>

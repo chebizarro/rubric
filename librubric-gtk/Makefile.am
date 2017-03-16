@@ -2,6 +2,7 @@
 lib_LTLIBRARIES = librubric-gtk.la
 
 librubric_gtk_la_SOURCES = \
+	assemblyinfo.vala \
 	src/application/application.vala \
 	src/application/shell.vala \
 	src/application/menu-adapter-factory.vala \
@@ -82,6 +83,7 @@ if HAVE_INTROSPECTION
 
 RubricGtk-1.0.typelib: RubricGtk-1.0.gir
 	g-ir-compiler \
+		--includedir=$(top_builddir)/librubric \
 		--shared-library=librubric-gtk.so.0 \
 		--output=$@ \
 		$<
