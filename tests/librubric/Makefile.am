@@ -12,7 +12,9 @@ test_programs = test-librubric-1.0
 test_librubric_1_0_SOURCES =  \
 	container/test-objects.vala \
 	container/container.vala \
-	collections/iterator.vala
+	collections/iterator.vala \
+	application/menu-extension.vala \
+	application/menu-manager.vala
 
 test_librubric_1_0_VALAFLAGS = \
 	-g \
