@@ -6,4 +6,7 @@ EXTRA_DIST = \
 	tap-test \
 	tap-driver.sh
 
+NO_DIST = \
+	intltool.m4
+
 -include $(top_srcdir)/git.mk

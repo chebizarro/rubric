@@ -292,7 +292,7 @@ AC_CONFIG_FILES([
 	tools/Makefile
 	tests/Makefile
 	tests/librubric/Makefile
-	tests/librubric-orm/Makefile
+	tests/librubric-gtk/Makefile
 	po/Makefile.in
 	examples/Makefile
 	examples/tienda/Makefile

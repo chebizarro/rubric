@@ -17,35 +17,35 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
  
-namespace Rubric.Tests
+namespace Rubric.Tests {
 
-	public class MenuExtension : Valadate.Framework.TestCase {
+	public class MenuExtensionTests : Valadate.Framework.TestCase {
 		
 		private string menubar =
-	"""<section>
-		<submenu>
-			<attribute name="label">_File</attribute>
-			<attribute name="id">file-section</attribute>
-		</submenu>
-		<submenu>
-			<attribute name="label">View</attribute>
-			<attribute name="id">view-section</attribute>
-			<section>
-				<attribute name="id">view-section-plugins</attribute>
-			</section>
-			<section>
-				<attribute name="id">view-section-windows</attribute>
-			</section>
-		</submenu>
-		<submenu>
-			<attribute name="label">Tools</attribute>
-			<attribute name="id">tools-section</attribute>
-			<section>
-				<attribute name="id">tools-section-1</attribute>
-			</section>
-		</submenu>
-	</section>
-	""";	
+"""<section>
+	<submenu>
+		<attribute name="label">_File</attribute>
+		<attribute name="id">file-section</attribute>
+	</submenu>
+	<submenu>
+		<attribute name="label">View</attribute>
+		<attribute name="id">view-section</attribute>
+		<section>
+			<attribute name="id">view-section-plugins</attribute>
+		</section>
+		<section>
+			<attribute name="id">view-section-windows</attribute>
+		</section>
+	</submenu>
+	<submenu>
+		<attribute name="label">Tools</attribute>
+		<attribute name="id">tools-section</attribute>
+		<section>
+			<attribute name="id">tools-section-1</attribute>
+		</section>
+	</submenu>
+</section>
+""";	
 
 		private string appmenu =
 	"""<section>
@@ -101,55 +101,55 @@ namespace Rubric.Tests
 		public void test_menu_extension_append_menu_item () {
 
 			string test_result = """<section>
-		<submenu>
-			<attribute name="label">_File</attribute>
+	<submenu>
+		<attribute name="label">_File</attribute>
+		<attribute name="id">file-section</attribute>
+	</submenu>
+	<submenu>
+		<attribute name="label">View</attribute>
+		<attribute name="id">view-section</attribute>
+		<section>
+			<attribute name="id">view-section-plugins</attribute>
+		</section>
+		<section>
+			<attribute name="id">view-section-windows</attribute>
+		</section>
+		<section>
+			<attribute name="rubric-merge-id">2</attribute>
 			<attribute name="id">file-section</attribute>
-		</submenu>
-		<submenu>
-			<attribute name="label">View</attribute>
-			<attribute name="id">view-section</attribute>
-			<section>
-				<attribute name="id">view-section-plugins</attribute>
-			</section>
-			<section>
-				<attribute name="id">view-section-windows</attribute>
-			</section>
-			<section>
-				<attribute name="valarade-merge-id">2</attribute>
-				<attribute name="id">file-section</attribute>
-				<item>
-					<attribute name="accel"><Primary>n</attribute>
-					<attribute name="label">_New</attribute>
-					<attribute name="action">win.file_new</attribute>
-				</item>
-				<submenu>
-					<attribute name="label">New</attribute>
-					<section>
-						<attribute name="id">wizard-section</attribute>
-					</section>
-				</submenu>
-				<item>
-					<attribute name="accel"><Primary>o</attribute>
-					<attribute name="label">_Open</attribute>
-					<attribute name="action">win.file_open</attribute>
-				</item>
-				<submenu>
-					<attribute name="label">Open Recent</attribute>
-					<attribute name="id">recent-section</attribute>
-					<section>
-					</section>
-				</submenu>
-			</section>
-		</submenu>
-		<submenu>
-			<attribute name="label">Tools</attribute>
-			<attribute name="id">tools-section</attribute>
-			<section>
-				<attribute name="id">tools-section-1</attribute>
-			</section>
-		</submenu>
-	</section>
-	""";
+			<item>
+				<attribute name="accel"><Primary>n</attribute>
+				<attribute name="label">_New</attribute>
+				<attribute name="action">win.file_new</attribute>
+			</item>
+			<submenu>
+				<attribute name="label">New</attribute>
+				<section>
+					<attribute name="id">wizard-section</attribute>
+				</section>
+			</submenu>
+			<item>
+				<attribute name="accel"><Primary>o</attribute>
+				<attribute name="label">_Open</attribute>
+				<attribute name="action">win.file_open</attribute>
+			</item>
+			<submenu>
+				<attribute name="label">Open Recent</attribute>
+				<attribute name="id">recent-section</attribute>
+				<section>
+				</section>
+			</submenu>
+		</section>
+	</submenu>
+	<submenu>
+		<attribute name="label">Tools</attribute>
+		<attribute name="id">tools-section</attribute>
+		<section>
+			<attribute name="id">tools-section-1</attribute>
+		</section>
+	</submenu>
+</section>
+""";
 
 			var menubldrstr = "<interface><menu id=\"menubar\">%s</menu></interface>".printf(this.menubar);
 			var menubar_builder = new Gtk.Builder.from_string (menubldrstr, menubldrstr.length);
@@ -169,55 +169,55 @@ namespace Rubric.Tests
 		public void test_menu_extension_prepend_menu_item () {
 
 			string test_result = """<section>
-		<submenu>
-			<attribute name="label">_File</attribute>
+	<submenu>
+		<attribute name="label">_File</attribute>
+		<attribute name="id">file-section</attribute>
+	</submenu>
+	<submenu>
+		<attribute name="label">View</attribute>
+		<attribute name="id">view-section</attribute>
+		<section>
+			<attribute name="rubric-merge-id">3</attribute>
 			<attribute name="id">file-section</attribute>
-		</submenu>
-		<submenu>
-			<attribute name="label">View</attribute>
-			<attribute name="id">view-section</attribute>
-			<section>
-				<attribute name="valarade-merge-id">3</attribute>
-				<attribute name="id">file-section</attribute>
-				<item>
-					<attribute name="accel"><Primary>n</attribute>
-					<attribute name="label">_New</attribute>
-					<attribute name="action">win.file_new</attribute>
-				</item>
-				<submenu>
-					<attribute name="label">New</attribute>
-					<section>
-						<attribute name="id">wizard-section</attribute>
-					</section>
-				</submenu>
-				<item>
-					<attribute name="accel"><Primary>o</attribute>
-					<attribute name="label">_Open</attribute>
-					<attribute name="action">win.file_open</attribute>
-				</item>
-				<submenu>
-					<attribute name="label">Open Recent</attribute>
-					<attribute name="id">recent-section</attribute>
-					<section>
-					</section>
-				</submenu>
-			</section>
-			<section>
-				<attribute name="id">view-section-plugins</attribute>
-			</section>
-			<section>
-				<attribute name="id">view-section-windows</attribute>
-			</section>
-		</submenu>
-		<submenu>
-			<attribute name="label">Tools</attribute>
-			<attribute name="id">tools-section</attribute>
-			<section>
-				<attribute name="id">tools-section-1</attribute>
-			</section>
-		</submenu>
-	</section>
-	""";
+			<item>
+				<attribute name="accel"><Primary>n</attribute>
+				<attribute name="label">_New</attribute>
+				<attribute name="action">win.file_new</attribute>
+			</item>
+			<submenu>
+				<attribute name="label">New</attribute>
+				<section>
+					<attribute name="id">wizard-section</attribute>
+				</section>
+			</submenu>
+			<item>
+				<attribute name="accel"><Primary>o</attribute>
+				<attribute name="label">_Open</attribute>
+				<attribute name="action">win.file_open</attribute>
+			</item>
+			<submenu>
+				<attribute name="label">Open Recent</attribute>
+				<attribute name="id">recent-section</attribute>
+				<section>
+				</section>
+			</submenu>
+		</section>
+		<section>
+			<attribute name="id">view-section-plugins</attribute>
+		</section>
+		<section>
+			<attribute name="id">view-section-windows</attribute>
+		</section>
+	</submenu>
+	<submenu>
+		<attribute name="label">Tools</attribute>
+		<attribute name="id">tools-section</attribute>
+		<section>
+			<attribute name="id">tools-section-1</attribute>
+		</section>
+	</submenu>
+</section>
+""";
 
 			var menubldrstr = "<interface><menu id=\"menubar\">%s</menu></interface>".printf(this.menubar);
 			var menubar_builder = new Gtk.Builder.from_string (menubldrstr, menubldrstr.length);
@@ -237,55 +237,55 @@ namespace Rubric.Tests
 		public void menu_extension_remove_items () {
 
 			string test_result = """<section>
-		<submenu>
-			<attribute name="label">_File</attribute>
+	<submenu>
+		<attribute name="label">_File</attribute>
+		<attribute name="id">file-section</attribute>
+	</submenu>
+	<submenu>
+		<attribute name="label">View</attribute>
+		<attribute name="id">view-section</attribute>
+		<section>
+			<attribute name="rubric-merge-id">4</attribute>
 			<attribute name="id">file-section</attribute>
-		</submenu>
-		<submenu>
-			<attribute name="label">View</attribute>
-			<attribute name="id">view-section</attribute>
-			<section>
-				<attribute name="valarade-merge-id">4</attribute>
-				<attribute name="id">file-section</attribute>
-				<item>
-					<attribute name="accel"><Primary>n</attribute>
-					<attribute name="label">_New</attribute>
-					<attribute name="action">win.file_new</attribute>
-				</item>
-				<submenu>
-					<attribute name="label">New</attribute>
-					<section>
-						<attribute name="id">wizard-section</attribute>
-					</section>
-				</submenu>
-				<item>
-					<attribute name="accel"><Primary>o</attribute>
-					<attribute name="label">_Open</attribute>
-					<attribute name="action">win.file_open</attribute>
-				</item>
-				<submenu>
-					<attribute name="label">Open Recent</attribute>
-					<attribute name="id">recent-section</attribute>
-					<section>
-					</section>
-				</submenu>
-			</section>
-			<section>
-				<attribute name="id">view-section-plugins</attribute>
-			</section>
-			<section>
-				<attribute name="id">view-section-windows</attribute>
-			</section>
-		</submenu>
-		<submenu>
-			<attribute name="label">Tools</attribute>
-			<attribute name="id">tools-section</attribute>
-			<section>
-				<attribute name="id">tools-section-1</attribute>
-			</section>
-		</submenu>
-	</section>
-	""";
+			<item>
+				<attribute name="accel"><Primary>n</attribute>
+				<attribute name="label">_New</attribute>
+				<attribute name="action">win.file_new</attribute>
+			</item>
+			<submenu>
+				<attribute name="label">New</attribute>
+				<section>
+					<attribute name="id">wizard-section</attribute>
+				</section>
+			</submenu>
+			<item>
+				<attribute name="accel"><Primary>o</attribute>
+				<attribute name="label">_Open</attribute>
+				<attribute name="action">win.file_open</attribute>
+			</item>
+			<submenu>
+				<attribute name="label">Open Recent</attribute>
+				<attribute name="id">recent-section</attribute>
+				<section>
+				</section>
+			</submenu>
+		</section>
+		<section>
+			<attribute name="id">view-section-plugins</attribute>
+		</section>
+		<section>
+			<attribute name="id">view-section-windows</attribute>
+		</section>
+	</submenu>
+	<submenu>
+		<attribute name="label">Tools</attribute>
+		<attribute name="id">tools-section</attribute>
+		<section>
+			<attribute name="id">tools-section-1</attribute>
+		</section>
+	</submenu>
+</section>
+""";
 
 			var menubldrstr = "<interface><menu id=\"menubar\">%s</menu></interface>".printf(this.menubar);
 			var menubar_builder = new Gtk.Builder.from_string (menubldrstr, menubldrstr.length);
@@ -333,55 +333,55 @@ namespace Rubric.Tests
 		public void test_menu_extension_destructor () {
 
 			string test_result = """<section>
-		<submenu>
-			<attribute name="label">_File</attribute>
+	<submenu>
+		<attribute name="label">_File</attribute>
+		<attribute name="id">file-section</attribute>
+	</submenu>
+	<submenu>
+		<attribute name="label">View</attribute>
+		<attribute name="id">view-section</attribute>
+		<section>
+			<attribute name="id">view-section-plugins</attribute>
+		</section>
+		<section>
+			<attribute name="id">view-section-windows</attribute>
+		</section>
+		<section>
+			<attribute name="rubric-merge-id">4</attribute>
 			<attribute name="id">file-section</attribute>
-		</submenu>
-		<submenu>
-			<attribute name="label">View</attribute>
-			<attribute name="id">view-section</attribute>
-			<section>
-				<attribute name="id">view-section-plugins</attribute>
-			</section>
-			<section>
-				<attribute name="id">view-section-windows</attribute>
-			</section>
-			<section>
-				<attribute name="valarade-merge-id">6</attribute>
-				<attribute name="id">file-section</attribute>
-				<item>
-					<attribute name="accel"><Primary>n</attribute>
-					<attribute name="label">_New</attribute>
-					<attribute name="action">win.file_new</attribute>
-				</item>
-				<submenu>
-					<attribute name="label">New</attribute>
-					<section>
-						<attribute name="id">wizard-section</attribute>
-					</section>
-				</submenu>
-				<item>
-					<attribute name="accel"><Primary>o</attribute>
-					<attribute name="label">_Open</attribute>
-					<attribute name="action">win.file_open</attribute>
-				</item>
-				<submenu>
-					<attribute name="label">Open Recent</attribute>
-					<attribute name="id">recent-section</attribute>
-					<section>
-					</section>
-				</submenu>
-			</section>
-		</submenu>
-		<submenu>
-			<attribute name="label">Tools</attribute>
-			<attribute name="id">tools-section</attribute>
-			<section>
-				<attribute name="id">tools-section-1</attribute>
-			</section>
-		</submenu>
-	</section>
-	""";
+			<item>
+				<attribute name="accel"><Primary>n</attribute>
+				<attribute name="label">_New</attribute>
+				<attribute name="action">win.file_new</attribute>
+			</item>
+			<submenu>
+				<attribute name="label">New</attribute>
+				<section>
+					<attribute name="id">wizard-section</attribute>
+				</section>
+			</submenu>
+			<item>
+				<attribute name="accel"><Primary>o</attribute>
+				<attribute name="label">_Open</attribute>
+				<attribute name="action">win.file_open</attribute>
+			</item>
+			<submenu>
+				<attribute name="label">Open Recent</attribute>
+				<attribute name="id">recent-section</attribute>
+				<section>
+				</section>
+			</submenu>
+		</section>
+	</submenu>
+	<submenu>
+		<attribute name="label">Tools</attribute>
+		<attribute name="id">tools-section</attribute>
+		<section>
+			<attribute name="id">tools-section-1</attribute>
+		</section>
+	</submenu>
+</section>
+""";
 
 			var menubldrstr = "<interface><menu id=\"menubar\">%s</menu></interface>".printf(this.menubar);
 			var menubar_builder = new Gtk.Builder.from_string (menubldrstr, menubldrstr.length);

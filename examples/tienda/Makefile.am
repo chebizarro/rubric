@@ -51,3 +51,5 @@ tienda_CFLAGS = \
 CLEANFILES = \
 	$(tienda_SOURCES:.vala=.c) \
 	$(BUILT_SOURCES)
+
+include $(top_srcdir)/git.mk

@@ -55,7 +55,7 @@ namespace RubricGtk {
 
 	}
 
-	public class MenuButtonAdapter : MenuAdapter {
+	internal class MenuButtonAdapter : MenuAdapter {
 		
 		public override void set_menu(GLib.Menu menu) {
 			var butt = this.object as Gtk.MenuButton;
@@ -65,7 +65,7 @@ namespace RubricGtk {
 	
 	}
 
-	public class PopoverAdapter : MenuAdapter {
+	internal class PopoverAdapter : MenuAdapter {
 		
 		public override void set_menu(GLib.Menu menu) {
 			var pop = this.object as Gtk.Popover;
@@ -74,7 +74,7 @@ namespace RubricGtk {
 	
 	}
 
-	public class MenuShellAdapter : MenuAdapter {
+	internal class MenuShellAdapter : MenuAdapter {
 		
 		public override void set_menu(GLib.Menu menu) {
 			var shell = this.object as Gtk.MenuShell;

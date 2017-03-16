@@ -27,7 +27,10 @@ rubrik-gtk-glade-catalog.xml: ../librubric-gtk/RubricGtk-1.0.gir
 
 CLEANFILES = \
 	$(glade_catalogger_SOURCES:.vala=.c) \
-	rubrik-gtk-glade-catalog.xml
+	rubrik-gtk-glade-catalog.xml \
+	gc/.dirstamp
 
 noinst_DATA = \
 	rubrik-gtk-glade-catalog.xml
+
+include $(top_srcdir)/git.mk

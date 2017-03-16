@@ -4,6 +4,7 @@ ACLOCAL_AMFLAGS  = -I build/autotools ${ACLOCAL_FLAGS}
 AUTOMAKE_OPTIONS = subdir-objects
 
 INTLTOOL_FILES = \
+	build/autotools/intltool.m4 \
 	intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in
