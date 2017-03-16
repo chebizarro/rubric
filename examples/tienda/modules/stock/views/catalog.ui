@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.20.0 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <requires lib="rubric-gtk" version="0.0"/>
+  <template class="TiendaModulesStockCatalogView" parent="RubricGtkWidgetsBoxView">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="orientation">vertical</property>
+    <child>
+      <object class="GtkIconView" id="icon_view">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="margin">3</property>
+        <property name="item_width">42</property>
+        <property name="spacing">3</property>
+        <property name="row_spacing">3</property>
+        <property name="column_spacing">3</property>
+        <property name="item_padding">3</property>
+        <property name="activate_on_single_click">True</property>
+        <signal name="item-activated" handler="activate_item" swapped="no"/>
+      </object>
+      <packing>
+        <property name="expand">True</property>
+        <property name="fill">True</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+  </template>
+</interface>

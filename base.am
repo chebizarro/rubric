@@ -1,0 +1,84 @@
+LIBRUBRIC_LIB_PATHS = \
+	$(top_builddir)/vapi \
+	$(top_builddir)/librubric
+
+LIBRUBRIC_VALAFLAGS = \
+	--pkg gee-0.8 \
+	--pkg libxml-2.0 \
+	--target-glib=2.40.0
+
+LIBRUBRIC_CPPFLAGS = \
+	$(addprefix -I ,$(LIBRUBRIC_LIB_PATHS)) \
+	`pkg-config --cflags --libs $(pkg_modules) gio-2.0` \
+	-DRUBRIC_LIB_DIR=\""$(RUBRIC_LIB_DIR)"\" \
+	-DPACKAGES=\""$(pkg_modules)"\"
+
+if ENABLE_DEVELOPMENT_MODE
+
+LIBRUBRIC_VALAFLAGS += \
+	-D ENABLE_DEVELOPMENT_MODE
+
+endif
+
+TESTS_CPPFLAGS = \
+	$(addprefix -I ,$(TESTS_LIB_PATHS)) \
+	`pkg-config --cflags --libs $(pkg_tests_modules)` \
+	-DRUBRIC_LIB_DIR=\""$(RUBRIC_LIB_DIR)"\" \
+	-DRUBRIC_TESTS_DIR=\""$(RUBRIC_TESTS_DIR)"\"
+
+TESTS_VALAFLAGS = \
+	$(LIBRUBRIC_VALAFLAGS) \
+	--pkg rubric-1.0 \
+	--vapidir $(top_builddir)/librubric
+	
+CLEANFILES = \
+	*.stamp \
+	*.o \
+	*.gcda \
+	*.gcno
+
+DISTCLEANFILES = \
+	$(CLEANFILES) \
+	*.log
+
+GITIGNOREFILES = \
+	autom4te.cache \
+	aclocal.m4 \
+	ar-lib \
+	build/autotools/libtool.m4 \
+	build/autotools/ltoptions.m4 \
+	build/autotools/ltsugar.m4 \
+	build/autotools/ltversion.m4 \
+	build/autotools/lt~obsolete.m4 \
+	compile \
+	config.guess \
+	config.sub \
+	depcomp \
+	install-sh \
+	ltmain.sh \
+	missing
+
+if ENABLE_GCOV
+# use recursive makes in order to ignore errors during check/perf
+lcov:
+	-$(MAKE) $(AM_MAKEFLAGS) check
+	$(MAKE) $(AM_MAKEFLAGS) genlcov
+
+# we have to massage the lcov.info file slightly to hide the effect of libtool
+# placing the objects files in the .libs/ directory separate from the *.c
+genlcov:
+	$(LTP) --directory $(top_builddir) --capture --output-file $(top_builddir)/tests/results/rubric-lcov.info --test-name VALADATE_TEST --no-checksum
+	$(SED) -e 's#.libs/##' < $(top_builddir)/tests/results/rubric-lcov.info > $(top_builddir)/tests/results/rubric-lcov.info.tmp
+	LANG=C $(LTP_GENHTML) --output-directory $(top_builddir)/tests/results/rubric-lcov --title "Valadate Code Coverage" --show-details $(top_builddir)/tests/results/rubric-lcov.info.tmp
+	rm -f $(top_builddir)/tests/results/rubric-lcov.info.tmp
+
+lcov-clean:
+	-$(LTP) --directory $(top_builddir) -z
+	-$(RM) -rf $(top_builddir)/tests/results/rubric-lcov.info $(top_builddir)/tests/results/rubric-lcov
+else
+lcov genlcov lcov-clean:
+	@echo You need to configure Rubric with support for gcov enabled.
+	@echo e.g., ./configure --enable-gcov
+endif
+
+.PHONY: lcov genlcov lcov-clean

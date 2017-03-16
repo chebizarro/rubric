@@ -1,0 +1,5 @@
+UnixSocketAddress.abstract skip
+StaticResource.next skip
+Socket.condition_wait skip
+Socket.receive_messages skip
+Socket.send_messages skip

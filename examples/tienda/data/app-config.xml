@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<app-config version="1.0" xmlns="http://www.valadate.org/rubric/1.0">
+	<name translatable="yes">Tienda</name>
+	<description translatable="yes"></description>
+	<orm>
+		<repository>
+			<name>tienda-db</name>
+			<adapter-type>RubricOrmGomAdapter</adapter-type>
+			<description>Database for Tienda Demo Application</description>
+			<dsn>file:///</dsn>
+		</repository>
+	</orm>
+</app-config>

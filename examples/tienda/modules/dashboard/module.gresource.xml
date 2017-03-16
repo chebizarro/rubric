@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/tienda/modules/dashboard/">
+    <file preprocess="xml-stripblanks">views/dashboard.ui</file>
+  </gresource>
+</gresources>

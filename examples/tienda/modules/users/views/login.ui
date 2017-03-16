@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.20.0 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <requires lib="users" version="0.0"/>
+  <object class="GtkImage" id="image1">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-clear</property>
+  </object>
+  <template class="TiendaModulesUsersLoginView" parent="RubricGtkWidgetsBoxView">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="orientation">vertical</property>
+    <child>
+      <object class="GtkEntry" id="entry">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+		<property name="text" bind-source="user_view_model" bind-property="text" bind-flags="G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL"/>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkFlowBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="homogeneous">True</property>
+        <property name="min_children_per_line">3</property>
+        <property name="max_children_per_line">3</property>
+        <child>
+          <object class="GtkFlowBoxChild">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <child>
+              <object class="GtkButton">
+                <property name="label">1</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="action_name">view.enter-pin</property>
+                <property name="action_target">"1"</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkFlowBoxChild">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <child>
+              <object class="GtkButton" id="button_two">
+                <property name="label" translatable="yes">2</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="action_name">view.enter-pin</property>
+                <property name="action_target">"2"</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkFlowBoxChild">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">3</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="action_name">view.enter-pin</property>
+                <property name="action_target">"3"</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkFlowBoxChild">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <child>
+              <object class="GtkButton">
+                <property name="label">4</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="action_name">view.enter-pin</property>
+                <property name="action_target">"4"</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkFlowBoxChild">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <child>
+              <object class="GtkButton">
+                <property name="label">5</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="action_name">view.enter-pin</property>
+                <property name="action_target">"5"</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkFlowBoxChild">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <child>
+              <object class="GtkButton">
+                <property name="label">6</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="action_name">view.enter-pin</property>
+                <property name="action_target">"6"</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkFlowBoxChild">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <child>
+              <object class="GtkButton">
+                <property name="label">7</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="action_name">view.enter-pin</property>
+                <property name="action_target">"7"</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkFlowBoxChild">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <child>
+              <object class="GtkButton">
+                <property name="label">8</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="action_name">view.enter-pin</property>
+                <property name="action_target">"8"</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkFlowBoxChild">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <child>
+              <object class="GtkButton">
+                <property name="label">9</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="action_name">view.enter-pin</property>
+                <property name="action_target">"9"</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkFlowBoxChild">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <child>
+              <object class="GtkButton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="action_name">view.enter-backspace</property>
+                <property name="image">image1</property>
+                <property name="always_show_image">True</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkFlowBoxChild">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <child>
+              <object class="GtkButton">
+                <property name="label">0</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="action_name">view.enter-pin</property>
+                <property name="action_target">"0"</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkFlowBoxChild">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <child>
+              <object class="GtkButton">
+                <property name="label">Login</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="action_name">view.login</property>
+                <signal name="clicked" handler="login" swapped="no"/>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">1</property>
+      </packing>
+    </child>
+  </template>
+  <object class="TiendaModulesUsersLoginViewModel" id="user_view_model"/>
+</interface>

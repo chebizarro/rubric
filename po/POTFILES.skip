@@ -1,0 +1,7 @@
+examples/tienda/data/app-menu.ui
+examples/tienda/data/shell.ui
+examples/tienda/modules/users/views/login.ui
+examples/tienda/modules/users/views/order.ui
+examples/tienda/modules/users/views/welcome.ui
+examples/tienda/data/app-config.xml
+examples/tienda/modules/sales/views/order.ui

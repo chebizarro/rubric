@@ -1,0 +1,2754 @@
+<?xml version="1.0"?>
+<!-- This file was automatically generated from C sources - DO NOT EDIT!
+To affect the contents of this file, edit the original C definitions,
+and/or use gtk-doc annotations.  -->
+<repository version="1.2"
+            xmlns="http://www.gtk.org/introspection/core/1.0"
+            xmlns:c="http://www.gtk.org/introspection/c/1.0"
+            xmlns:glib="http://www.gtk.org/introspection/glib/1.0">
+  <include name="GObject" version="2.0"/>
+  <include name="Gio" version="2.0"/>
+  <package name="gom-1.0"/>
+  <c:include name="gom/gom.h"/>
+  <namespace name="Gom"
+             version="1.0"
+             shared-library="libgom-1.0.so.0"
+             c:identifier-prefixes="Gom"
+             c:symbol-prefixes="gom">
+    <class name="Adapter"
+           c:symbol-prefix="adapter"
+           c:type="GomAdapter"
+           parent="GObject.Object"
+           glib:type-name="GomAdapter"
+           glib:get-type="gom_adapter_get_type"
+           glib:type-struct="AdapterClass">
+      <constructor name="new" c:identifier="gom_adapter_new">
+        <return-value transfer-ownership="full">
+          <type name="Adapter" c:type="GomAdapter*"/>
+        </return-value>
+      </constructor>
+      <method name="close_async" c:identifier="gom_adapter_close_async">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="adapter" transfer-ownership="none">
+            <type name="Adapter" c:type="GomAdapter*"/>
+          </instance-parameter>
+          <parameter name="callback"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1"
+                     scope="async"
+                     closure="1">
+            <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+          </parameter>
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="close_finish"
+              c:identifier="gom_adapter_close_finish"
+              throws="1">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="adapter" transfer-ownership="none">
+            <type name="Adapter" c:type="GomAdapter*"/>
+          </instance-parameter>
+          <parameter name="result" transfer-ownership="none">
+            <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="close_sync"
+              c:identifier="gom_adapter_close_sync"
+              throws="1">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="adapter" transfer-ownership="none">
+            <type name="Adapter" c:type="GomAdapter*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="execute_sql"
+              c:identifier="gom_adapter_execute_sql"
+              throws="1">
+        <doc xml:space="preserve">This is a helper function to make simple execution of SQL easier.
+It is primarily meant for things like "BEGIN;" and "COMMIT;".
+
+This MUST be called from within a write transaction using
+gom_adapter_queue_write().</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if successful;</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="adapter" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomAdapter.</doc>
+            <type name="Adapter" c:type="GomAdapter*"/>
+          </instance-parameter>
+          <parameter name="sql" transfer-ownership="none">
+            <doc xml:space="preserve">SQL to execute.</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_handle" c:identifier="gom_adapter_get_handle">
+        <doc xml:space="preserve">Fetches the sqlite3 structure used by the adapter.</doc>
+        <return-value transfer-ownership="none" nullable="1">
+          <doc xml:space="preserve">A handle to the #sqlite3 structure.
+Side effects: None.</doc>
+          <type name="gpointer" c:type="gpointer"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="adapter" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomAdapter.</doc>
+            <type name="Adapter" c:type="GomAdapter*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="open_async" c:identifier="gom_adapter_open_async">
+        <doc xml:space="preserve">Opens the database pointed to by @uri. @uri can be in any format understood
+by SQLite. See &lt;ulink type="http" url="http://www.sqlite.org/c3ref/open.html"&gt;http://www.sqlite.org/c3ref/open.html&lt;/ulink&gt;
+for details.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="adapter" transfer-ownership="none">
+            <doc xml:space="preserve">a #GomAdapter</doc>
+            <type name="Adapter" c:type="GomAdapter*"/>
+          </instance-parameter>
+          <parameter name="uri" transfer-ownership="none">
+            <doc xml:space="preserve">a URI understood by SQLite</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="callback"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1"
+                     scope="async"
+                     closure="2">
+            <doc xml:space="preserve">the function to call when the operation finished, or %NULL</doc>
+            <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+          </parameter>
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve">the user data to pass to the callback function</doc>
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="open_finish"
+              c:identifier="gom_adapter_open_finish"
+              throws="1">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="adapter" transfer-ownership="none">
+            <type name="Adapter" c:type="GomAdapter*"/>
+          </instance-parameter>
+          <parameter name="result" transfer-ownership="none">
+            <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="open_sync" c:identifier="gom_adapter_open_sync" throws="1">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="adapter" transfer-ownership="none">
+            <type name="Adapter" c:type="GomAdapter*"/>
+          </instance-parameter>
+          <parameter name="uri" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="queue_read" c:identifier="gom_adapter_queue_read">
+        <doc xml:space="preserve">Queues a callback to be executed within the SQLite thread. The callback is
+expected to perform reads only.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="adapter" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomAdapter.</doc>
+            <type name="Adapter" c:type="GomAdapter*"/>
+          </instance-parameter>
+          <parameter name="callback"
+                     transfer-ownership="none"
+                     scope="async"
+                     closure="1">
+            <doc xml:space="preserve">A callback to execute read queries on SQLite.</doc>
+            <type name="AdapterCallback" c:type="GomAdapterCallback"/>
+          </parameter>
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve">User data for @callback.</doc>
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="queue_write" c:identifier="gom_adapter_queue_write">
+        <doc xml:space="preserve">Queues a callback to be executed within the SQLite thwrite. The callback can
+perform reads and writes.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="adapter" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomAdapter.</doc>
+            <type name="Adapter" c:type="GomAdapter*"/>
+          </instance-parameter>
+          <parameter name="callback"
+                     transfer-ownership="none"
+                     scope="async"
+                     closure="1">
+            <doc xml:space="preserve">A callback to execute write queries on SQLite.</doc>
+            <type name="AdapterCallback" c:type="GomAdapterCallback"/>
+          </parameter>
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve">User data for @callback.</doc>
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+        </parameters>
+      </method>
+      <field name="parent">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="AdapterPrivate" c:type="GomAdapterPrivate*"/>
+      </field>
+    </class>
+    <callback name="AdapterCallback" c:type="GomAdapterCallback">
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="adapter" transfer-ownership="none">
+          <type name="Adapter" c:type="GomAdapter*"/>
+        </parameter>
+        <parameter name="user_data"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1"
+                   closure="1">
+          <type name="gpointer" c:type="gpointer"/>
+        </parameter>
+      </parameters>
+    </callback>
+    <record name="AdapterClass"
+            c:type="GomAdapterClass"
+            glib:is-gtype-struct-for="Adapter">
+      <field name="parent_class">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+    </record>
+    <record name="AdapterPrivate" c:type="GomAdapterPrivate" disguised="1">
+    </record>
+    <class name="Command"
+           c:symbol-prefix="command"
+           c:type="GomCommand"
+           parent="GObject.Object"
+           glib:type-name="GomCommand"
+           glib:get-type="gom_command_get_type"
+           glib:type-struct="CommandClass">
+      <method name="execute" c:identifier="gom_command_execute" throws="1">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="command" transfer-ownership="none">
+            <type name="Command" c:type="GomCommand*"/>
+          </instance-parameter>
+          <parameter name="cursor" transfer-ownership="none">
+            <type name="Cursor" c:type="GomCursor**"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_param_index"
+              c:identifier="gom_command_get_param_index">
+        <return-value transfer-ownership="none">
+          <type name="gint" c:type="gint"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="command" transfer-ownership="none">
+            <type name="Command" c:type="GomCommand*"/>
+          </instance-parameter>
+          <parameter name="param_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="reset" c:identifier="gom_command_reset">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="command" transfer-ownership="none">
+            <type name="Command" c:type="GomCommand*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="set_param" c:identifier="gom_command_set_param">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="command" transfer-ownership="none">
+            <type name="Command" c:type="GomCommand*"/>
+          </instance-parameter>
+          <parameter name="param" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="GObject.Value" c:type="const GValue*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_param_double"
+              c:identifier="gom_command_set_param_double">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="command" transfer-ownership="none">
+            <type name="Command" c:type="GomCommand*"/>
+          </instance-parameter>
+          <parameter name="param" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="gdouble" c:type="gdouble"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_param_float"
+              c:identifier="gom_command_set_param_float">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="command" transfer-ownership="none">
+            <type name="Command" c:type="GomCommand*"/>
+          </instance-parameter>
+          <parameter name="param" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="gfloat" c:type="gfloat"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_param_int" c:identifier="gom_command_set_param_int">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="command" transfer-ownership="none">
+            <type name="Command" c:type="GomCommand*"/>
+          </instance-parameter>
+          <parameter name="param" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="gint" c:type="gint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_param_int64"
+              c:identifier="gom_command_set_param_int64">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="command" transfer-ownership="none">
+            <type name="Command" c:type="GomCommand*"/>
+          </instance-parameter>
+          <parameter name="param" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="gint64" c:type="gint64"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_param_string"
+              c:identifier="gom_command_set_param_string">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="command" transfer-ownership="none">
+            <type name="Command" c:type="GomCommand*"/>
+          </instance-parameter>
+          <parameter name="param" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_param_uint" c:identifier="gom_command_set_param_uint">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="command" transfer-ownership="none">
+            <type name="Command" c:type="GomCommand*"/>
+          </instance-parameter>
+          <parameter name="param" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_param_uint64"
+              c:identifier="gom_command_set_param_uint64">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="command" transfer-ownership="none">
+            <type name="Command" c:type="GomCommand*"/>
+          </instance-parameter>
+          <parameter name="param" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="guint64" c:type="guint64"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_sql" c:identifier="gom_command_set_sql">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="command" transfer-ownership="none">
+            <type name="Command" c:type="GomCommand*"/>
+          </instance-parameter>
+          <parameter name="sql" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <property name="adapter"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <type name="Adapter"/>
+      </property>
+      <property name="sql" readable="0" writable="1" transfer-ownership="none">
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <field name="parent">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="CommandPrivate" c:type="GomCommandPrivate*"/>
+      </field>
+    </class>
+    <class name="CommandBuilder"
+           c:symbol-prefix="command_builder"
+           c:type="GomCommandBuilder"
+           parent="GObject.Object"
+           glib:type-name="GomCommandBuilder"
+           glib:get-type="gom_command_builder_get_type"
+           glib:type-struct="CommandBuilderClass">
+      <method name="build_count"
+              c:identifier="gom_command_builder_build_count">
+        <doc xml:space="preserve">Builds a new command that will count the number of rows matching the
+current query parameters.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A #GomCommand.</doc>
+          <type name="Command" c:type="GomCommand*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="builder" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomCommandBuilder.</doc>
+            <type name="CommandBuilder" c:type="GomCommandBuilder*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="build_create"
+              c:identifier="gom_command_builder_build_create">
+        <doc xml:space="preserve">Builds a list of #GomCommand to update the table for the
+resource_type associated with @builder up to @version.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A #GList of #GomCommand.</doc>
+          <type name="GLib.List" c:type="GList*">
+            <type name="Command"/>
+          </type>
+        </return-value>
+        <parameters>
+          <instance-parameter name="builder" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomCommandBuilder.</doc>
+            <type name="CommandBuilder" c:type="GomCommandBuilder*"/>
+          </instance-parameter>
+          <parameter name="version" transfer-ownership="none">
+            <doc xml:space="preserve">the version of the database.</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="build_delete"
+              c:identifier="gom_command_builder_build_delete">
+        <doc xml:space="preserve">Builds a new #GomCommand to delete the rows matching the current query
+params.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A #GomCommand.</doc>
+          <type name="Command" c:type="GomCommand*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="builder" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomCommandBuilder.</doc>
+            <type name="CommandBuilder" c:type="GomCommandBuilder*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="build_insert"
+              c:identifier="gom_command_builder_build_insert">
+        <doc xml:space="preserve">Builds a new #GomCommand that will insert the parameters of the resource
+into the underlying database.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A #GomCommand.</doc>
+          <type name="Command" c:type="GomCommand*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="builder" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomCommandBuilder.</doc>
+            <type name="CommandBuilder" c:type="GomCommandBuilder*"/>
+          </instance-parameter>
+          <parameter name="resource" transfer-ownership="none">
+            <doc xml:space="preserve">a #GomResource</doc>
+            <type name="Resource" c:type="GomResource*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="build_select"
+              c:identifier="gom_command_builder_build_select">
+        <doc xml:space="preserve">Builds a #GomCommand that will select all the rows matching the current
+query params.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A #GomCommand.</doc>
+          <type name="Command" c:type="GomCommand*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="builder" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomCommandBuilder.</doc>
+            <type name="CommandBuilder" c:type="GomCommandBuilder*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="build_update"
+              c:identifier="gom_command_builder_build_update">
+        <doc xml:space="preserve">Builds a new #GomCommand that will update the contents stored for @resource
+in the underlying database.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A #GomCommand.</doc>
+          <type name="Command" c:type="GomCommand*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="builder" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomCommandBuilder.</doc>
+            <type name="CommandBuilder" c:type="GomCommandBuilder*"/>
+          </instance-parameter>
+          <parameter name="resource" transfer-ownership="none">
+            <doc xml:space="preserve">a #GomResource</doc>
+            <type name="Resource" c:type="GomResource*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <property name="adapter"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <type name="Adapter"/>
+      </property>
+      <property name="filter" writable="1" transfer-ownership="none">
+        <type name="Filter"/>
+      </property>
+      <property name="limit" writable="1" transfer-ownership="none">
+        <type name="guint" c:type="guint"/>
+      </property>
+      <property name="m2m-table"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <property name="m2m-type"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <type name="GType" c:type="GType"/>
+      </property>
+      <property name="offset" writable="1" transfer-ownership="none">
+        <type name="guint" c:type="guint"/>
+      </property>
+      <property name="resource-type" writable="1" transfer-ownership="none">
+        <type name="GType" c:type="GType"/>
+      </property>
+      <property name="sorting" writable="1" transfer-ownership="none">
+        <type name="Sorting"/>
+      </property>
+      <field name="parent">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="CommandBuilderPrivate" c:type="GomCommandBuilderPrivate*"/>
+      </field>
+    </class>
+    <record name="CommandBuilderClass"
+            c:type="GomCommandBuilderClass"
+            glib:is-gtype-struct-for="CommandBuilder">
+      <field name="parent_class">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+    </record>
+    <record name="CommandBuilderPrivate"
+            c:type="GomCommandBuilderPrivate"
+            disguised="1">
+    </record>
+    <record name="CommandClass"
+            c:type="GomCommandClass"
+            glib:is-gtype-struct-for="Command">
+      <field name="parent_class">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+    </record>
+    <record name="CommandPrivate" c:type="GomCommandPrivate" disguised="1">
+    </record>
+    <class name="Cursor"
+           c:symbol-prefix="cursor"
+           c:type="GomCursor"
+           parent="GObject.Object"
+           glib:type-name="GomCursor"
+           glib:get-type="gom_cursor_get_type"
+           glib:type-struct="CursorClass">
+      <method name="get_column" c:identifier="gom_cursor_get_column">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="cursor" transfer-ownership="none">
+            <type name="Cursor" c:type="GomCursor*"/>
+          </instance-parameter>
+          <parameter name="column" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="GObject.Value" c:type="GValue*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_column_boolean"
+              c:identifier="gom_cursor_get_column_boolean">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="cursor" transfer-ownership="none">
+            <type name="Cursor" c:type="GomCursor*"/>
+          </instance-parameter>
+          <parameter name="column" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_column_double"
+              c:identifier="gom_cursor_get_column_double">
+        <return-value transfer-ownership="none">
+          <type name="gdouble" c:type="gdouble"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="cursor" transfer-ownership="none">
+            <type name="Cursor" c:type="GomCursor*"/>
+          </instance-parameter>
+          <parameter name="column" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_column_float"
+              c:identifier="gom_cursor_get_column_float">
+        <return-value transfer-ownership="none">
+          <type name="gfloat" c:type="gfloat"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="cursor" transfer-ownership="none">
+            <type name="Cursor" c:type="GomCursor*"/>
+          </instance-parameter>
+          <parameter name="column" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_column_int" c:identifier="gom_cursor_get_column_int">
+        <return-value transfer-ownership="none">
+          <type name="gint" c:type="gint"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="cursor" transfer-ownership="none">
+            <type name="Cursor" c:type="GomCursor*"/>
+          </instance-parameter>
+          <parameter name="column" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_column_int64"
+              c:identifier="gom_cursor_get_column_int64">
+        <return-value transfer-ownership="none">
+          <type name="gint64" c:type="gint64"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="cursor" transfer-ownership="none">
+            <type name="Cursor" c:type="GomCursor*"/>
+          </instance-parameter>
+          <parameter name="column" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_column_name" c:identifier="gom_cursor_get_column_name">
+        <return-value transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="cursor" transfer-ownership="none">
+            <type name="Cursor" c:type="GomCursor*"/>
+          </instance-parameter>
+          <parameter name="column" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_column_string"
+              c:identifier="gom_cursor_get_column_string">
+        <return-value transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="cursor" transfer-ownership="none">
+            <type name="Cursor" c:type="GomCursor*"/>
+          </instance-parameter>
+          <parameter name="column" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_column_uint" c:identifier="gom_cursor_get_column_uint">
+        <return-value transfer-ownership="none">
+          <type name="guint" c:type="guint"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="cursor" transfer-ownership="none">
+            <type name="Cursor" c:type="GomCursor*"/>
+          </instance-parameter>
+          <parameter name="column" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_column_uint64"
+              c:identifier="gom_cursor_get_column_uint64">
+        <return-value transfer-ownership="none">
+          <type name="guint64" c:type="guint64"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="cursor" transfer-ownership="none">
+            <type name="Cursor" c:type="GomCursor*"/>
+          </instance-parameter>
+          <parameter name="column" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_n_columns" c:identifier="gom_cursor_get_n_columns">
+        <return-value transfer-ownership="none">
+          <type name="guint" c:type="guint"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="cursor" transfer-ownership="none">
+            <type name="Cursor" c:type="GomCursor*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="next" c:identifier="gom_cursor_next">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="cursor" transfer-ownership="none">
+            <type name="Cursor" c:type="GomCursor*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="statement"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <type name="gpointer" c:type="gpointer"/>
+      </property>
+      <field name="parent">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="CursorPrivate" c:type="GomCursorPrivate*"/>
+      </field>
+    </class>
+    <record name="CursorClass"
+            c:type="GomCursorClass"
+            glib:is-gtype-struct-for="Cursor">
+      <field name="parent_class">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+    </record>
+    <record name="CursorPrivate" c:type="GomCursorPrivate" disguised="1">
+    </record>
+    <enumeration name="Error"
+                 glib:type-name="GomError"
+                 glib:get-type="gom_error_get_type"
+                 c:type="GomError"
+                 glib:error-domain="&quot;gom-error-quark&quot;">
+      <member name="ADAPTER_OPEN"
+              value="0"
+              c:identifier="GOM_ERROR_ADAPTER_OPEN"
+              glib:nick="ADAPTER_OPEN">
+      </member>
+      <member name="COMMAND_NO_SQL"
+              value="1"
+              c:identifier="GOM_ERROR_COMMAND_NO_SQL"
+              glib:nick="COMMAND_NO_SQL">
+      </member>
+      <member name="COMMAND_SQLITE"
+              value="2"
+              c:identifier="GOM_ERROR_COMMAND_SQLITE"
+              glib:nick="COMMAND_SQLITE">
+      </member>
+      <member name="REPOSITORY_EMPTY_RESULT"
+              value="3"
+              c:identifier="GOM_ERROR_REPOSITORY_EMPTY_RESULT"
+              glib:nick="REPOSITORY_EMPTY_RESULT">
+      </member>
+      <member name="RESOURCE_CURSOR"
+              value="4"
+              c:identifier="GOM_ERROR_RESOURCE_CURSOR"
+              glib:nick="RESOURCE_CURSOR">
+      </member>
+      <function name="quark" c:identifier="gom_error_quark">
+        <return-value transfer-ownership="none">
+          <type name="GLib.Quark" c:type="GQuark"/>
+        </return-value>
+      </function>
+    </enumeration>
+    <class name="Filter"
+           c:symbol-prefix="filter"
+           c:type="GomFilter"
+           parent="GObject.InitiallyUnowned"
+           glib:type-name="GomFilter"
+           glib:get-type="gom_filter_get_type"
+           glib:type-struct="FilterClass">
+      <constructor name="new_and" c:identifier="gom_filter_new_and">
+        <doc xml:space="preserve">Creates a new filter that requires that both left and right filters
+equate to #TRUE.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A #GomFilter.</doc>
+          <type name="Filter" c:type="GomFilter*"/>
+        </return-value>
+        <parameters>
+          <parameter name="left" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomFilter.</doc>
+            <type name="Filter" c:type="GomFilter*"/>
+          </parameter>
+          <parameter name="right" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomFilter.</doc>
+            <type name="Filter" c:type="GomFilter*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <constructor name="new_and_full"
+                   c:identifier="gom_filter_new_and_full"
+                   introspectable="0">
+        <doc xml:space="preserve">Creates a new filter that requires that all filters passed as arguments
+equate to #TRUE.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A #GomFilter.</doc>
+          <type name="Filter" c:type="GomFilter*"/>
+        </return-value>
+        <parameters>
+          <parameter name="first" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomFilter.</doc>
+            <type name="Filter" c:type="GomFilter*"/>
+          </parameter>
+          <parameter name="..." transfer-ownership="none">
+            <doc xml:space="preserve">A %NULL-terminated list of #GomFilter.</doc>
+            <varargs/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <constructor name="new_and_fullv"
+                   c:identifier="gom_filter_new_and_fullv">
+        <doc xml:space="preserve">Creates a new filter that requires that all filters passed as arguments
+equate to #TRUE.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A #GomFilter.</doc>
+          <type name="Filter" c:type="GomFilter*"/>
+        </return-value>
+        <parameters>
+          <parameter name="filter_array" transfer-ownership="none">
+            <doc xml:space="preserve">A %NULL-terminated array of #GomFilter.</doc>
+            <type name="Filter" c:type="GomFilter**"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <constructor name="new_eq" c:identifier="gom_filter_new_eq">
+        <return-value transfer-ownership="none">
+          <type name="Filter" c:type="GomFilter*"/>
+        </return-value>
+        <parameters>
+          <parameter name="resource_type" transfer-ownership="none">
+            <type name="GType" c:type="GType"/>
+          </parameter>
+          <parameter name="property_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="GObject.Value" c:type="const GValue*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <constructor name="new_glob" c:identifier="gom_filter_new_glob">
+        <return-value transfer-ownership="none">
+          <type name="Filter" c:type="GomFilter*"/>
+        </return-value>
+        <parameters>
+          <parameter name="resource_type" transfer-ownership="none">
+            <type name="GType" c:type="GType"/>
+          </parameter>
+          <parameter name="property_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="GObject.Value" c:type="const GValue*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <constructor name="new_gt" c:identifier="gom_filter_new_gt">
+        <return-value transfer-ownership="none">
+          <type name="Filter" c:type="GomFilter*"/>
+        </return-value>
+        <parameters>
+          <parameter name="resource_type" transfer-ownership="none">
+            <type name="GType" c:type="GType"/>
+          </parameter>
+          <parameter name="property_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="GObject.Value" c:type="const GValue*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <constructor name="new_gte" c:identifier="gom_filter_new_gte">
+        <return-value transfer-ownership="none">
+          <type name="Filter" c:type="GomFilter*"/>
+        </return-value>
+        <parameters>
+          <parameter name="resource_type" transfer-ownership="none">
+            <type name="GType" c:type="GType"/>
+          </parameter>
+          <parameter name="property_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="GObject.Value" c:type="const GValue*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <constructor name="new_is_not_null"
+                   c:identifier="gom_filter_new_is_not_null">
+        <return-value transfer-ownership="none">
+          <type name="Filter" c:type="GomFilter*"/>
+        </return-value>
+        <parameters>
+          <parameter name="resource_type" transfer-ownership="none">
+            <type name="GType" c:type="GType"/>
+          </parameter>
+          <parameter name="property_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <constructor name="new_is_null" c:identifier="gom_filter_new_is_null">
+        <return-value transfer-ownership="none">
+          <type name="Filter" c:type="GomFilter*"/>
+        </return-value>
+        <parameters>
+          <parameter name="resource_type" transfer-ownership="none">
+            <type name="GType" c:type="GType"/>
+          </parameter>
+          <parameter name="property_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <constructor name="new_like" c:identifier="gom_filter_new_like">
+        <return-value transfer-ownership="none">
+          <type name="Filter" c:type="GomFilter*"/>
+        </return-value>
+        <parameters>
+          <parameter name="resource_type" transfer-ownership="none">
+            <type name="GType" c:type="GType"/>
+          </parameter>
+          <parameter name="property_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="GObject.Value" c:type="const GValue*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <constructor name="new_lt" c:identifier="gom_filter_new_lt">
+        <return-value transfer-ownership="none">
+          <type name="Filter" c:type="GomFilter*"/>
+        </return-value>
+        <parameters>
+          <parameter name="resource_type" transfer-ownership="none">
+            <type name="GType" c:type="GType"/>
+          </parameter>
+          <parameter name="property_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="GObject.Value" c:type="const GValue*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <constructor name="new_lte" c:identifier="gom_filter_new_lte">
+        <return-value transfer-ownership="none">
+          <type name="Filter" c:type="GomFilter*"/>
+        </return-value>
+        <parameters>
+          <parameter name="resource_type" transfer-ownership="none">
+            <type name="GType" c:type="GType"/>
+          </parameter>
+          <parameter name="property_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="GObject.Value" c:type="const GValue*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <constructor name="new_neq" c:identifier="gom_filter_new_neq">
+        <return-value transfer-ownership="none">
+          <type name="Filter" c:type="GomFilter*"/>
+        </return-value>
+        <parameters>
+          <parameter name="resource_type" transfer-ownership="none">
+            <type name="GType" c:type="GType"/>
+          </parameter>
+          <parameter name="property_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="GObject.Value" c:type="const GValue*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <constructor name="new_or" c:identifier="gom_filter_new_or">
+        <doc xml:space="preserve">Creates a new filter that requires either the left or right filters
+equate to #TRUE.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A #GomFilter.</doc>
+          <type name="Filter" c:type="GomFilter*"/>
+        </return-value>
+        <parameters>
+          <parameter name="left" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomFilter.</doc>
+            <type name="Filter" c:type="GomFilter*"/>
+          </parameter>
+          <parameter name="right" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomFilter.</doc>
+            <type name="Filter" c:type="GomFilter*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <constructor name="new_or_full"
+                   c:identifier="gom_filter_new_or_full"
+                   introspectable="0">
+        <doc xml:space="preserve">Creates a new filter that requires either of the filters passed as
+arguments equate to #TRUE.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A #GomFilter.</doc>
+          <type name="Filter" c:type="GomFilter*"/>
+        </return-value>
+        <parameters>
+          <parameter name="first" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomFilter.</doc>
+            <type name="Filter" c:type="GomFilter*"/>
+          </parameter>
+          <parameter name="..." transfer-ownership="none">
+            <doc xml:space="preserve">A %NULL-terminated list of #GomFilter.</doc>
+            <varargs/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <constructor name="new_or_fullv" c:identifier="gom_filter_new_or_fullv">
+        <doc xml:space="preserve">Creates a new filter that requires either of the filters passed as
+arguments equate to #TRUE.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A #GomFilter.</doc>
+          <type name="Filter" c:type="GomFilter*"/>
+        </return-value>
+        <parameters>
+          <parameter name="filter_array" transfer-ownership="none">
+            <doc xml:space="preserve">A %NULL-terminated array of #GomFilter.</doc>
+            <type name="Filter" c:type="GomFilter**"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <constructor name="new_sql" c:identifier="gom_filter_new_sql">
+        <doc xml:space="preserve">Creates a new #GomFilter using the SQL and values provided.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A new #GomFilter.</doc>
+          <type name="Filter" c:type="GomFilter*"/>
+        </return-value>
+        <parameters>
+          <parameter name="sql" transfer-ownership="none">
+            <doc xml:space="preserve">A UTF-8 string.</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="values" transfer-ownership="none">
+            <doc xml:space="preserve">An array of values.</doc>
+            <array name="GLib.Array" c:type="const GArray*">
+              <type name="GObject.Value"/>
+            </array>
+          </parameter>
+        </parameters>
+      </constructor>
+      <method name="get_sql" c:identifier="gom_filter_get_sql">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="filter" transfer-ownership="none">
+            <type name="Filter" c:type="GomFilter*"/>
+          </instance-parameter>
+          <parameter name="table_map" transfer-ownership="none">
+            <type name="GLib.HashTable" c:type="GHashTable*">
+              <type name="gpointer" c:type="gpointer"/>
+              <type name="gpointer" c:type="gpointer"/>
+            </type>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_values" c:identifier="gom_filter_get_values">
+        <doc xml:space="preserve">Fetches the list of values that should be applied in order when building
+the #GomCommand.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">An array of values for the SQL.</doc>
+          <array name="GLib.Array" c:type="GArray*">
+            <type name="GObject.Value"/>
+          </array>
+        </return-value>
+        <parameters>
+          <instance-parameter name="filter" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomFilter.</doc>
+            <type name="Filter" c:type="GomFilter*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="mode"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <type name="FilterMode"/>
+      </property>
+      <property name="sql"
+                readable="0"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <field name="parent">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="FilterPrivate" c:type="GomFilterPrivate*"/>
+      </field>
+    </class>
+    <record name="FilterClass"
+            c:type="GomFilterClass"
+            glib:is-gtype-struct-for="Filter">
+      <field name="parent_class">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+    </record>
+    <enumeration name="FilterMode"
+                 glib:type-name="GomFilterMode"
+                 glib:get-type="gom_filter_mode_get_type"
+                 c:type="GomFilterMode">
+      <member name="SQL"
+              value="1"
+              c:identifier="GOM_FILTER_SQL"
+              glib:nick="SQL">
+      </member>
+      <member name="OR" value="2" c:identifier="GOM_FILTER_OR" glib:nick="OR">
+      </member>
+      <member name="AND"
+              value="3"
+              c:identifier="GOM_FILTER_AND"
+              glib:nick="AND">
+      </member>
+      <member name="EQ" value="4" c:identifier="GOM_FILTER_EQ" glib:nick="EQ">
+      </member>
+      <member name="NEQ"
+              value="5"
+              c:identifier="GOM_FILTER_NEQ"
+              glib:nick="NEQ">
+      </member>
+      <member name="GT" value="6" c:identifier="GOM_FILTER_GT" glib:nick="GT">
+      </member>
+      <member name="GTE"
+              value="7"
+              c:identifier="GOM_FILTER_GTE"
+              glib:nick="GTE">
+      </member>
+      <member name="LT" value="8" c:identifier="GOM_FILTER_LT" glib:nick="LT">
+      </member>
+      <member name="LTE"
+              value="9"
+              c:identifier="GOM_FILTER_LTE"
+              glib:nick="LTE">
+      </member>
+      <member name="LIKE"
+              value="10"
+              c:identifier="GOM_FILTER_LIKE"
+              glib:nick="LIKE">
+      </member>
+      <member name="GLOB"
+              value="11"
+              c:identifier="GOM_FILTER_GLOB"
+              glib:nick="GLOB">
+      </member>
+      <member name="IS_NULL"
+              value="12"
+              c:identifier="GOM_FILTER_IS_NULL"
+              glib:nick="IS_NULL">
+      </member>
+      <member name="IS_NOT_NULL"
+              value="13"
+              c:identifier="GOM_FILTER_IS_NOT_NULL"
+              glib:nick="IS_NOT_NULL">
+      </member>
+    </enumeration>
+    <record name="FilterPrivate" c:type="GomFilterPrivate" disguised="1">
+    </record>
+    <class name="Repository"
+           c:symbol-prefix="repository"
+           c:type="GomRepository"
+           parent="GObject.Object"
+           glib:type-name="GomRepository"
+           glib:get-type="gom_repository_get_type"
+           glib:type-struct="RepositoryClass">
+      <constructor name="new" c:identifier="gom_repository_new">
+        <return-value transfer-ownership="full">
+          <type name="Repository" c:type="GomRepository*"/>
+        </return-value>
+        <parameters>
+          <parameter name="adapter" transfer-ownership="none">
+            <type name="Adapter" c:type="GomAdapter*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <method name="automatic_migrate_async"
+              c:identifier="gom_repository_automatic_migrate_async">
+        <doc xml:space="preserve">Performs an automatic migration on the underlying database. See
+gom_repository_automatic_migrate_sync() for details.
+
+Upon completion, @callback will be executed and it must call
+gom_repository_automatic_migrate_finish().</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="repository" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomRepository.</doc>
+            <type name="Repository" c:type="GomRepository*"/>
+          </instance-parameter>
+          <parameter name="version" transfer-ownership="none">
+            <doc xml:space="preserve">The version to migrate to.</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="object_types" transfer-ownership="container">
+            <doc xml:space="preserve">a #GList of #GType</doc>
+            <type name="GLib.List" c:type="GList*">
+              <type name="GType"/>
+            </type>
+          </parameter>
+          <parameter name="callback"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1"
+                     scope="async"
+                     closure="3">
+            <doc xml:space="preserve">A callback to execute upon completion.</doc>
+            <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+          </parameter>
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve">User data for @callback.</doc>
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="automatic_migrate_finish"
+              c:identifier="gom_repository_automatic_migrate_finish"
+              throws="1">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="repository" transfer-ownership="none">
+            <type name="Repository" c:type="GomRepository*"/>
+          </instance-parameter>
+          <parameter name="result" transfer-ownership="none">
+            <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="automatic_migrate_sync"
+              c:identifier="gom_repository_automatic_migrate_sync"
+              throws="1">
+        <doc xml:space="preserve">Performs an automatic migration on the underlying database. For
+each of the #GType passed in @object_types, the table will be
+created if necessary, and each of the columns corresponding to
+properties will be added if needed.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">#TRUE in case of success.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="repository" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomRepository.</doc>
+            <type name="Repository" c:type="GomRepository*"/>
+          </instance-parameter>
+          <parameter name="version" transfer-ownership="none">
+            <doc xml:space="preserve">The version to migrate to.</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="object_types" transfer-ownership="container">
+            <doc xml:space="preserve">a #GList of #GType</doc>
+            <type name="GLib.List" c:type="GList*">
+              <type name="GType"/>
+            </type>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="find_async" c:identifier="gom_repository_find_async">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="repository" transfer-ownership="none">
+            <type name="Repository" c:type="GomRepository*"/>
+          </instance-parameter>
+          <parameter name="resource_type" transfer-ownership="none">
+            <type name="GType" c:type="GType"/>
+          </parameter>
+          <parameter name="filter" transfer-ownership="none">
+            <type name="Filter" c:type="GomFilter*"/>
+          </parameter>
+          <parameter name="callback"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1"
+                     scope="async"
+                     closure="3">
+            <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+          </parameter>
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="find_finish"
+              c:identifier="gom_repository_find_finish"
+              throws="1">
+        <doc xml:space="preserve">Completes an asynchronous request to fetch a group of resources.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A #GomResourceGroup.</doc>
+          <type name="ResourceGroup" c:type="GomResourceGroup*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="repository" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomRepository.</doc>
+            <type name="Repository" c:type="GomRepository*"/>
+          </instance-parameter>
+          <parameter name="result" transfer-ownership="none">
+            <doc xml:space="preserve">A #GAsyncResult.</doc>
+            <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="find_one_async"
+              c:identifier="gom_repository_find_one_async">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="repository" transfer-ownership="none">
+            <type name="Repository" c:type="GomRepository*"/>
+          </instance-parameter>
+          <parameter name="resource_type" transfer-ownership="none">
+            <type name="GType" c:type="GType"/>
+          </parameter>
+          <parameter name="filter" transfer-ownership="none">
+            <type name="Filter" c:type="GomFilter*"/>
+          </parameter>
+          <parameter name="callback"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1"
+                     scope="async"
+                     closure="3">
+            <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+          </parameter>
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="find_one_finish"
+              c:identifier="gom_repository_find_one_finish"
+              throws="1">
+        <doc xml:space="preserve">Completes an asynchronous request to find a single resource in the
+repository. See gom_repository_find_one_async() for more info.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A #GomResource if successful, otherwise %NULL.</doc>
+          <type name="Resource" c:type="GomResource*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="repository" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomRepository.</doc>
+            <type name="Repository" c:type="GomRepository*"/>
+          </instance-parameter>
+          <parameter name="result" transfer-ownership="none">
+            <doc xml:space="preserve">A #GAsyncResult.</doc>
+            <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="find_one_sync"
+              c:identifier="gom_repository_find_one_sync"
+              throws="1">
+        <doc xml:space="preserve">Synchronous version of gom_repository_find_async().</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A #GomResource or %NULL.</doc>
+          <type name="Resource" c:type="GomResource*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="repository" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomRepository.</doc>
+            <type name="Repository" c:type="GomRepository*"/>
+          </instance-parameter>
+          <parameter name="resource_type" transfer-ownership="none">
+            <doc xml:space="preserve">A #GType of the resource to lookup.</doc>
+            <type name="GType" c:type="GType"/>
+          </parameter>
+          <parameter name="filter"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve">A #GomFilter to apply to your search.</doc>
+            <type name="Filter" c:type="GomFilter*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="find_sorted_async"
+              c:identifier="gom_repository_find_sorted_async">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="repository" transfer-ownership="none">
+            <type name="Repository" c:type="GomRepository*"/>
+          </instance-parameter>
+          <parameter name="resource_type" transfer-ownership="none">
+            <type name="GType" c:type="GType"/>
+          </parameter>
+          <parameter name="filter" transfer-ownership="none">
+            <type name="Filter" c:type="GomFilter*"/>
+          </parameter>
+          <parameter name="sorting" transfer-ownership="none">
+            <type name="Sorting" c:type="GomSorting*"/>
+          </parameter>
+          <parameter name="callback"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1"
+                     scope="async"
+                     closure="4">
+            <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+          </parameter>
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="find_sorted_sync"
+              c:identifier="gom_repository_find_sorted_sync"
+              throws="1">
+        <doc xml:space="preserve">Synchronously queries the #GomRepository for objects matching the
+requested query. This must only be run from a callback provided to
+gom_adapter_queue_read().</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A #GomResourceGroup or %NULL.</doc>
+          <type name="ResourceGroup" c:type="GomResourceGroup*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="repository" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomRepository.</doc>
+            <type name="Repository" c:type="GomRepository*"/>
+          </instance-parameter>
+          <parameter name="resource_type" transfer-ownership="none">
+            <doc xml:space="preserve">The #GType of the resources to query.</doc>
+            <type name="GType" c:type="GType"/>
+          </parameter>
+          <parameter name="filter"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve">An optional filter for the query.</doc>
+            <type name="Filter" c:type="GomFilter*"/>
+          </parameter>
+          <parameter name="sorting"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve">An optional #GomSorting to order the query
+                             results.</doc>
+            <type name="Sorting" c:type="GomSorting*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="find_sync"
+              c:identifier="gom_repository_find_sync"
+              throws="1">
+        <doc xml:space="preserve">Synchronously queries the #GomRepository for objects matching the
+requested query. This must only be run from a callback provided to
+gom_adapter_queue_read().</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A #GomResourceGroup or %NULL.</doc>
+          <type name="ResourceGroup" c:type="GomResourceGroup*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="repository" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomRepository.</doc>
+            <type name="Repository" c:type="GomRepository*"/>
+          </instance-parameter>
+          <parameter name="resource_type" transfer-ownership="none">
+            <doc xml:space="preserve">The #GType of the resources to query.</doc>
+            <type name="GType" c:type="GType"/>
+          </parameter>
+          <parameter name="filter"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve">An optional filter for the query.</doc>
+            <type name="Filter" c:type="GomFilter*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_adapter" c:identifier="gom_repository_get_adapter">
+        <doc xml:space="preserve">Fetches the underlying adapter.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">A #GomAdapter.</doc>
+          <type name="Adapter" c:type="GomAdapter*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="repository" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomRepository.</doc>
+            <type name="Repository" c:type="GomRepository*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="migrate_async" c:identifier="gom_repository_migrate_async">
+        <doc xml:space="preserve">Asynchronously performs a migration on the underlying database. This will
+call @migrator from the SQLite thread for each migration to perform.
+
+Upon completion, @callback will be executed and it must call
+gom_repository_migrate_finish().</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="repository" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomRepository.</doc>
+            <type name="Repository" c:type="GomRepository*"/>
+          </instance-parameter>
+          <parameter name="version" transfer-ownership="none">
+            <doc xml:space="preserve">The version to migrate to.</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="migrator"
+                     transfer-ownership="none"
+                     scope="async"
+                     closure="2">
+            <doc xml:space="preserve">A function to perform the migrations.</doc>
+            <type name="RepositoryMigrator" c:type="GomRepositoryMigrator"/>
+          </parameter>
+          <parameter name="migrator_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve">User data for @migrator</doc>
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+          <parameter name="callback"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1"
+                     scope="async"
+                     closure="4">
+            <doc xml:space="preserve">A callback to execute upon completion.</doc>
+            <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+          </parameter>
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve">User data for @callback.</doc>
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="migrate_finish"
+              c:identifier="gom_repository_migrate_finish"
+              throws="1">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="repository" transfer-ownership="none">
+            <type name="Repository" c:type="GomRepository*"/>
+          </instance-parameter>
+          <parameter name="result" transfer-ownership="none">
+            <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="migrate_sync"
+              c:identifier="gom_repository_migrate_sync"
+              throws="1">
+        <doc xml:space="preserve">Performs a migration on the underlying database. This will
+call @migrator from the SQLite thread for each migration to perform.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">#TRUE in case of success.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="repository" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomRepository.</doc>
+            <type name="Repository" c:type="GomRepository*"/>
+          </instance-parameter>
+          <parameter name="version" transfer-ownership="none">
+            <doc xml:space="preserve">The version to migrate to.</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="migrator"
+                     transfer-ownership="none"
+                     scope="call"
+                     closure="2">
+            <doc xml:space="preserve">A function to perform the migrations.</doc>
+            <type name="RepositoryMigrator" c:type="GomRepositoryMigrator"/>
+          </parameter>
+          <parameter name="migrator_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve">User data for @migrator.</doc>
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+        </parameters>
+      </method>
+      <property name="adapter"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <type name="Adapter"/>
+      </property>
+      <field name="parent">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="RepositoryPrivate" c:type="GomRepositoryPrivate*"/>
+      </field>
+    </class>
+    <record name="RepositoryClass"
+            c:type="GomRepositoryClass"
+            glib:is-gtype-struct-for="Repository">
+      <field name="parent_class">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+    </record>
+    <callback name="RepositoryMigrator"
+              c:type="GomRepositoryMigrator"
+              throws="1">
+      <return-value transfer-ownership="none">
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="repository" transfer-ownership="none">
+          <type name="Repository" c:type="GomRepository*"/>
+        </parameter>
+        <parameter name="adapter" transfer-ownership="none">
+          <type name="Adapter" c:type="GomAdapter*"/>
+        </parameter>
+        <parameter name="version" transfer-ownership="none">
+          <type name="guint" c:type="guint"/>
+        </parameter>
+        <parameter name="user_data"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1"
+                   closure="3">
+          <type name="gpointer" c:type="gpointer"/>
+        </parameter>
+      </parameters>
+    </callback>
+    <record name="RepositoryPrivate"
+            c:type="GomRepositoryPrivate"
+            disguised="1">
+    </record>
+    <class name="Resource"
+           c:symbol-prefix="resource"
+           c:type="GomResource"
+           parent="GObject.Object"
+           abstract="1"
+           glib:type-name="GomResource"
+           glib:get-type="gom_resource_get_type"
+           glib:type-struct="ResourceClass">
+      <function name="from_bytes_func_quark"
+                c:identifier="gom_resource_from_bytes_func_quark">
+        <return-value transfer-ownership="none">
+          <type name="GLib.Quark" c:type="GQuark"/>
+        </return-value>
+      </function>
+      <function name="has_dynamic_pkey"
+                c:identifier="gom_resource_has_dynamic_pkey">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <parameter name="type" transfer-ownership="none">
+            <type name="GType" c:type="GType"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="new_in_version_quark"
+                c:identifier="gom_resource_new_in_version_quark">
+        <return-value transfer-ownership="none">
+          <type name="GLib.Quark" c:type="GQuark"/>
+        </return-value>
+      </function>
+      <function name="not_mapped_quark"
+                c:identifier="gom_resource_not_mapped_quark">
+        <return-value transfer-ownership="none">
+          <type name="GLib.Quark" c:type="GQuark"/>
+        </return-value>
+      </function>
+      <function name="notnull" c:identifier="gom_resource_notnull">
+        <return-value transfer-ownership="none">
+          <type name="GLib.Quark" c:type="GQuark"/>
+        </return-value>
+      </function>
+      <function name="ref_property_name"
+                c:identifier="gom_resource_ref_property_name">
+        <return-value transfer-ownership="none">
+          <type name="GLib.Quark" c:type="GQuark"/>
+        </return-value>
+      </function>
+      <function name="ref_table_class"
+                c:identifier="gom_resource_ref_table_class">
+        <return-value transfer-ownership="none">
+          <type name="GLib.Quark" c:type="GQuark"/>
+        </return-value>
+      </function>
+      <function name="to_bytes_func_quark"
+                c:identifier="gom_resource_to_bytes_func_quark">
+        <return-value transfer-ownership="none">
+          <type name="GLib.Quark" c:type="GQuark"/>
+        </return-value>
+      </function>
+      <function name="unique" c:identifier="gom_resource_unique">
+        <return-value transfer-ownership="none">
+          <type name="GLib.Quark" c:type="GQuark"/>
+        </return-value>
+      </function>
+      <method name="build_save_cmd" c:identifier="gom_resource_build_save_cmd">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource" transfer-ownership="none">
+            <type name="Resource" c:type="GomResource*"/>
+          </instance-parameter>
+          <parameter name="adapter" transfer-ownership="none">
+            <type name="Adapter" c:type="GomAdapter*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="delete_async" c:identifier="gom_resource_delete_async">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource" transfer-ownership="none">
+            <type name="Resource" c:type="GomResource*"/>
+          </instance-parameter>
+          <parameter name="callback"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1"
+                     scope="async"
+                     closure="1">
+            <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+          </parameter>
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="delete_finish"
+              c:identifier="gom_resource_delete_finish"
+              throws="1">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource" transfer-ownership="none">
+            <type name="Resource" c:type="GomResource*"/>
+          </instance-parameter>
+          <parameter name="result" transfer-ownership="none">
+            <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="delete_sync"
+              c:identifier="gom_resource_delete_sync"
+              throws="1">
+        <doc xml:space="preserve">Synchronously deletes a resource. This may only be called from inside a
+callback to gom_adapter_queue_write().</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if successful; otherwise %FALSE and @error is set.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomResource.</doc>
+            <type name="Resource" c:type="GomResource*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="do_delete"
+              c:identifier="gom_resource_do_delete"
+              throws="1">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource" transfer-ownership="none">
+            <type name="Resource" c:type="GomResource*"/>
+          </instance-parameter>
+          <parameter name="adapter" transfer-ownership="none">
+            <type name="Adapter" c:type="GomAdapter*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="do_save" c:identifier="gom_resource_do_save" throws="1">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource" transfer-ownership="none">
+            <type name="Resource" c:type="GomResource*"/>
+          </instance-parameter>
+          <parameter name="adapter" transfer-ownership="none">
+            <type name="Adapter" c:type="GomAdapter*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="fetch_m2m_async"
+              c:identifier="gom_resource_fetch_m2m_async">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource" transfer-ownership="none">
+            <type name="Resource" c:type="GomResource*"/>
+          </instance-parameter>
+          <parameter name="resource_type" transfer-ownership="none">
+            <type name="GType" c:type="GType"/>
+          </parameter>
+          <parameter name="m2m_table" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="filter" transfer-ownership="none">
+            <type name="Filter" c:type="GomFilter*"/>
+          </parameter>
+          <parameter name="callback"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1"
+                     scope="async"
+                     closure="4">
+            <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+          </parameter>
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="fetch_m2m_finish"
+              c:identifier="gom_resource_fetch_m2m_finish"
+              throws="1">
+        <doc xml:space="preserve">Completes the asynchronous request to fetch a group of resources that
+are related to the resource through a many-to-many table.</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A #GomResourceGroup.</doc>
+          <type name="ResourceGroup" c:type="GomResourceGroup*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomResource.</doc>
+            <type name="Resource" c:type="GomResource*"/>
+          </instance-parameter>
+          <parameter name="result" transfer-ownership="none">
+            <doc xml:space="preserve">A #GAsyncResult.</doc>
+            <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_is_from_table"
+              c:identifier="gom_resource_get_is_from_table">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource" transfer-ownership="none">
+            <type name="Resource" c:type="GomResource*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="save_async" c:identifier="gom_resource_save_async">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource" transfer-ownership="none">
+            <type name="Resource" c:type="GomResource*"/>
+          </instance-parameter>
+          <parameter name="callback"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1"
+                     scope="async"
+                     closure="1">
+            <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+          </parameter>
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="save_finish"
+              c:identifier="gom_resource_save_finish"
+              throws="1">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource" transfer-ownership="none">
+            <type name="Resource" c:type="GomResource*"/>
+          </instance-parameter>
+          <parameter name="result" transfer-ownership="none">
+            <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="save_sync"
+              c:identifier="gom_resource_save_sync"
+              throws="1">
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if successful; otherwise %FALSE.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomResource.</doc>
+            <type name="Resource" c:type="GomResource*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="set_is_from_table"
+              c:identifier="gom_resource_set_is_from_table">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource" transfer-ownership="none">
+            <type name="Resource" c:type="GomResource*"/>
+          </instance-parameter>
+          <parameter name="is_from_table" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_post_save_properties"
+              c:identifier="gom_resource_set_post_save_properties">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource" transfer-ownership="none">
+            <type name="Resource" c:type="GomResource*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="repository" writable="1" transfer-ownership="none">
+        <type name="Repository"/>
+      </property>
+      <field name="parent">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="ResourcePrivate" c:type="GomResourcePrivate*"/>
+      </field>
+    </class>
+    <record name="ResourceClass"
+            c:type="GomResourceClass"
+            glib:is-gtype-struct-for="Resource">
+      <field name="parent_class">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+      <field name="primary_key">
+        <array zero-terminated="0" c:type="gchar" fixed-size="64">
+          <type name="gchar" c:type="gchar"/>
+        </array>
+      </field>
+      <field name="table">
+        <array zero-terminated="0" c:type="gchar" fixed-size="64">
+          <type name="gchar" c:type="gchar"/>
+        </array>
+      </field>
+      <method name="set_notnull" c:identifier="gom_resource_class_set_notnull">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource_class" transfer-ownership="none">
+            <type name="ResourceClass" c:type="GomResourceClass*"/>
+          </instance-parameter>
+          <parameter name="property_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_primary_key"
+              c:identifier="gom_resource_class_set_primary_key">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource_class" transfer-ownership="none">
+            <type name="ResourceClass" c:type="GomResourceClass*"/>
+          </instance-parameter>
+          <parameter name="primary_key" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_property_from_bytes"
+              c:identifier="gom_resource_class_set_property_from_bytes">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource_class" transfer-ownership="none">
+            <type name="ResourceClass" c:type="GomResourceClass*"/>
+          </instance-parameter>
+          <parameter name="property_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="from_bytes_func"
+                     transfer-ownership="none"
+                     scope="notified"
+                     destroy="2">
+            <type name="ResourceFromBytesFunc"
+                  c:type="GomResourceFromBytesFunc"/>
+          </parameter>
+          <parameter name="notify" transfer-ownership="none" scope="async">
+            <type name="GLib.DestroyNotify" c:type="GDestroyNotify"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_property_new_in_version"
+              c:identifier="gom_resource_class_set_property_new_in_version">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource_class" transfer-ownership="none">
+            <type name="ResourceClass" c:type="GomResourceClass*"/>
+          </instance-parameter>
+          <parameter name="property_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="version" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_property_set_mapped"
+              c:identifier="gom_resource_class_set_property_set_mapped">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource_class" transfer-ownership="none">
+            <type name="ResourceClass" c:type="GomResourceClass*"/>
+          </instance-parameter>
+          <parameter name="property_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="is_mapped" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_property_to_bytes"
+              c:identifier="gom_resource_class_set_property_to_bytes">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource_class" transfer-ownership="none">
+            <type name="ResourceClass" c:type="GomResourceClass*"/>
+          </instance-parameter>
+          <parameter name="property_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="to_bytes_func"
+                     transfer-ownership="none"
+                     scope="notified"
+                     destroy="2">
+            <type name="ResourceToBytesFunc" c:type="GomResourceToBytesFunc"/>
+          </parameter>
+          <parameter name="notify" transfer-ownership="none" scope="async">
+            <type name="GLib.DestroyNotify" c:type="GDestroyNotify"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_property_transform"
+              c:identifier="gom_resource_class_set_property_transform"
+              introspectable="0">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource_class" transfer-ownership="none">
+            <type name="ResourceClass" c:type="GomResourceClass*"/>
+          </instance-parameter>
+          <parameter name="property_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="to_bytes_func" transfer-ownership="none">
+            <type name="ResourceToBytesFunc" c:type="GomResourceToBytesFunc"/>
+          </parameter>
+          <parameter name="from_bytes_func" transfer-ownership="none">
+            <type name="ResourceFromBytesFunc"
+                  c:type="GomResourceFromBytesFunc"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_reference"
+              c:identifier="gom_resource_class_set_reference">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource_class" transfer-ownership="none">
+            <type name="ResourceClass" c:type="GomResourceClass*"/>
+          </instance-parameter>
+          <parameter name="property_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="ref_table_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="ref_property_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_table" c:identifier="gom_resource_class_set_table">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource_class" transfer-ownership="none">
+            <type name="ResourceClass" c:type="GomResourceClass*"/>
+          </instance-parameter>
+          <parameter name="table" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="set_unique" c:identifier="gom_resource_class_set_unique">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="resource_class" transfer-ownership="none">
+            <type name="ResourceClass" c:type="GomResourceClass*"/>
+          </instance-parameter>
+          <parameter name="property_name" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+    </record>
+    <callback name="ResourceFromBytesFunc" c:type="GomResourceFromBytesFunc">
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="bytes" transfer-ownership="none">
+          <type name="GLib.Bytes" c:type="GBytes*"/>
+        </parameter>
+        <parameter name="value" transfer-ownership="none">
+          <type name="GObject.Value" c:type="GValue*"/>
+        </parameter>
+      </parameters>
+    </callback>
+    <class name="ResourceGroup"
+           c:symbol-prefix="resource_group"
+           c:type="GomResourceGroup"
+           parent="GObject.Object"
+           glib:type-name="GomResourceGroup"
+           glib:get-type="gom_resource_group_get_type"
+           glib:type-struct="ResourceGroupClass">
+      <constructor name="new" c:identifier="gom_resource_group_new">
+        <return-value transfer-ownership="full">
+          <type name="ResourceGroup" c:type="GomResourceGroup*"/>
+        </return-value>
+        <parameters>
+          <parameter name="repository" transfer-ownership="none">
+            <type name="Repository" c:type="GomRepository*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <method name="append" c:identifier="gom_resource_group_append">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="group" transfer-ownership="none">
+            <type name="ResourceGroup" c:type="GomResourceGroup*"/>
+          </instance-parameter>
+          <parameter name="resource" transfer-ownership="none">
+            <type name="Resource" c:type="GomResource*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="delete_async"
+              c:identifier="gom_resource_group_delete_async">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="group" transfer-ownership="none">
+            <type name="ResourceGroup" c:type="GomResourceGroup*"/>
+          </instance-parameter>
+          <parameter name="callback"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1"
+                     scope="async"
+                     closure="1">
+            <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+          </parameter>
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="delete_finish"
+              c:identifier="gom_resource_group_delete_finish"
+              throws="1">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="group" transfer-ownership="none">
+            <type name="ResourceGroup" c:type="GomResourceGroup*"/>
+          </instance-parameter>
+          <parameter name="result" transfer-ownership="none">
+            <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="delete_sync"
+              c:identifier="gom_resource_group_delete_sync"
+              throws="1">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="group" transfer-ownership="none">
+            <type name="ResourceGroup" c:type="GomResourceGroup*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="fetch_async" c:identifier="gom_resource_group_fetch_async">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="group" transfer-ownership="none">
+            <type name="ResourceGroup" c:type="GomResourceGroup*"/>
+          </instance-parameter>
+          <parameter name="index_" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="count" transfer-ownership="none">
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="callback"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1"
+                     scope="async"
+                     closure="3">
+            <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+          </parameter>
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="fetch_finish"
+              c:identifier="gom_resource_group_fetch_finish"
+              throws="1">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="group" transfer-ownership="none">
+            <type name="ResourceGroup" c:type="GomResourceGroup*"/>
+          </instance-parameter>
+          <parameter name="result" transfer-ownership="none">
+            <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="fetch_sync"
+              c:identifier="gom_resource_group_fetch_sync"
+              throws="1">
+        <doc xml:space="preserve">Fetches a sequence of resources from the group synchronously. This must
+be called from an adapter read callback using gom_adapter_queue_read().</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">%TRUE if successful; otherwise %FALSE and @error is set.</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="group" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomResourceGroup.</doc>
+            <type name="ResourceGroup" c:type="GomResourceGroup*"/>
+          </instance-parameter>
+          <parameter name="index_" transfer-ownership="none">
+            <doc xml:space="preserve">The first index to fetch.</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+          <parameter name="count" transfer-ownership="none">
+            <doc xml:space="preserve">The number of indexes to fetch.</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_count" c:identifier="gom_resource_group_get_count">
+        <return-value transfer-ownership="none">
+          <type name="guint" c:type="guint"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="group" transfer-ownership="none">
+            <type name="ResourceGroup" c:type="GomResourceGroup*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="get_index" c:identifier="gom_resource_group_get_index">
+        <doc xml:space="preserve">Fetches the resource at @index_. You must have loaded that resource by
+calling gom_resource_group_fetch_async() with a range inclusive of the
+index.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">A #GomResource.</doc>
+          <type name="Resource" c:type="GomResource*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="group" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomResourceGroup.</doc>
+            <type name="ResourceGroup" c:type="GomResourceGroup*"/>
+          </instance-parameter>
+          <parameter name="index_" transfer-ownership="none">
+            <doc xml:space="preserve">The index of the resource.</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_m2m_table"
+              c:identifier="gom_resource_group_get_m2m_table">
+        <return-value transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="group" transfer-ownership="none">
+            <type name="ResourceGroup" c:type="GomResourceGroup*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="write_async" c:identifier="gom_resource_group_write_async">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="group" transfer-ownership="none">
+            <type name="ResourceGroup" c:type="GomResourceGroup*"/>
+          </instance-parameter>
+          <parameter name="callback"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1"
+                     scope="async"
+                     closure="1">
+            <type name="Gio.AsyncReadyCallback" c:type="GAsyncReadyCallback"/>
+          </parameter>
+          <parameter name="user_data"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <type name="gpointer" c:type="gpointer"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="write_finish"
+              c:identifier="gom_resource_group_write_finish"
+              throws="1">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="group" transfer-ownership="none">
+            <type name="ResourceGroup" c:type="GomResourceGroup*"/>
+          </instance-parameter>
+          <parameter name="result" transfer-ownership="none">
+            <type name="Gio.AsyncResult" c:type="GAsyncResult*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="write_sync"
+              c:identifier="gom_resource_group_write_sync"
+              throws="1">
+        <return-value transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="group" transfer-ownership="none">
+            <type name="ResourceGroup" c:type="GomResourceGroup*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="count"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <type name="guint" c:type="guint"/>
+      </property>
+      <property name="filter"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <type name="Filter"/>
+      </property>
+      <property name="is-writable"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <type name="gboolean" c:type="gboolean"/>
+      </property>
+      <property name="m2m-table"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <type name="utf8" c:type="gchar*"/>
+      </property>
+      <property name="m2m-type"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <type name="GType" c:type="GType"/>
+      </property>
+      <property name="repository"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <type name="Repository"/>
+      </property>
+      <property name="resource-type"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <type name="GType" c:type="GType"/>
+      </property>
+      <property name="sorting"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <type name="Sorting"/>
+      </property>
+      <field name="parent">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="ResourceGroupPrivate" c:type="GomResourceGroupPrivate*"/>
+      </field>
+    </class>
+    <record name="ResourceGroupClass"
+            c:type="GomResourceGroupClass"
+            glib:is-gtype-struct-for="ResourceGroup">
+      <field name="parent_class">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+    </record>
+    <record name="ResourceGroupPrivate"
+            c:type="GomResourceGroupPrivate"
+            disguised="1">
+    </record>
+    <record name="ResourcePrivate" c:type="GomResourcePrivate" disguised="1">
+    </record>
+    <callback name="ResourceToBytesFunc" c:type="GomResourceToBytesFunc">
+      <return-value transfer-ownership="full">
+        <type name="GLib.Bytes" c:type="GBytes*"/>
+      </return-value>
+      <parameters>
+        <parameter name="value" transfer-ownership="none">
+          <type name="GObject.Value" c:type="GValue*"/>
+        </parameter>
+      </parameters>
+    </callback>
+    <class name="Sorting"
+           c:symbol-prefix="sorting"
+           c:type="GomSorting"
+           parent="GObject.InitiallyUnowned"
+           glib:type-name="GomSorting"
+           glib:get-type="gom_sorting_get_type"
+           glib:type-struct="SortingClass">
+      <constructor name="new"
+                   c:identifier="gom_sorting_new"
+                   introspectable="0">
+        <doc xml:space="preserve">Creates a new #GomSorting to instance.
+
+This is useful to sort query results, as #GomSorting knows how to return
+the proper "ORDER BY" SQL statements.
+
+Example:
+|[&lt;!-- language="C" --&gt;
+    GomSorting *sorting = gom_sorting_new(EPISODE_TYPE_RESOURCE,
+                                          "season-number",
+                                          GOM_SORTING_DESCENDING,
+                                          EPISODE_TYPE_RESOURCE,
+                                          "episode-number",
+                                          GOM_SORTING_ASCENDING);
+]|
+
+The above example maps to the following SQL statement:
+|[&lt;!-- language="SQL" --&gt;
+    ORDER BY 'episodes'.'season-number' DESC, 'episodes'.'episode-number'
+]|</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A #GomSorting.</doc>
+          <type name="Sorting" c:type="GomSorting*"/>
+        </return-value>
+        <parameters>
+          <parameter name="first_resource_type" transfer-ownership="none">
+            <doc xml:space="preserve">A subclass of #GomResource.</doc>
+            <type name="GType" c:type="GType"/>
+          </parameter>
+          <parameter name="first_property_name" transfer-ownership="none">
+            <doc xml:space="preserve">A string.</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="first_sorting_mode" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomSortingMode.</doc>
+            <type name="SortingMode" c:type="GomSortingMode"/>
+          </parameter>
+          <parameter name="..." transfer-ownership="none">
+            <doc xml:space="preserve">Additional triples of resource_type/property_name/sorting_mode,
+      followed by %NULL.</doc>
+            <varargs/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <method name="add" c:identifier="gom_sorting_add">
+        <doc xml:space="preserve">Add a new ORDER BY clause to the sorting object.
+
+This allows chaining ORDER BY clauses, adding them one at a time, rather
+than passing them all to the constructor.
+
+Example:
+|[&lt;!-- language="C" --&gt;
+    GomSorting *sorting = g_object_new (GOM_TYPE_SORTING, NULL);
+    gom_sorting_add (sorting, EPISODE_TYPE_RESOURCE, "season-number",
+                     GOM_SORTING_DESCENDING);
+    gom_sorting_add (sorting, EPISODE_TYPE_RESOURCE, "episode-number",
+                     GOM_SORTING_ASCENDING);
+]|
+
+The above example maps to the following SQL statement:
+|[&lt;!-- language="SQL" --&gt;
+    ORDER BY 'episodes'.'season-number' DESC, 'episodes'.'episode-number'
+]|</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="sorting" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomSorting.</doc>
+            <type name="Sorting" c:type="GomSorting*"/>
+          </instance-parameter>
+          <parameter name="resource_type" transfer-ownership="none">
+            <doc xml:space="preserve">A subclass of #GomResource.</doc>
+            <type name="GType" c:type="GType"/>
+          </parameter>
+          <parameter name="property_name" transfer-ownership="none">
+            <doc xml:space="preserve">A string.</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="sorting_mode" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomSortingMode.</doc>
+            <type name="SortingMode" c:type="GomSortingMode"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_sql" c:identifier="gom_sorting_get_sql">
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">A string containing the SQL query corresponding
+                          to this @sorting.</doc>
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="sorting" transfer-ownership="none">
+            <doc xml:space="preserve">A #GomSorting.</doc>
+            <type name="Sorting" c:type="GomSorting*"/>
+          </instance-parameter>
+          <parameter name="table_map" transfer-ownership="none">
+            <doc xml:space="preserve">A #GHashTable.</doc>
+            <type name="GLib.HashTable" c:type="GHashTable*">
+              <type name="gpointer" c:type="gpointer"/>
+              <type name="gpointer" c:type="gpointer"/>
+            </type>
+          </parameter>
+        </parameters>
+      </method>
+      <field name="parent">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv">
+        <type name="SortingPrivate" c:type="GomSortingPrivate*"/>
+      </field>
+    </class>
+    <record name="SortingClass"
+            c:type="GomSortingClass"
+            glib:is-gtype-struct-for="Sorting">
+      <field name="parent_class">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+    </record>
+    <enumeration name="SortingMode"
+                 glib:type-name="GomSortingMode"
+                 glib:get-type="gom_sorting_mode_get_type"
+                 c:type="GomSortingMode">
+      <member name="ASCENDING"
+              value="1"
+              c:identifier="GOM_SORTING_ASCENDING"
+              glib:nick="ASCENDING">
+      </member>
+      <member name="DESCENDING"
+              value="2"
+              c:identifier="GOM_SORTING_DESCENDING"
+              glib:nick="DESCENDING">
+      </member>
+    </enumeration>
+    <record name="SortingPrivate" c:type="GomSortingPrivate" disguised="1">
+    </record>
+    <function name="error_quark"
+              c:identifier="gom_error_quark"
+              moved-to="Error.quark">
+      <return-value transfer-ownership="none">
+        <type name="GLib.Quark" c:type="GQuark"/>
+      </return-value>
+    </function>
+  </namespace>
+</repository>

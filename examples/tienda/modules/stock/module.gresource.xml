@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/tienda/modules/stock/">
+    <file preprocess="xml-stripblanks">views/catalog.ui</file>
+    <file preprocess="xml-stripblanks">data/images/videos.svg</file>
+    <file preprocess="xml-stripblanks">data/images/canned-goods.svg</file>
+    <file preprocess="xml-stripblanks">data/images/fresh-fruit-veg.svg</file>
+    <file preprocess="xml-stripblanks">data/images/dairy.svg</file>
+  </gresource>
+</gresources>

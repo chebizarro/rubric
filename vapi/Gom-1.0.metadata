@@ -1,0 +1,2 @@
+Filter.sql skip
+//Gom.Repository.automatic_migrate_sync.object_types type_name="GLib.List<void*>"
