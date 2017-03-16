@@ -281,6 +281,7 @@ AC_CONFIG_FILES([
 	Makefile
 	build/Makefile
 	build/autotools/Makefile
+	build/aux/Makefile
 	docs/Makefile
 	librubric/Makefile
 	librubric/rubric-1.0.pc

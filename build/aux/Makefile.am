@@ -1,5 +1,6 @@
 include $(top_srcdir)/base.am
 
-SUBDIRS = autotools aux
+EXTRA_DIST = \
+	test-driver
 
 -include $(top_srcdir)/git.mk
