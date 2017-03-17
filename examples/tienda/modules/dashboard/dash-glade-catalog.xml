@@ -1,0 +1,9 @@
+<glade-catalog name="dash" library="libdash.so" depends="gtk+">
+	<glade-widget-classes>
+		<glade-widget-class name="TiendaModulesDashboardDashboardView" generic-name="ModulesDashboardDashboardView" title="ModulesDashboardDashboardView"  parent="RubricGtkWidgetsBoxView"/>
+	</glade-widget-classes>
+
+	<glade-widget-group name="dash-widgets" title="Dashboard Widgets">
+		<glade-widget-class-ref name="TiendaModulesDashboardDashboardView" />
+	</glade-widget-group>
+</glade-catalog>

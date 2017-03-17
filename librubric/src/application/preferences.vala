@@ -27,9 +27,14 @@ namespace Rubric {
 		private SettingsSchemaSource sss;
 	
 		public Preferences(string schema_id) throws Error {
-			this.schema_id = schema_id;
-			settings = new GLib.Settings (this.schema_id);
 			sss = SettingsSchemaSource.get_default();
+			
+			if(sss.lookup(schema_id, true) == null)
+				throw new IOError.NOT_FOUND("The schema %s was not found", schema_id);
+			
+			this.schema_id = schema_id;
+			
+			settings = new GLib.Settings (this.schema_id);
 		}
 		
 		public void apply(GLib.Object object, string? child_schema = null) throws Error {

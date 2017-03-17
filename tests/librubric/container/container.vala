@@ -192,7 +192,6 @@ namespace Rubric.Tests {
 				container.register<unowned CompactClass,unowned CompactClass>();
 				assert_not_reached();
 			} catch (ContainerError e) {
-				message(e.message);
 				assert(e.message == "You must provide a constructor for type gpointer");
 			}
 		}

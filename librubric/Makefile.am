@@ -17,6 +17,7 @@ librubric_la_SOURCES = \
 	src/collections/node.vala \
 	src/container/container.vala \
 	src/container/container-extension.vala \
+	src/container/gir-resource-handler.vala \
 	src/logging/category.vala \
 	src/logging/logger.vala \
 	src/logging/debug-logger.vala \

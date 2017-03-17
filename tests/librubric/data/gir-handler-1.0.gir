@@ -1,0 +1,562 @@
+<?xml version="1.0"?>
+<repository version="1.2" xmlns="http://www.gtk.org/introspection/core/1.0" xmlns:c="http://www.gtk.org/introspection/c/1.0" xmlns:glib="http://www.gtk.org/introspection/glib/1.0">
+<include name="GObject" version="2.0"/>
+<include name="Rubric" version="1.0"/>
+<include name="Valadate" version="1.0"/>
+<package name="test-librubric"/>
+<c:include name="rubric.h"/>
+<c:include name="container/test-objects.h"/>
+<namespace name="test-librubric" version="1.0" c:prefix="Rubric">
+	<annotation key="ccode.gir-version" value="1.0"/>
+	<annotation key="ccode.gir-namespace" value="Rubric"/>
+	<class name="TestsSettings" c:type="RubricTestsSettings" glib:type-name="RubricTestsSettings" glib:get-type="rubric_tests_settings_get_type" glib:type-struct="TestsSettingsClass" parent="GObject.Object">
+		<field name="parent_instance">
+			<type name="GObject.Object" c:type="GObject"/>
+		</field>
+		<field name="priv">
+			<type name="TestsSettingsPrivate" c:type="RubricTestsSettingsPrivate*"/>
+		</field>
+		<constructor name="new" c:identifier="rubric_tests_settings_new">
+			<return-value transfer-ownership="full">
+				<type name="Rubric.Settings" c:type="RubricTestsSettings*"/>
+			</return-value>
+		</constructor>
+		<property name="schema-id" writable="1" construct="1">
+			<type name="utf8" c:type="gchar*"/>
+		</property>
+		<method name="get_schema_id" c:identifier="rubric_tests_settings_get_schema_id">
+			<return-value transfer-ownership="none">
+				<type name="utf8" c:type="const gchar*"/>
+			</return-value>
+		</method>
+		<method name="set_schema_id" c:identifier="rubric_tests_settings_set_schema_id">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="utf8" c:type="const gchar*"/>
+				</parameter>
+			</parameters>
+		</method>
+	</class>
+	<record name="TestsSettingsClass" c:type="RubricTestsSettingsClass" glib:is-gtype-struct-for="Settings">
+		<field name="parent_class">
+			<type name="GObject.ObjectClass" c:type="GObjectClass"/>
+		</field>
+	</record>
+	<record name="TestsSettingsPrivate" c:type="RubricTestsSettingsPrivate" disguised="1"/>
+	<class name="TestsTestObject" c:type="RubricTestsTestObject" glib:type-name="RubricTestsTestObject" glib:get-type="rubric_tests_test_object_get_type" glib:type-struct="TestsTestObjectClass" parent="GObject.Object">
+		<field name="parent_instance">
+			<type name="GObject.Object" c:type="GObject"/>
+		</field>
+		<field name="priv">
+			<type name="TestsTestObjectPrivate" c:type="RubricTestsTestObjectPrivate*"/>
+		</field>
+		<constructor name="new" c:identifier="rubric_tests_test_object_new">
+			<return-value transfer-ownership="full">
+				<type name="Rubric.TestObject" c:type="RubricTestsTestObject*"/>
+			</return-value>
+		</constructor>
+		<property name="prop-one" writable="1" construct-only="1">
+			<type name="utf8" c:type="gchar*"/>
+		</property>
+		<method name="get_prop_one" c:identifier="rubric_tests_test_object_get_prop_one">
+			<return-value transfer-ownership="none">
+				<type name="utf8" c:type="const gchar*"/>
+			</return-value>
+		</method>
+		<property name="prop-two" writable="1" construct="1">
+			<type name="gint" c:type="gint"/>
+		</property>
+		<method name="get_prop_two" c:identifier="rubric_tests_test_object_get_prop_two">
+			<return-value transfer-ownership="none">
+				<type name="gint" c:type="gint"/>
+			</return-value>
+		</method>
+		<method name="set_prop_two" c:identifier="rubric_tests_test_object_set_prop_two">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="gint" c:type="gint"/>
+				</parameter>
+			</parameters>
+		</method>
+		<property name="struct" writable="1">
+			<type name="Rubric.TestStruct" c:type="RubricTestsTestStruct"/>
+		</property>
+		<method name="get_struct" c:identifier="rubric_tests_test_object_get_struct">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="result" direction="out" transfer-ownership="none" caller-allocates="1">
+					<type name="Rubric.TestStruct" c:type="RubricTestsTestStruct*"/>
+				</parameter>
+			</parameters>
+		</method>
+		<method name="set_struct" c:identifier="rubric_tests_test_object_set_struct">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="Rubric.TestStruct" c:type="RubricTestsTestStruct"/>
+				</parameter>
+			</parameters>
+		</method>
+		<property name="settings" writable="1" construct="1">
+			<type name="Rubric.Settings" c:type="RubricTestsSettings*"/>
+		</property>
+		<method name="get_settings" c:identifier="rubric_tests_test_object_get_settings">
+			<return-value transfer-ownership="none">
+				<type name="Rubric.Settings" c:type="RubricTestsSettings*"/>
+			</return-value>
+		</method>
+		<method name="set_settings" c:identifier="rubric_tests_test_object_set_settings">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="Rubric.Settings" c:type="RubricTestsSettings*"/>
+				</parameter>
+			</parameters>
+		</method>
+		<property name="compact-class" writable="1">
+			<type name="Rubric.CompactClass" c:type="RubricTestsCompactClass*"/>
+		</property>
+		<method name="get_compact_class" c:identifier="rubric_tests_test_object_get_compact_class">
+			<return-value transfer-ownership="none">
+				<type name="Rubric.CompactClass" c:type="RubricTestsCompactClass*"/>
+			</return-value>
+		</method>
+		<method name="set_compact_class" c:identifier="rubric_tests_test_object_set_compact_class">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="Rubric.CompactClass" c:type="RubricTestsCompactClass*"/>
+				</parameter>
+			</parameters>
+		</method>
+	</class>
+	<record name="TestsTestObjectClass" c:type="RubricTestsTestObjectClass" glib:is-gtype-struct-for="TestObject">
+		<field name="parent_class">
+			<type name="GObject.ObjectClass" c:type="GObjectClass"/>
+		</field>
+	</record>
+	<record name="TestsTestObjectPrivate" c:type="RubricTestsTestObjectPrivate" disguised="1"/>
+	<record name="TestsSimpleClass">
+		<constructor name="new" c:identifier="rubric_tests_simpleclass_new">
+			<return-value transfer-ownership="full">
+				<type name="Rubric.SimpleClass" c:type="RubricTestsSimpleClass*"/>
+			</return-value>
+		</constructor>
+		<property name="prop-one" writable="1">
+			<type name="utf8" c:type="gchar*"/>
+		</property>
+		<method name="get_prop_one" c:identifier="rubric_tests_simpleclass_get_prop_one">
+			<return-value transfer-ownership="none">
+				<type name="utf8" c:type="const gchar*"/>
+			</return-value>
+		</method>
+		<method name="set_prop_one" c:identifier="rubric_tests_simpleclass_set_prop_one">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="utf8" c:type="const gchar*"/>
+				</parameter>
+			</parameters>
+		</method>
+		<property name="prop-two" writable="1">
+			<type name="gint" c:type="gint"/>
+		</property>
+		<method name="get_prop_two" c:identifier="rubric_tests_simpleclass_get_prop_two">
+			<return-value transfer-ownership="none">
+				<type name="gint" c:type="gint"/>
+			</return-value>
+		</method>
+		<method name="set_prop_two" c:identifier="rubric_tests_simpleclass_set_prop_two">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="gint" c:type="gint"/>
+				</parameter>
+			</parameters>
+		</method>
+		<property name="stuct" writable="1">
+			<type name="Rubric.TestStruct" c:type="RubricTestsTestStruct"/>
+		</property>
+		<method name="get_stuct" c:identifier="rubric_tests_simpleclass_get_stuct">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="result" direction="out" transfer-ownership="none" caller-allocates="1">
+					<type name="Rubric.TestStruct" c:type="RubricTestsTestStruct*"/>
+				</parameter>
+			</parameters>
+		</method>
+		<method name="set_stuct" c:identifier="rubric_tests_simpleclass_set_stuct">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="Rubric.TestStruct" c:type="RubricTestsTestStruct"/>
+				</parameter>
+			</parameters>
+		</method>
+		<property name="object" writable="1">
+			<type name="Rubric.TestObject" c:type="RubricTestsTestObject*"/>
+		</property>
+		<method name="get_object" c:identifier="rubric_tests_simpleclass_get_object">
+			<return-value transfer-ownership="none">
+				<type name="Rubric.TestObject" c:type="RubricTestsTestObject*"/>
+			</return-value>
+		</method>
+		<method name="set_object" c:identifier="rubric_tests_simpleclass_set_object">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="Rubric.TestObject" c:type="RubricTestsTestObject*"/>
+				</parameter>
+			</parameters>
+		</method>
+	</record>
+	<record name="TestsCompactClass">
+		<field name="prop_one">
+			<type name="utf8" c:type="gchar*"/>
+		</field>
+		<field name="prop_two">
+			<type name="gint" c:type="gint"/>
+		</field>
+		<constructor name="new" c:identifier="rubric_tests_compactclass_new">
+			<return-value transfer-ownership="full">
+				<type name="Rubric.CompactClass" c:type="RubricTestsCompactClass*"/>
+			</return-value>
+		</constructor>
+	</record>
+	<class name="TestsOpenGeneric" c:type="RubricTestsOpenGeneric" glib:type-name="RubricTestsOpenGeneric" glib:get-type="rubric_tests_open_generic_get_type" glib:type-struct="TestsOpenGenericClass" parent="GObject.Object">
+		<field name="parent_instance">
+			<type name="GObject.Object" c:type="GObject"/>
+		</field>
+		<field name="priv">
+			<type name="TestsOpenGenericPrivate" c:type="RubricTestsOpenGenericPrivate*"/>
+		</field>
+		<constructor name="new" c:identifier="rubric_tests_open_generic_new">
+			<return-value transfer-ownership="full">
+				<type name="Rubric.OpenGeneric" c:type="RubricTestsOpenGeneric*"/>
+			</return-value>
+		</constructor>
+		<property name="prop-one" writable="1" construct-only="1">
+			<type name="utf8" c:type="gchar*"/>
+		</property>
+		<method name="get_prop_one" c:identifier="rubric_tests_open_generic_get_prop_one">
+			<return-value transfer-ownership="none">
+				<type name="utf8" c:type="const gchar*"/>
+			</return-value>
+		</method>
+	</class>
+	<record name="TestsOpenGenericClass" c:type="RubricTestsOpenGenericClass" glib:is-gtype-struct-for="OpenGeneric">
+		<field name="parent_class">
+			<type name="GObject.ObjectClass" c:type="GObjectClass"/>
+		</field>
+	</record>
+	<record name="TestsOpenGenericPrivate" c:type="RubricTestsOpenGenericPrivate" disguised="1"/>
+	<class name="TestsClosedGeneric" c:type="RubricTestsClosedGeneric" glib:type-name="RubricTestsClosedGeneric" glib:get-type="rubric_tests_closed_generic_get_type" glib:type-struct="TestsClosedGenericClass" parent="GObject.Object">
+		<field name="parent_instance">
+			<type name="GObject.Object" c:type="GObject"/>
+		</field>
+		<field name="priv">
+			<type name="TestsClosedGenericPrivate" c:type="RubricTestsClosedGenericPrivate*"/>
+		</field>
+		<constructor name="new" c:identifier="rubric_tests_closed_generic_new">
+			<return-value transfer-ownership="full">
+				<type name="Rubric.ClosedGeneric" c:type="RubricTestsClosedGeneric*"/>
+			</return-value>
+		</constructor>
+		<property name="prop-one" writable="1" construct-only="1">
+			<type name="gpointer" c:type="gpointer"/>
+		</property>
+		<method name="get_prop_one" c:identifier="rubric_tests_closed_generic_get_prop_one">
+			<return-value transfer-ownership="none" allow-none="1">
+				<type name="gpointer" c:type="gpointer"/>
+			</return-value>
+		</method>
+	</class>
+	<record name="TestsClosedGenericClass" c:type="RubricTestsClosedGenericClass" glib:is-gtype-struct-for="ClosedGeneric">
+		<field name="parent_class">
+			<type name="GObject.ObjectClass" c:type="GObjectClass"/>
+		</field>
+	</record>
+	<record name="TestsClosedGenericPrivate" c:type="RubricTestsClosedGenericPrivate" disguised="1"/>
+	<class name="TestsRubricContainer" c:type="RubricTestsRubricContainer" glib:type-name="RubricTestsRubricContainer" glib:get-type="rubric_tests_rubric_container_get_type" glib:type-struct="TestsRubricContainerClass" parent="Valadate.TestCase">
+		<field name="parent_instance">
+			<type name="Valadate.TestCase" c:type="ValadateFrameworkTestCase"/>
+		</field>
+		<field name="priv">
+			<type name="TestsRubricContainerPrivate" c:type="RubricTestsRubricContainerPrivate*"/>
+		</field>
+		<method name="test_register_type" c:identifier="rubric_tests_rubric_container_test_register_type">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_resolve" c:identifier="rubric_tests_rubric_container_test_resolve">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_resolve_unregistered" c:identifier="rubric_tests_rubric_container_test_resolve_unregistered">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_register_constructor" c:identifier="rubric_tests_rubric_container_test_register_constructor">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_resolve_with_registered_constructor" c:identifier="rubric_tests_rubric_container_test_resolve_with_registered_constructor">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_register_type_with_name" c:identifier="rubric_tests_rubric_container_test_register_type_with_name">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_resolve_name" c:identifier="rubric_tests_rubric_container_test_resolve_name">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_inject_params" c:identifier="rubric_tests_rubric_container_test_inject_params">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_set_non_construct_property" c:identifier="rubric_tests_rubric_container_test_set_non_construct_property">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_struct_register" c:identifier="rubric_tests_rubric_container_test_struct_register">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_struct_register_with_constructor" c:identifier="rubric_tests_rubric_container_test_struct_register_with_constructor">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_struct_resolve" c:identifier="rubric_tests_rubric_container_test_struct_resolve">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_simpleclass_register" c:identifier="rubric_tests_rubric_container_test_simpleclass_register">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_simpleclass_register_with_constructor" c:identifier="rubric_tests_rubric_container_test_simpleclass_register_with_constructor">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_simpleclass_resolve" c:identifier="rubric_tests_rubric_container_test_simpleclass_resolve">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_compactclass_register" c:identifier="rubric_tests_rubric_container_test_compactclass_register">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_compactclass_register_with_constructor" c:identifier="rubric_tests_rubric_container_test_compactclass_register_with_constructor">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_compactclass_resolve" c:identifier="rubric_tests_rubric_container_test_compactclass_resolve">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<constructor name="new" c:identifier="rubric_tests_rubric_container_new">
+			<return-value transfer-ownership="full">
+				<type name="Rubric.TestsRubricContainer" c:type="RubricTestsRubricContainer*"/>
+			</return-value>
+		</constructor>
+	</class>
+	<record name="TestsRubricContainerClass" c:type="RubricTestsRubricContainerClass" glib:is-gtype-struct-for="RubricContainer">
+		<field name="parent_class">
+			<type name="Valadate.TestCaseClass" c:type="ValadateFrameworkTestCaseClass"/>
+		</field>
+	</record>
+	<record name="TestsRubricContainerPrivate" c:type="RubricTestsRubricContainerPrivate" disguised="1"/>
+	<class name="TestsTestClass" c:type="RubricTestsTestClass" glib:type-name="RubricTestsTestClass" glib:get-type="rubric_tests_testclass_get_type" glib:type-struct="TestsTestClassClass" parent="GObject.Object">
+		<annotation key="container.register" value="true"/>
+		<field name="parent_instance">
+			<type name="GObject.Object" c:type="GObject"/>
+		</field>
+		<field name="priv">
+			<type name="TestsTestClassPrivate" c:type="RubricTestsTestClassPrivate*"/>
+		</field>
+		<constructor name="new" c:identifier="rubric_tests_testclass_new">
+			<return-value transfer-ownership="full">
+				<type name="Rubric.TestsTestClass" c:type="RubricTestsTestClass*"/>
+			</return-value>
+		</constructor>
+	</class>
+	<record name="TestsTestClassClass" c:type="RubricTestsTestClassClass" glib:is-gtype-struct-for="TestClass">
+		<field name="parent_class">
+			<type name="GObject.ObjectClass" c:type="GObjectClass"/>
+		</field>
+	</record>
+	<record name="TestsTestClassPrivate" c:type="RubricTestsTestClassPrivate" disguised="1"/>
+	<class name="TestsSecondTestClass" c:type="RubricTestsSecondTestClass" glib:type-name="RubricTestsSecondTestClass" glib:get-type="rubric_tests_second_testclass_get_type" glib:type-struct="TestsSecondTestClassClass" parent="GObject.Object">
+		<annotation key="container.register" value="true"/>
+		<annotation key="container.name" value="secondtestclass"/>
+		<field name="parent_instance">
+			<type name="GObject.Object" c:type="GObject"/>
+		</field>
+		<field name="priv">
+			<type name="TestsSecondTestClassPrivate" c:type="RubricTestsSecondTestClassPrivate*"/>
+		</field>
+		<constructor name="new" c:identifier="rubric_tests_second_testclass_new">
+			<return-value transfer-ownership="full">
+				<type name="Rubric.TestsSecondTestClass" c:type="RubricTestsSecondTestClass*"/>
+			</return-value>
+		</constructor>
+	</class>
+	<record name="TestsSecondTestClassClass" c:type="RubricTestsSecondTestClassClass" glib:is-gtype-struct-for="SecondTestClass">
+		<field name="parent_class">
+			<type name="GObject.ObjectClass" c:type="GObjectClass"/>
+		</field>
+	</record>
+	<record name="TestsSecondTestClassPrivate" c:type="RubricTestsSecondTestClassPrivate" disguised="1"/>
+	<class name="TestsGIRHandler" c:type="RubricTestsGIRHandler" glib:type-name="RubricTestsGIRHandler" glib:get-type="rubric_tests_gir_handler_get_type" glib:type-struct="TestsGIRHandlerClass" parent="Valadate.TestCase">
+		<field name="parent_instance">
+			<type name="Valadate.TestCase" c:type="ValadateFrameworkTestCase"/>
+		</field>
+		<field name="priv">
+			<type name="TestsGIRHandlerPrivate" c:type="RubricTestsGIRHandlerPrivate*"/>
+		</field>
+		<method name="test_parse" c:identifier="rubric_tests_gir_handler_test_parse">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<constructor name="new" c:identifier="rubric_tests_gir_handler_new">
+			<return-value transfer-ownership="full">
+				<type name="Rubric.TestsGIRHandler" c:type="RubricTestsGIRHandler*"/>
+			</return-value>
+		</constructor>
+	</class>
+	<record name="TestsGIRHandlerClass" c:type="RubricTestsGIRHandlerClass" glib:is-gtype-struct-for="GIRHandler">
+		<field name="parent_class">
+			<type name="Valadate.TestCaseClass" c:type="ValadateFrameworkTestCaseClass"/>
+		</field>
+	</record>
+	<record name="TestsGIRHandlerPrivate" c:type="RubricTestsGIRHandlerPrivate" disguised="1"/>
+	<class name="TestsRubricIterator" c:type="RubricTestsRubricIterator" glib:type-name="RubricTestsRubricIterator" glib:get-type="rubric_tests_rubric_iterator_get_type" glib:type-struct="TestsRubricIteratorClass" parent="Valadate.TestCase">
+		<field name="parent_instance">
+			<type name="Valadate.TestCase" c:type="ValadateFrameworkTestCase"/>
+		</field>
+		<field name="priv">
+			<type name="TestsRubricIteratorPrivate" c:type="RubricTestsRubricIteratorPrivate*"/>
+		</field>
+		<method name="test_iterator_new" c:identifier="rubric_tests_rubric_iterator_test_iterator_new">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_iterator_next" c:identifier="rubric_tests_rubric_iterator_test_iterator_next">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_iterator_get" c:identifier="rubric_tests_rubric_iterator_test_iterator_get">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_iterator_iterator" c:identifier="rubric_tests_rubric_iterator_test_iterator_iterator">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<constructor name="new" c:identifier="rubric_tests_rubric_iterator_new">
+			<return-value transfer-ownership="full">
+				<type name="Rubric.TestsRubricIterator" c:type="RubricTestsRubricIterator*"/>
+			</return-value>
+		</constructor>
+	</class>
+	<record name="TestsRubricIteratorClass" c:type="RubricTestsRubricIteratorClass" glib:is-gtype-struct-for="RubricIterator">
+		<field name="parent_class">
+			<type name="Valadate.TestCaseClass" c:type="ValadateFrameworkTestCaseClass"/>
+		</field>
+	</record>
+	<record name="TestsRubricIteratorPrivate" c:type="RubricTestsRubricIteratorPrivate" disguised="1"/>
+	<record name="TestsTestStruct">
+		<field name="_prop_one">
+			<type name="utf8" c:type="gchar*"/>
+		</field>
+		<field name="_prop_two">
+			<type name="gint" c:type="gint"/>
+		</field>
+		<property name="prop-one" writable="1">
+			<type name="utf8" c:type="gchar*"/>
+		</property>
+		<method name="get_prop_one" c:identifier="rubric_tests_test_struct_get_prop_one">
+			<return-value transfer-ownership="none">
+				<type name="utf8" c:type="const gchar*"/>
+			</return-value>
+		</method>
+		<method name="set_prop_one" c:identifier="rubric_tests_test_struct_set_prop_one">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="utf8" c:type="const gchar*"/>
+				</parameter>
+			</parameters>
+		</method>
+		<property name="prop-two" writable="1">
+			<type name="gint" c:type="gint"/>
+		</property>
+		<method name="get_prop_two" c:identifier="rubric_tests_test_struct_get_prop_two">
+			<return-value transfer-ownership="none">
+				<type name="gint" c:type="gint"/>
+			</return-value>
+		</method>
+		<method name="set_prop_two" c:identifier="rubric_tests_test_struct_set_prop_two">
+			<return-value transfer-ownership="none">
+				<type name="none"/>
+			</return-value>
+			<parameters>
+				<parameter name="value" transfer-ownership="none">
+					<type name="gint" c:type="gint"/>
+				</parameter>
+			</parameters>
+		</method>
+	</record>
+</namespace>
+</repository>

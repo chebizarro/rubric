@@ -72,6 +72,7 @@ namespace RubricGtk {
 		public virtual void setup_container() {
 			container = new Container(false);
 			container.add_extension(new GtkBuilderResourceHandler(container));
+			container.add_extension(new GirResourceHandler(container));
 			container_registered(container);
 		}
 

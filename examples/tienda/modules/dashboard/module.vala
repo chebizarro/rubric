@@ -32,7 +32,7 @@ namespace Tienda.Modules.Dashboard {
 		
 		public void activate ()	{
 
-			container.register<DashboardView, DashboardView>();
+			//container.register<DashboardView, DashboardView>();
 		}
 
 		public void deactivate () {	}

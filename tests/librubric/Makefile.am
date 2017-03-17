@@ -3,6 +3,13 @@ DISTCLEANFILES =
 
 include $(top_srcdir)/build/autotools/glib-tap.mk
 
+
+data/resources.c: data/test.gresource.xml $(shell glib-compile-resources --sourcedir=$(top_srcdir)/tests/librubric/data/ --generate-dependencies data/test.gresource.xml)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(top_srcdir)/tests/librubric/data/ --generate-source $<
+
+BUILT_SOURCES += \
+	data/resources.c
+
 TESTS_ENVIRONMENT += \
 	G_MESSAGES_DEBUG=all \
 	G_SLICE=debug-blocks
@@ -10,8 +17,10 @@ TESTS_ENVIRONMENT += \
 test_programs = test-librubric-1.0
 
 test_librubric_1_0_SOURCES =  \
+	$(BUILT_SOURCES) \
 	container/test-objects.vala \
 	container/container.vala \
+	container/gir-resource-handler.vala \
 	collections/iterator.vala
 	
 test_librubric_1_0_VALAFLAGS = \
@@ -24,7 +33,8 @@ test_librubric_1_0_VALAFLAGS = \
 	--pkg rubric-1.0 \
 	--pkg config \
 	--vapidir=$(top_builddir)/librubric \
-	--vapidir=$(top_builddir)/vapi
+	--vapidir=$(top_builddir)/vapi \
+	--gresources data/test.gresource.xml
 
 test_librubric_1_0_LDADD = \
 	$(LIBRUBRIC_LIBS) \
@@ -51,7 +61,8 @@ CLEANFILES += \
 	$(test_librubric_1_0_SOURCES:.vala=.c) \
 	*.vapi \
 	*.gir \
-	*.stamp
+	*.stamp \
+	data/*.c
 
 DISTCLEANFILES += $(CLEANFILES)
 

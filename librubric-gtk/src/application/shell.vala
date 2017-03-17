@@ -39,7 +39,7 @@ namespace RubricGtk {
 
 		construct {
 			this.notify["application"].connect((s,p) => {
-				container = ((Rubric.Application)application).container;
+				container = ((RubricGtk.Application)application).container;
 				find_regions(this);
 				this.add.connect(find_regions);
 			});

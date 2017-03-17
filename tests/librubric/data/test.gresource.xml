@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/rubric/test">
+    <file preprocess="xml-stripblanks">gir-handler-1.0.gir</file>
+  </gresource>
+</gresources>

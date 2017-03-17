@@ -24,7 +24,7 @@ using Rubric;
 
 namespace RubricGtk {
 
-	public class GtkBuilderResourceHandler : Object, ResourceHandler, ContainerExtension {
+	public class GtkBuilderResourceHandler : Object, ContainerExtension, ResourceHandler {
 
 		public unowned Container container {get;construct set;}
 
