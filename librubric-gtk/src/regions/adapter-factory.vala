@@ -20,7 +20,7 @@
  * 
  */
 using Rubric;
-using Rubric.Presentation;
+using Rubric.PM;
 using Rubric.Regions;
 using Gee;
 

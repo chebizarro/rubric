@@ -65,8 +65,6 @@ namespace RubricGtk {
 			setup_menus();
 			setup_actions();
 			setup_dialog_service();
-
-			apply_preferences();
 		}
 
 		public virtual void setup_container() {
@@ -215,16 +213,6 @@ namespace RubricGtk {
 			}
 		}
 		
-
-		public virtual void apply_preferences() {
-			try {
-				var prefs = container.resolve<Preferences>(this.application_id);
-				//prefs.apply(container.resolve<ModuleManager>(), "regions");
-			} catch (Error e) {
-				debug(e.message);
-			}
-		}
-
 
 		public override void activate () {
 			try {

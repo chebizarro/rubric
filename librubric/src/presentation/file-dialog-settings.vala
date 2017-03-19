@@ -24,7 +24,7 @@
  * Conceptually based on MVVM Dialogs https://github.com/FantasticFiasco/mvvm-dialogs 
  */
 
-namespace Rubric.Presentation {
+namespace Rubric.PM {
 
 	public abstract class FileDialogSettings : Object {
 	
