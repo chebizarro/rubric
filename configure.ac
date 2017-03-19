@@ -130,11 +130,13 @@ AC_SUBST(pkg_tests_modules)
 AC_SUBST(TESTS_CFLAGS)
 AC_SUBST(TESTS_LIBS)
 
-dnl === Check for Introspection/Test ===================================
+dnl === Check for Introspection/Test/Settings ==========================
 
 GLIB_TESTS
 
 GOBJECT_INTROSPECTION_CHECK([1.38.0])
+
+GLIB_GSETTINGS
 
 dnl === Documentation with Valadoc =====================================
 

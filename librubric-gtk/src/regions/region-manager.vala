@@ -32,7 +32,7 @@ namespace RubricGtk.Regions {
 		public Container container {get;construct set;}
 		
 		private RegionCollection _regions = new RegionCollection(); 
-		
+
 		construct {
 			_regions.added.connect(region_added);
 			_regions.removed.connect(region_removed);

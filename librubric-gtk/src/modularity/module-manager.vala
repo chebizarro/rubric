@@ -19,12 +19,15 @@
 
 using Rubric;
 using Rubric.Modularity;
+using RubricGtk.Regions;
 
 namespace RubricGtk.Modularity {
 
 	public class ModuleManager : Peas.Engine, Rubric.Modularity.ModuleManager {
 	
 		public Container container {get;construct set;}
+	
+		public ModuleCatalog catalog { get; construct set; }
 	
 		private Peas.ExtensionSet extension_set;
 	
@@ -41,12 +44,22 @@ namespace RubricGtk.Modularity {
 			rescan_plugins();
 
 			foreach (var plug in get_plugin_list ()) {
-				if (!plug.is_builtin())
-					continue;
-				if (try_load_plugin (plug)) {
-					GLib.debug ("Plugin Loaded:" +plug.get_name ());
-				} else {
-					GLib.warning ("Could not load plugin:" +plug.get_name ());
+				if (plug.is_builtin() ||
+					plug.get_module_name() in catalog.active_modules &&
+					!plug.is_loaded()) {
+					foreach(var dep in plug.get_dependencies()) {
+						var inf = get_plugin_info(dep);
+						if(inf != null && !inf.is_loaded())
+							if (try_load_plugin (inf))
+								GLib.debug ("Module Loaded: " +inf.get_name ());
+							else
+								GLib.warning ("Could not load Module: " +inf.get_name ());
+					}
+					if (try_load_plugin (plug)) {
+						GLib.debug ("Module Loaded: " +plug.get_name ());
+					} else {
+						GLib.warning ("Could not load Module: " +plug.get_name ());
+					}
 				}
 			}
 			
@@ -55,27 +68,26 @@ namespace RubricGtk.Modularity {
 			});
 			
 			extension_set.foreach((s, i, e) => {
-				var prefix = i.get_external_data("Prefix");
-				if(prefix != null)
-					load_resources(prefix);
-				
-				((Rubric.Modularity.Module) e).activate ();
+				var mod = e as Rubric.Modularity.Module;
+				mod.binary = "%s/lib%s.la".printf(i.get_module_dir(), i.get_module_name());
+				if(FileUtils.test ("%s/gschemas.compiled".printf(i.get_module_dir()), FileTest.EXISTS)) {
+					try {
+						var appid = container.resolve<Rubric.Application>().assembly_id;
+						var appprefs = container.resolve<Preferences>(appid);
+						var prefs = new Preferences.from_directory(mod.assembly_id, i.get_module_dir(),appprefs);
+						var dec = new PreferencesDecorator(container, prefs);
+						container.add_extension(dec);
+						var vr = container.resolve<ViewRegistry>();
+						prefs.apply(vr, "views");
+					} catch (Error e) {
+						debug(e.message);
+					}
+				}
+				mod.activate ();
 			});				
 			
 		}
 
-		private void load_resources(string prefix) {
-			
-			try {
-				foreach(var res in resources_enumerate_children(
-					prefix, ResourceLookupFlags.NONE)) {
-					container.register_resource(prefix + res);
-				}
-			} catch (Error e) {
-				debug(e.message);
-			}
-	
-		}
 
 		public void load_module(string module_name) {
 			

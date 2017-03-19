@@ -37,7 +37,7 @@ namespace Tienda.Modules.Sales {
 		
 	}
 	
-	
+	[Container (register=true)]
 	[GtkTemplate (ui = "/org/tienda/modules/sales/views/order.ui")]
 	public class OrderView : BoxView {
 

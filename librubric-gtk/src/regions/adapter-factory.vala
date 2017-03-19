@@ -32,12 +32,10 @@ namespace RubricGtk.Regions {
 		
 		public Container container {get;construct set;}
 
-		private Rubric.Regions.RegionManager region_manager;
+		public Rubric.Regions.RegionManager region_manager {get;construct set;}
 
 		public AdapterFactory(Container container, Rubric.Regions.RegionManager region_manager) {
-			Object(container : container);
-			
-			this.region_manager = region_manager;
+			Object(container : container, region_manager : region_manager);
 		}
 		
 		public Region? get_adapter(Object object) {

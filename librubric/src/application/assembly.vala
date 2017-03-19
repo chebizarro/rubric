@@ -33,7 +33,17 @@ namespace Rubric {
 		/**
 		 * The default container for the assembly
 		 */
-		public abstract Container container { get; protected set; }
+		public abstract Container container { get; construct set; }
+
+		/**
+		 * The path to the assembly's binary
+		 */
+		public abstract string binary {get;set;}
+
+		/**
+		 * The id for the assembly - i.e. org.rubric.app
+		 */
+		public abstract string assembly_id {get;set;}
 
 		/**
 		 * The Namespace for the assembly. 
@@ -54,6 +64,27 @@ namespace Rubric {
 		 * The arguments that the assembly was launched with
 		 */
 		public abstract string[] args {get;construct set;}
+
+
+		private void recurse_resources(string prefix) {
+			try {
+				foreach(var res in resources_enumerate_children(
+					prefix, ResourceLookupFlags.NONE)) {
+					if(res.has_suffix("/"))
+						recurse_resources(prefix + res);
+					else
+						container.register_resource(prefix + res, this);
+				}
+			} catch (Error e) {
+				error(e.message);
+			}
+		}
+
+		public virtual void load_resources() {
+			if (resource_path != null)
+				recurse_resources(resource_path);
+		}
+
 		
 	}
 	

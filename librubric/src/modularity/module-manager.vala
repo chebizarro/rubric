@@ -21,30 +21,19 @@
  */
 
 namespace Rubric.Modularity {
-	/**
-	 * Interface for the service that will locate and initialize the application's modules.
-	 */
+
 	public interface ModuleManager : GLib.Object {
-		/**
-		 * Initializes the modules marked as {@link InitializationMode.WHEN_AVAILABLE} on the {@link ModuleCatalog}.
-		 */
+		
+		public abstract Container container { get; construct set; }
+
+		public abstract ModuleCatalog catalog { get; construct set; }
+		
 		public abstract void run();
 
-		/**
-		 * Loads and initializes the module on the {@link ModuleCatalog} with the name moduleName.
-		 * 
-		 * @param module_name Name of the module requested for initialization.
-		 */
 		public abstract void load_module(string module_name);	   
 
-		/**
-		 * Raised repeatedly to provide progress as modules are downloaded.
-		 */
-		public signal void module_download_progress_changed();
+		public signal void download_progress_changed();
 
-		/**
-		 * Raised when a module is loaded or fails to load.
-		 */
 		public signal void load_module_completed();
 	}
 }

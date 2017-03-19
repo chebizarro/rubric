@@ -13,5 +13,5 @@ Help-Windows=
 Help-MacOS-X=
 Hidden=true
 Icon=
-Builtin=true
+Builtin=false
 Version=1.0

@@ -1,8 +1,18 @@
 CLEANFILES =
 DISTCLEANFILES =
-
 include $(top_srcdir)/build/autotools/glib-tap.mk
 
+schema_file = data/org.rubric.tests.gschema.xml
+
+gsettings_SCHEMAS =	\
+	$(schema_file)
+
+@GSETTINGS_RULES@
+
+gschemas.compiled: $(schema_file)
+	$(GLIB_COMPILE_SCHEMAS) $(top_srcdir)/tests/librubric/data
+
+all: gschemas.compiled
 
 data/resources.c: data/test.gresource.xml $(shell glib-compile-resources --sourcedir=$(top_srcdir)/tests/librubric/data/ --generate-dependencies data/test.gresource.xml)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(top_srcdir)/tests/librubric/data/ --generate-source $<
@@ -12,12 +22,14 @@ BUILT_SOURCES += \
 
 TESTS_ENVIRONMENT += \
 	G_MESSAGES_DEBUG=all \
-	G_SLICE=debug-blocks
+	G_SLICE=debug-blocks \
+	GSETTINGS_SCHEMA_DIR=$(abs_top_builddir)/tests/librubric/data/
 
 test_programs = test-librubric-1.0
 
 test_librubric_1_0_SOURCES =  \
 	$(BUILT_SOURCES) \
+	application/preferences.vala \
 	container/test-objects.vala \
 	container/container.vala \
 	container/gir-resource-handler.vala \

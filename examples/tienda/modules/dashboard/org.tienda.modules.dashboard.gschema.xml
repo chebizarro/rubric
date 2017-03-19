@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+
+	<schema path="/org/tienda/modules/dashboard/" id="org.tienda.modules.dashboard">
+		<child name="views" schema="views" />
+	</schema>
+
+
+	<schema path="/org/tienda/modules/dashboard/views/" id="org.tienda.modules.dashboard.views">
+		<key name="views" type="a{sas}">
+			<default>{"left":["TiendaModulesSalesOrderView"], "right":["TiendaModulesStockCatalogView"]}</default>
+			<summary>Active views</summary>
+			<description>Map of the active view types</description>
+		</key>
+	</schema>
+
+
+	<schema id="TiendaModulesSalesOrderView">
+		<key type="n" name="margin">
+			<default>30</default>
+		</key>
+	</schema>
+
+
+</schemalist>

@@ -25,7 +25,7 @@ using RubricGtk.Widgets;
 
 namespace Tienda.Modules.Dashboard {
 	
-	[Container (register=true, name="dashboard")]
+	[Container (register=true)]
 	[GtkTemplate (ui = "/org/tienda/modules/dashboard/views/dashboard.ui")]
 	public class DashboardView : BoxView {
 

@@ -121,7 +121,7 @@ namespace Rubric.Tests {
 			var testobj = container.resolve<TestObject>(null, {param});
 			
 			assert(testobj.prop_two == 42);
-			
+		
 		}
 
 		public void test_struct_register () {

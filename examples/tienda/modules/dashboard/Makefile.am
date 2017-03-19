@@ -1,6 +1,24 @@
 GLADE_GEN = $(top_srcdir)/tools/glade-catalogger
-
 GLADE_FILES = dashboard-glade-catalog.xml
+CLEANFILES = 
+
+schema_file = org.tienda.modules.dashboard.gschema.xml
+
+gsettings_SCHEMAS =	\
+	$(schema_file)
+
+@GSETTINGS_RULES@
+
+gschemas.compiled: $(schema_file)
+	$(GLIB_COMPILE_SCHEMAS) $(top_srcdir)/examples/tienda/modules/dashboard
+
+if ENABLE_DEVELOPMENT_MODE
+all: gschemas.compiled
+
+CLEANFILES += gschemas.compiled
+
+endif
+
 
 plugin_in_files = dashboard.plugin.in
 %.plugin: %.plugin.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
@@ -88,12 +106,13 @@ libdashboard_la_VALAFLAGS = \
 dashboard-glade-catalog.xml: Dashboard-1.0.gir
 	$(GLADE_GEN) $<
 	
-CLEANFILES = \
+CLEANFILES += \
 	$(libdashboard_la_SOURCES:.vala=.c) \
 	*.c \
 	*.plugin \
 	*.gir \
 	*.vapi \
+	*.h \
 	$(GLADE_FILES)
 
 EXTRA_DIST = \

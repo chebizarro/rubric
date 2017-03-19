@@ -26,6 +26,10 @@ namespace Rubric.Regions {
 	
 	public interface AdapterFactory : Object {
 
+		public abstract Container container {get;construct set;}
+
+		public abstract Rubric.Regions.RegionManager region_manager {get;construct set;}
+
 		public abstract Region? get_adapter(Object object);
 		
 		public virtual void set_adapter<T,AT>() {

@@ -38,7 +38,7 @@ namespace RubricGtk {
 			return false;
 		}
 
-		public void add(string filename) throws ContainerError {
+		public void add(string filename, Assembly? assembly = null) throws ContainerError {
 
 			try {
 				var resfile = new XmlFile.from_resource(filename);
@@ -74,6 +74,7 @@ namespace RubricGtk {
 						if(objname != null) {
 							var obj = builder.get_object(objname);
 							container.register_type_instance(obj.get_type(), obj, objname);
+							container.decorate(obj.get_type(), obj, objname);
 						}
 					}
 				}

@@ -20,26 +20,15 @@
  * 
  */
 
-using Rubric;
-using Rubric.Regions;
-using Rubric.Modularity;
+using RubricGtk.Modularity;
 
 namespace Tienda.Modules.Sales {
 	
-	public class Module : Object, Rubric.Modularity.Module {
+	public class Module : BaseModule {
 		
-		public Container container {owned get; construct set;}
-		
-		public void activate ()	{
-			container.register<OrderView, OrderView>();
-			var rm = container.resolve<RegionManager>();
-			rm.register_view<OrderView>("left");
+		construct {
+			assembly_id = "org.tienda.modules.sales";
 		}
-
-		public void deactivate () {	}
-
-		public void update_state () { }
-		
 	}
 	
 }

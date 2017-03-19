@@ -26,6 +26,8 @@ namespace Rubric.Regions {
 	
 	public interface ViewRegistry : Object {
 
+		public abstract HashTable<string, List<string>> views {get;set;}
+
 		public abstract Iterator<View> get_contents(string region_name);
 
 		public virtual void register_view<T>(string region_name) {

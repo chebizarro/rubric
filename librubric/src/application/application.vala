@@ -37,7 +37,7 @@ namespace Rubric {
 		/**
 		 * The default container for the application
 		 */
-		public abstract Container container { get; protected set; }
+		public abstract Container container { get; construct set; }
 
 		/**
 		 * The application's shell
@@ -84,13 +84,6 @@ namespace Rubric {
 		 * Set up the Dialog Service for the application
 		 */
 		public abstract void setup_dialog_service();
-
-		/**
-		 * Load the application's resources
-		 */
-		public abstract void load_resources();
-
-
 
 		/**
 		 * Set up the application-wide menus

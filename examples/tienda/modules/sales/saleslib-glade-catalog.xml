@@ -1,0 +1,11 @@
+<glade-catalog name="saleslib" library="libsaleslib.so" depends="gtk+">
+	<glade-widget-classes>
+		<glade-widget-class name="TiendaModulesSalesOrderModel" generic-name="ModulesSalesOrderModel" title="ModulesSalesOrderModel"  top-level="True"/>
+		<glade-widget-class name="TiendaModulesSalesOrderView" generic-name="ModulesSalesOrderView" title="ModulesSalesOrderView"  parent="RubricGtkWidgetsBoxView"/>
+	</glade-widget-classes>
+
+	<glade-widget-group name="saleslib-widgets" title="Sales Widgets">
+		<glade-widget-class-ref name="TiendaModulesSalesOrderModel" />
+		<glade-widget-class-ref name="TiendaModulesSalesOrderView" />
+	</glade-widget-group>
+</glade-catalog>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/tienda/modules/sales/">
+    <file preprocess="xml-stripblanks">Sales-1.0.gir</file>
+  </gresource>
+</gresources>

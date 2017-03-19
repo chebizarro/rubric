@@ -8,6 +8,7 @@ librubric_gtk_la_SOURCES = \
 	src/application/menu-adapter-factory.vala \
 	src/container/gtk-builder-resource-handler.vala \
 	src/modularity/module-manager.vala \
+	src/modularity/base-module.vala \
 	src/presentation/view-model.vala \
 	src/presentation/base-view.vala \
 	src/presentation/gtk-dialog-service.vala \

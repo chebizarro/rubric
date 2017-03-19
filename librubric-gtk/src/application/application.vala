@@ -31,23 +31,21 @@ namespace RubricGtk {
 
 	public class Application : Gtk.Application, Assembly, Rubric.Application {
 
-		public Container container { get; protected set; }
+		public Container container { get; construct set; }
 		public string namespace {get;set;}
 		public string version {get;set;}
 		public string[] args {get;construct set;}
 		public string resource_path {get;set;}
+		public string assembly_id {get;set;}
+		public string binary {get;set;}
 
 		public Rubric.Shell shell {get;set;}
 
-		protected RegionManager region_manager;
-		private ViewRegistry registry;
-		private AdapterFactory adapter_factory;
-
 		public Application (string[] args, string app_id, string version) {
 			this.args = args;
-			application_id = app_id;
+			this.binary = args[0];
+			assembly_id = application_id = app_id;
 			resource_path = "/%s/".printf(app_id.replace(".","/"));
-			
 			register_session = true;
 		}
 
@@ -62,11 +60,13 @@ namespace RubricGtk {
 			setup_module_manager();
 			setup_menu_manager();
 			load_resources();
-			setup_shell();
 			setup_modules();
+			setup_shell();
 			setup_menus();
 			setup_actions();
 			setup_dialog_service();
+
+			apply_preferences();
 		}
 
 		public virtual void setup_container() {
@@ -99,18 +99,24 @@ namespace RubricGtk {
 			try {
 				var prefs = new Preferences(this.application_id);
 				container.register_instance<Preferences>(prefs, this.application_id);
+				var prefdec = new PreferencesDecorator(container, prefs);
+				container.add_extension(prefdec);
 			} catch (Error e) {
 				debug(e.message);
 			}
 		}
 
 		public virtual void setup_region_manager() {
-			registry = new ViewRegistry(container);
-			region_manager = new RegionManager(container);
-			adapter_factory = new AdapterFactory(container, region_manager);
 			
 			try {
+				container.register<Rubric.Regions.ViewRegistry, ViewRegistry>();
+				var registry = container.resolve<Rubric.Regions.ViewRegistry>();
+				container.register<Rubric.Regions.RegionManager, RegionManager>();
+				var region_manager = container.resolve<Rubric.Regions.RegionManager>();
+				container.register<Rubric.Regions.AdapterFactory, AdapterFactory>();
+				var adapter_factory = container.resolve<Rubric.Regions.AdapterFactory>();
 				container.register_instance<Rubric.Regions.ViewRegistry>(registry);
+				container.register_instance<RubricGtk.Regions.ViewRegistry>(registry as RubricGtk.Regions.ViewRegistry);
 				container.register_instance<Rubric.Regions.RegionManager>(region_manager);
 				container.register_instance<Rubric.Regions.AdapterFactory>(adapter_factory);
 			} catch (Error e) {
@@ -119,14 +125,18 @@ namespace RubricGtk {
 		}
 
 		public virtual void setup_module_manager() {
-			var mmanager = new ModuleManager(container);
-			var modpath = "%s_MODULE_DIR".printf(application_id.replace(".","_").ascii_up());
-			var moddir = Environment.get_variable(modpath);
-			
-			if(moddir != null)
-				mmanager.add_search_path(moddir, null);
 			
 			try {
+				container.register<Rubric.Modularity.ModuleCatalog, Rubric.Modularity.ModuleCatalog>();
+				container.register<ModuleManager, ModuleManager>();
+				
+				var mmanager = container.resolve<ModuleManager>();
+				var modpath = "%s_MODULE_DIR".printf(application_id.replace(".","_").ascii_up());
+				var moddir = Environment.get_variable(modpath);
+				
+				if(moddir != null)
+					mmanager.add_search_path(moddir, null);
+			
 				container.register_instance<ModuleManager>(mmanager);
 			} catch (Error e) {
 				warning(e.message);
@@ -145,23 +155,13 @@ namespace RubricGtk {
 			}
 		}
 
-		public virtual void load_resources() {
-			try {
-				foreach(var res in resources_enumerate_children(
-					resource_path, ResourceLookupFlags.NONE)) {
-					container.register_resource(resource_path + res);
-				}
-			} catch (Error e) {
-				error(e.message);
-			}
-		}
 
 		public virtual void setup_shell() {
 
 			try {
 				var appwindow = container.resolve<Shell> ("shell") as Gtk.ApplicationWindow;
 				shell = appwindow as Rubric.Shell;
-				((Shell)appwindow).region_manager = region_manager;
+				((Shell)appwindow).region_manager = container.resolve<Rubric.Regions.RegionManager>();
 				appwindow.application = this;
 				container.register_instance<Gtk.ApplicationWindow>(shell as Gtk.ApplicationWindow);
 				container.register_instance<Rubric.Shell>(shell);
@@ -215,6 +215,16 @@ namespace RubricGtk {
 			}
 		}
 		
+
+		public virtual void apply_preferences() {
+			try {
+				var prefs = container.resolve<Preferences>(this.application_id);
+				//prefs.apply(container.resolve<ModuleManager>(), "regions");
+			} catch (Error e) {
+				debug(e.message);
+			}
+		}
+
 
 		public override void activate () {
 			try {

@@ -18,6 +18,7 @@ librubric_la_SOURCES = \
 	src/container/container.vala \
 	src/container/container-extension.vala \
 	src/container/gir-resource-handler.vala \
+	src/container/preferences-decorator.vala \
 	src/logging/category.vala \
 	src/logging/logger.vala \
 	src/logging/debug-logger.vala \
@@ -55,6 +56,7 @@ librubric_la_SOURCES = \
 librubric_la_VALAFLAGS = \
 	--pkg gio-2.0 \
 	--pkg gee-0.8 \
+	--pkg gmodule-2.0 \
 	--pkg libxml-2.0 \
 	--pkg gobject-introspection-1.0 \
 	--library rubric \

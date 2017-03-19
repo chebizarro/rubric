@@ -17,15 +17,34 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-namespace Rubric.Modularity {
+using Rubric;
 
-	public interface Module : GLib.Object, Assembly {
+namespace RubricGtk.Modularity {
 
-		//public abstract Container container {construct set; get;}
+	public abstract class BaseModule : GLib.Object, Assembly, Rubric.Modularity.Module {
+
+		public string binary {get;set;}
+
+		public Container container { construct set; get; }
+
+		public string namespace {get;set;}
+
+		public string version {get;set;}
+
+		public string resource_path {get;set;}
+
+		public string[] args {get;construct set;}
+
+		public string assembly_id {get;set;}
 	
-		public abstract void activate();
-		public abstract void deactivate();
-		public abstract void update_state();
+		public virtual void activate() {
+			if(assembly_id != null)
+				resource_path = "/%s/".printf(assembly_id.replace(".","/"));
+			load_resources();
+		}
+		
+		public virtual void deactivate() { }
+		public virtual void update_state() { }
 	
 	}
 }

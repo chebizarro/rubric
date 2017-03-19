@@ -25,50 +25,120 @@ namespace Rubric {
 		public GLib.Settings settings {get;private set;}
 	
 		private SettingsSchemaSource sss;
-	
+		private SettingsSchema schema;
+		
+		private weak Preferences parent;
+		
+		private bool from_dir = false;
+		
+		public Preferences.from_directory(string schema_id, string directory, Preferences parent) throws Error {
+			this.sss = new SettingsSchemaSource.from_directory(directory, parent.sss, true);
+			this.parent = parent;
+			this.schema = sss.lookup(schema_id, true);
+
+			if(schema == null)
+				throw new IOError.NOT_FOUND("The schema %s was not found", schema_id);
+
+			this.schema_id = schema_id;
+			this.settings = new GLib.Settings.full(schema, null, null);
+			this.from_dir = true;
+		}
+		
 		public Preferences(string schema_id) throws Error {
-			sss = SettingsSchemaSource.get_default();
+			this.sss = SettingsSchemaSource.get_default();
+
+			this.schema = sss.lookup(schema_id, true);
 			
-			if(sss.lookup(schema_id, true) == null)
+			if(this.schema == null)
 				throw new IOError.NOT_FOUND("The schema %s was not found", schema_id);
 			
 			this.schema_id = schema_id;
-			
-			settings = new GLib.Settings (this.schema_id);
+			this.settings = new GLib.Settings (this.schema_id);
 		}
 		
-		public void apply(GLib.Object object, string? child_schema = null) throws Error {
+		public Object apply(GLib.Object object, string? child_schema = null) throws Error {
 			
 			unowned ObjectClass objclass = object.get_class();
 			
-			GLib.Settings localsettings;
-			GLib.SettingsSchema schema;
+			GLib.Settings localsettings = settings;
+			GLib.SettingsSchema sschema = schema;
 			
 			if (child_schema != null) {
-				schema = sss.lookup ("%s.%s".printf(this.schema_id, child_schema) , true);
-				localsettings = new Settings.full (schema, null, null);
-			} else {
-				localsettings = settings;
-				schema = settings.settings_schema;
+				var sid = "/%s/".printf(this.schema_id.replace(".","/"));
+				sschema = sss.lookup ("%s.%s".printf(this.schema_id, child_schema) , true);
+				if(sschema == null) {
+					sschema = sss.lookup (child_schema , true);
+					if(sschema == null)
+						return object;
+					if(!from_dir)
+						localsettings = new Settings.with_path (child_schema, sid);
+					else
+						localsettings = new Settings.full (sschema, null, sid);
+				} else {
+					localsettings = new Settings.full (sschema, null, null);
+				}
 			}
-			
+		
 			foreach(string key in localsettings.list_keys()) {
 				var pspec = objclass.find_property(key);
 				if (pspec != null) {
-					var skey = schema.get_key(key);
+					if((pspec.flags & ParamFlags.WRITABLE) != ParamFlags.WRITABLE)
+						continue;
+						
+					var skey = sschema.get_key(key);
 					var t = skey.get_value_type();
 					
-					if (pspec.value_type == typeof(bool) && t.equal(VariantType.BOOLEAN))
-						object.set(key, localsettings.get_boolean(key));
-					else if (pspec.value_type == typeof(string) && t.equal(VariantType.STRING))
-						object.set(key, localsettings.get_string(key));
-					else if (pspec.value_type == typeof(double) && t.equal(VariantType.DOUBLE))
-						object.set(key, localsettings.get_double(key));
-					else if (pspec.value_type == typeof(int) && t.equal(VariantType.INT16))
-						object.set(key, localsettings.get_default_value(key).get_int16());
+					switch ((string)t.peek_string()) {
+						case "d":
+							if(pspec.value_type == typeof(double))
+								object.set(key, localsettings.get_double(key));
+							break;
+						case "i":
+							if(pspec.value_type == typeof(int))
+								object.set(key, localsettings.get_value(key));
+							break;
+						case "as":
+							if(pspec.value_type == typeof(string[]))
+								object.set(key, localsettings.get_strv(key));
+							break;
+						case "b":
+							if(pspec.value_type == typeof(bool))
+								object.set(key, localsettings.get_boolean(key));
+							break;
+						case "s":
+							if(pspec.value_type == typeof(string))
+								object.set(key, localsettings.get_string(key));
+							break;
+						case "n":
+							if(pspec.value_type == typeof(int))
+								object.set(key, localsettings.get_default_value(key).get_int16());
+							break;
+						case "a{sas}":
+							if(pspec.value_type == typeof(HashTable)) {
+								
+								var ht = new HashTable<string, List<string>>(str_hash, str_equal);
+								var val = localsettings.get_value(key);
+								
+								for(int i = 0; i < val.n_children(); i++) {
+									var l = new List<string>();
+									var arr = val.get_child_value(i).get_child_value(1).get_strv();
+									foreach (var str in arr)
+										l.append(str);
+									ht.set(val.get_child_value(i).get_child_value(0).get_string(),(owned)l);
+								}
+								object.set(key, ht);
+							}
+							break;
+						default:
+							object.set(key, localsettings.get_value(key));
+							break;
 					
+					}
 				}
 			}
+		
+			return object;
 		}
+
 	}
 }

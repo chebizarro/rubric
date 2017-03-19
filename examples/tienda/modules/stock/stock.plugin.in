@@ -2,7 +2,7 @@
 Module=stock
 Depends=
 Loader=C
-_Name=Users
+_Name=Stock
 _Description=This module provides Stock services to the Tienda application
 Authors=Chris Daley <chebizarro@gmail.com>
 _Copyright=Copyright © 20016 Chris Daley
@@ -13,5 +13,5 @@ Help-Windows=
 Help-MacOS-X=
 Hidden=true
 Icon=
-Builtin=true
+Builtin=false
 Version=1.0

@@ -1,6 +1,6 @@
 [Plugin]
 Module=users
-Depends=
+Depends=dashboard
 Loader=C
 _Name=Users
 _Description=This module provides User services to the Tienda application

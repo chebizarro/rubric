@@ -25,10 +25,17 @@ namespace Rubric.Tests {
 		
 	}
 
-	public class SecondTestClass : Object {
+	public class SecondTestClass : Object, TestIface {
+
+		public string name {get;set;}
 		
 	}
 
+	public interface TestIface : Object {
+		
+		public abstract string name {get;set;}
+		
+	}
 
 	public class GIRHandler : Valadate.Framework.TestCase {
 
@@ -50,13 +57,16 @@ namespace Rubric.Tests {
 		}
 
 		public void test_register_named() {
+
 			var handler = new GirResourceHandler(container);
 			
 			handler.add("/org/rubric/test/gir-handler-1.0.gir");
 			
 			var tclass = container.resolve<SecondTestClass>("secondtestclass");
+			var tclass2 = container.resolve<TestIface>("secondtestclass");
 			
 			assert(tclass is SecondTestClass);
+			assert(tclass2 is TestIface);
 		}
 
 	}

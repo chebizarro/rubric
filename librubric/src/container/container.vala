@@ -58,12 +58,17 @@ namespace Rubric {
 
 		private class Policy : GLib.Object {
 
+			private weak Container container;
 			public Strategy default_strategy;
 			public HashTable<string, Strategy> strategies = 
 				new HashTable<string, Strategy>(str_hash, str_equal);
 			public Value? default_instance = null;
 			public HashTable<string, Value?> instances = 
 				new HashTable<string, Value?>(str_hash, str_equal);
+
+			public Policy(Container container) {
+				this.container = container;
+			}
 
 			public Value resolve(
 				string? name = null,
@@ -73,10 +78,13 @@ namespace Rubric {
 				if(name != null) {
 					if(instances.contains(name))
 						return instances.get(name);
-					if(strategies.contains(name))
-						return strategies.get(name).resolve(params);
+					if(strategies.contains(name)) {
+						var strat = strategies.get(name);
+						return container.decorate(strat.to_type, strat.resolve(params), name);
+					}
 				}
-				return (default_instance != null) ? default_instance : default_strategy.resolve(params);
+				return (default_instance != null) ? default_instance :
+					container.decorate(default_strategy.to_type, default_strategy.resolve(params));
 			}
 
 			public Value resolve_all(Parameter[]? params = null) throws ContainerError {
@@ -85,6 +93,7 @@ namespace Rubric {
 				var valarray = new Array<GLib.Value?>();
 				strategies.foreach((k,v) => {
 					var val = v.resolve(params);
+					val = container.decorate(v.to_type, val, k);
 					if (val.type().is_a(typeof(GLib.Object)))
 						objarray.append_val(val.get_object());
 					else
@@ -218,7 +227,14 @@ namespace Rubric {
 					if (!found && !pspec.value_type.is_fundamental()) {
 						try {
 							var injected = container.resolve_type(pspec.value_type);
-							Parameter newparam = { name: pspec.get_name(), value : injected };
+							var val = Value(pspec.value_type);
+							if(pspec.value_type.is_object() || pspec.value_type.is_interface()) {
+								val.set_object(injected.get_object());
+							} else {
+								debug(pspec.value_type.name());
+								val.set_boxed((void*)injected);
+							}
+							Parameter newparam = { name: pspec.get_name(), value : val };
 							newparams += newparam;
 						} catch (ContainerError e) {
 							//if((e is ContainerError.UNREGISTERED) == false)
@@ -256,14 +272,32 @@ namespace Rubric {
 				extensions.append(extension);
 		}
 
-		public Container register_resource(string path) throws ContainerError {
+		public Container register_resource(string path, Assembly assembly) throws ContainerError {
 			foreach(var ext in extensions) {
 				var res = ext as ResourceHandler;
 				if (res != null)
 					if(res.handles(path))
-						res.add(path);
+						res.add(path, assembly);
 			}
 			return this;
+		}
+		
+		public Value decorate(Type from, Value object, string? name = null) throws ContainerError {
+			foreach(var ext in extensions) {
+				var dec = ext as DecoratorExtension;
+				if (dec != null)
+					object = dec.decorate(from, object, name);
+			}
+			return object;
+		}
+
+		public Value decorate_all(Type from, Value objects) throws ContainerError {
+			foreach(var ext in extensions) {
+				var dec = ext as DecoratorExtension;
+				if (dec != null)
+					objects = dec.decorate_all(from, objects);
+			}
+			return objects;
 		}
 		
 		/**
@@ -301,7 +335,7 @@ namespace Rubric {
 
 			var strategy = new Strategy(this, to, params, (owned)constructor);
 
-			var policy = (policies.contains(from)) ? policies.get(from) : new Policy();
+			var policy = (policies.contains(from)) ? policies.get(from) : new Policy(this);
 						
 			if (name != null) {
 				if(policy.strategies.contains(name))
@@ -356,7 +390,7 @@ namespace Rubric {
 			if (instance.type() == typeof(GLib.Object) && !(((GLib.Object)instance).get_type().is_a(from)))
 				throw new ContainerError.TYPE_MISMATCH("%s is not a %s", instance.type().name(), from.name());
 
-			var policy = (policies.contains(from)) ? policies.get(from) : new Policy();
+			var policy = (policies.contains(from)) ? policies.get(from) : new Policy(this);
 
 			if(name != null) {
 				if(policy.instances.contains(name))

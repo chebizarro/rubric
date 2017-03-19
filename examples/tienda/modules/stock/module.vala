@@ -22,19 +22,18 @@
 
 using Rubric;
 using Rubric.Regions;
-using Rubric.Modularity;
+using RubricGtk.Modularity;
 
 namespace Tienda.Modules.Stock {
 	
-	public class Module : Object, Rubric.Modularity.Module {
+	public class Module : BaseModule {
 		
-		public Container container {owned get; construct set;}
 		
 		//private Gda.Connection connection;
 		//private Gda.SqlParser parser;
 		
-		public void activate ()	{
-		
+		public override void activate ()	{
+			base.activate();
 	
 			/*
 			try {
@@ -90,8 +89,8 @@ namespace Tienda.Modules.Stock {
 		
 			container.register<CatalogView, CatalogView>();
 		
-			var rm = container.resolve<RegionManager>();
-			rm.register_view<CatalogView>("right");
+			//var rm = container.resolve<RegionManager>();
+			//rm.register_view<CatalogView>("right");
 		}
 
 		/*
@@ -106,11 +105,6 @@ namespace Tienda.Modules.Stock {
 			}
 			
 		}*/
-
-
-		public void deactivate () {	}
-
-		public void update_state () { }
 		
 	}
 	

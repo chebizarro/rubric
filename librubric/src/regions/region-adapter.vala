@@ -96,7 +96,7 @@ namespace Rubric.Regions {
 				remove_all_views();
 				add_view(view);
 				
-			} catch (Error e) {
+			} catch (ContainerError e) {
 				warning(e.message);
 			}
 		}

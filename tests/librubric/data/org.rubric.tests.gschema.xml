@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema path="/org/rubric/tests/" id="org.rubric.tests">
+    <child name="grid" schema="org.rubric.tests.grid" />
+    <key type="n" name="undo-depth">
+      <default>256</default>
+    </key>
+    <key type="b" name="show-connection-points">
+      <default>true</default>
+    </key>
+    <key type="b" name="snap-object">
+      <default>false</default>
+    </key>
+    <key type="s" name="length-unit">
+      <default>"mm"</default>
+    </key>
+    <key type="s" name="font-size-unit">
+      <default>"pts"</default>
+    </key>
+  </schema>
+  <schema path="/org/rubric/tests/grid/" id="org.rubric.tests.grid">
+    <key type="b" name="visible">
+      <default>true</default>
+    </key>
+    <key type="b" name="snap">
+      <default>false</default>
+    </key>
+    <key type="b" name="dynamic">
+      <default>false</default>
+    </key>
+    <key type="d" name="x">
+      <default>1.0</default>
+    </key>
+    <key type="d" name="y">
+      <default>1.0</default>
+    </key>
+    <key type="b" name="vis-x">
+      <default>false</default>
+    </key>
+    <key type="b" name="vis-y">
+      <default>false</default>
+    </key>
+    <key type="n" name="major-lines">
+      <default>5</default>
+    </key>
+    <key type="b" name="hex">
+      <default>false</default>
+    </key>
+    <key type="d" name="hex-size">
+      <default>1.0</default>
+    </key>
+  </schema>
+  <schema path="/org/rubric/tests/view/" id="org.rubric.tests.view">
+    <key type="n" name="width">
+      <default>800</default>
+    </key>
+    <key type="n" name="height">
+      <default>600</default>
+    </key>
+    <key type="d" name="zoom">
+      <default>100.0</default>
+    </key>
+    <key type="b" name="use-menu-bar">
+      <default>false</default>
+    </key>
+  </schema>
+  <schema path="/org/rubric/tests/page-break/" id="org.rubric.tests.page-break">
+    <key type="b" name="visible">
+      <default>true</default>
+    </key>
+    <key type="b" name="solid">
+      <default>true</default>
+    </key>
+  </schema>
+  <schema path="/org/rubric/tests/modules/" id="org.rubric.tests.modules">
+    <key name="active-plugins" type="as">
+      <default>["dashboard"]</default>
+    </key>
+    <key name="search-paths" type="as">
+      <default>["path1","path2"]</default>
+    </key>
+  </schema>
+  <schema path="/org/rubric/tests/regions/" id="org.rubric.tests.regions">
+    <key name="views" type="a{sas}">
+      <default>{"workspace":["DefaultView1", "DefaultView2"],"workspace2":["DefaultView"]}</default>
+    </key>
+  </schema>
+  <schema id="RubricTestsPrefsTestObject">
+    <key name="views" type="a{sas}">
+      <default>{"workspace":["DefaultView1", "DefaultView2"],"workspace2":["DefaultView"]}</default>
+    </key>
+  </schema>
+</schemalist>

@@ -27,7 +27,6 @@ namespace Rubric {
 	}
 
 	public interface ResolverExtension : Object, ContainerExtension {
-		
 		public abstract T resolve<T>(string? name = null, Parameter[]? params = null) throws ContainerError;
 		public abstract Value resolve_type(Type from, string? name = null, Parameter[]? params = null) throws ContainerError;
 		public abstract Value resolve_all<T>(Parameter[]? params = null) throws ContainerError;
@@ -36,18 +35,15 @@ namespace Rubric {
 	}
 
 	public interface DecoratorExtension : Object, ContainerExtension {
-		public abstract T decorate<T>(string? name = null, Parameter[]? params = null) throws ContainerError;
-		public abstract Value decorate_type(Type from, string? name = null, Parameter[]? params = null) throws ContainerError;
-		public abstract Value decorate_all<T>(Parameter[]? params = null) throws ContainerError;
-		public abstract Value decorate_type_all(Type from, Parameter[]? params = null) throws ContainerError;
-		
 
+		public abstract Value decorate(Type from, Value object, string? name = null) throws Error;
+
+		public abstract Value decorate_all(Type from, Value objects) throws Error;
 	}
 
 	public interface ResourceHandler : Object, ContainerExtension {
 		public abstract bool handles(string filename);
-		public abstract void add(string filename) throws ContainerError;
+		public abstract void add(string filename, Assembly? assembly = null) throws ContainerError;
 	}
-
 
 }

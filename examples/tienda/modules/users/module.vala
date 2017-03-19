@@ -22,25 +22,24 @@
 
 using Rubric;
 using Rubric.Regions;
-using Rubric.Modularity;
+using RubricGtk.Modularity;
 
 namespace Tienda.Modules.Users {
 	
-	public class Module : Object, Rubric.Modularity.Module {
+	public class Module : BaseModule {
 		
-		public Container container {owned get; construct set;}
+		construct {
+			assembly_id = "org.tienda.modules.users";
+		}
 		
-		public void activate ()	{
-		
+		public override void activate ()	{
+			base.activate();
 			container.register<LoginView, LoginView>();
+			/*
 			var rm = container.resolve<RegionManager>();
 			rm.register_view<LoginView>("content");
-			
+			*/
 		}
-
-		public void deactivate () {	}
-
-		public void update_state () { }
 		
 	}
 	

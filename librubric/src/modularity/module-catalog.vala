@@ -22,15 +22,13 @@
 
 namespace Rubric.Modularity {
 
-	public interface ModuleCatalog : GLib.Object {
+	public class ModuleCatalog : GLib.Object {
 
-		public abstract List<ModuleInfo> modules { get; }
+		public Container container {get;construct set;}
 
-		public abstract List<ModuleInfo> get_dependent_modules(ModuleInfo module_info);
+		public string[] search_paths {get;set;}
 
-		public abstract void initialize();
-
-		public abstract ModuleCatalog add_module(ModuleInfo moduleInfo);
+		public string[] active_modules {get;set;}
 
 	}
 }

@@ -44,21 +44,62 @@ namespace RubricGtk.Regions {
 
 		private Gee.HashMap<string, Gee.ArrayList<Resolver>> _content =  new Gee.HashMap<string, Gee.ArrayList<Resolver>>();
 
+		private HashTable<string, GLib.List<string>> _views = new HashTable<string, GLib.List<string>>(str_hash, str_equal);
+		
+		public HashTable<string, GLib.List<string>> views {
+			get {
+				return _views;
+			}
+			set {
+				foreach(var key in value.get_keys()) {
+					if(!_views.contains(key))
+						_views.set(key, new GLib.List<string>());
+
+					unowned List<string> l = value.get(key);
+
+					for(int i = 0; i < l.length(); i++) {
+						string res = l.nth_data(i);
+						register_view_type_name(res, key);
+						debug("View: %s registered for: %s", res, key);
+						_views.get(key).append(res);
+					}
+				}
+			}
+		}
+
+		private void register_view_type_name(string view_type, string region_name) {
+			if(!_content.has_key(region_name)) {
+				_content.set(region_name, new Gee.ArrayList<Resolver>());
+			}
+			var resolvers = _content.get(region_name);
+			Rubric.Resolver<View> res = () => { 
+				try {
+					debug("Creating view for %s", view_type);
+					return container.resolve_type_name(view_type) as View;
+				} catch (GLib.Error e) {
+					warning(e.message);
+				}
+				return null;
+			};
+			resolvers.add(new Resolver((owned)res));
+			
+		}
+
 		public ViewRegistry(Container container) {
 			Object(container: container);
 		} 
 
 		public Iterator<View> get_contents(string region_name) {
 			
-			View[] views = {};
+			View[] vs = {};
 			
 			if(_content.has_key(region_name)) {
 				var resolvers = _content.get(region_name);
 				foreach(var resolver in resolvers) {
-					views += resolver.resolve();
+					vs += resolver.resolve();
 				}
 			}
-			return new Iterator<View>(views);
+			return new Iterator<View>(vs);
 		}
 
 		public void register_view_type(Type view_type, string region_name) {

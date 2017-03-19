@@ -20,27 +20,15 @@
  * 
  */
 
-using Rubric;
-using Rubric.Regions;
-using Rubric.Modularity;
+using RubricGtk.Modularity;
 
 namespace Tienda.Modules.Dashboard {
 	
-	public class Module : Object, Rubric.Modularity.Module {
-		
-		public Container container {owned get; construct set;}
-		
-		public void activate ()	{
-
-			//container.register<DashboardView, DashboardView>();
+	public class Module : BaseModule {
+		construct {
+			assembly_id = "org.tienda.modules.dashboard";
 		}
-
-		public void deactivate () {	}
-
-		public void update_state () { }
-		
 	}
-	
 }
 
 [ModuleInit]
