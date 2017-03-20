@@ -1,4 +1,4 @@
-GLADE_GEN = $(top_srcdir)/tools/glade-catalogger
+GLADE_GEN = $(top_builddir)/tools/glade-catalogger
 
 GLADE_FILES = sales-glade-catalog.xml
 
@@ -21,8 +21,8 @@ libsaleslib_la_SOURCES = \
 
 libsaleslib_la_CFLAGS = \
 	$(LIBRUBRIC_GTK_CFLAGS) \
-	-I$(top_builddir)/librubric \
-	-I$(top_builddir)/librubric-gtk \
+	-I$(top_srcdir)/librubric \
+	-I$(top_srcdir)/librubric-gtk \
 	`pkg-config --cflags --libs $(pkg_gtk_modules) gio-2.0 gom-1.0 sqlite3` \
 	-shared
 
@@ -47,7 +47,7 @@ libsaleslib_la_VALAFLAGS = \
 	--gir=Sales-1.0.gir \
 	-g
 
-sales-resources.c: sales-module.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies --sourcedir=$(top_srcdir)/examples/tienda/modules/sales/ $(top_srcdir)/examples/tienda/modules/sales/sales-module.gresource.xml)
+sales-resources.c: sales-module.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies --sourcedir=$(top_srcdir)/examples/tienda/modules/sales/ $(top_srcdir)/examples/tienda/modules/sales/sales-module.gresource.xml) libsaleslib.la
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(top_srcdir)/examples/tienda/modules/sales/ --generate-source $<
 
 sales_moduledir = $(datadir)/tienda/modules/sales
@@ -69,8 +69,8 @@ libsales_la_SOURCES = \
 libsales_la_CFLAGS = \
 	$(LIBRUBRIC_GTK_CFLAGS) \
 	-I. \
-	-I$(top_builddir)/librubric \
-	-I$(top_builddir)/librubric-gtk \
+	-I$(top_srcdir)/librubric \
+	-I$(top_srcdir)/librubric-gtk \
 	`pkg-config --cflags --libs $(pkg_gtk_modules) gio-2.0 gom-1.0 sqlite3` \
 	-shared
 
@@ -94,7 +94,7 @@ libsales_la_VALAFLAGS = \
 	--library sales \
 	-g
 
-sales-glade-catalog.xml: Sales-1.0.gir
+sales-glade-catalog.xml: $(top_srcdir)/examples/tienda/modules/sales/Sales-1.0.gir
 	$(GLADE_GEN) $<
 	
 CLEANFILES = \
@@ -105,6 +105,7 @@ CLEANFILES = \
 	*.gir \
 	*.vapi \
 	*.h \
+	*.stamp \
 	$(GLADE_FILES)
 
 EXTRA_DIST = \

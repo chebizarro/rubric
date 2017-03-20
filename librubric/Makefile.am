@@ -65,7 +65,7 @@ librubric_la_VALAFLAGS = \
 	--target-glib=2.40.0 \
 	--gir=Rubric-1.0.gir \
 	--vapi-comments \
-	-H rubric.h
+	--header=rubric.h
 
 if ENABLE_DEVELOPMENT_MODE
 
@@ -85,7 +85,7 @@ librubric_la_CFLAGS = \
 	$(LIBRUBRIC_CFLAGS)
 
 librubric_la_includedir = $(includedir)/rubric
-librubric_la_include_HEADERS = rubric.h
+librubric_la_include_HEADERS =  $(top_srcdir)/librubric/rubric.h
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = rubric-1.0.pc
@@ -108,7 +108,7 @@ Rubric-1.0.typelib: Rubric-1.0.gir
 		$<
 
 girdir = $(datadir)/gir-1.0
-gir_DATA = Rubric-1.0.gir
+gir_DATA = $(top_srcdir)/librubric/Rubric-1.0.gir
 
 typelibdir = $(libdir)/girepository-1.0
 typelib_DATA = Rubric-1.0.typelib
@@ -122,8 +122,10 @@ endif
 CLEANFILES += \
 	$(librubric_la_SOURCES:.vala=.c) \
 	*.vapi \
+	*.gir \
 	*.h \
-	*.pc
+	*.pc \
+	*.stamp
 
 MAINTAINERCLEANFILES = \
 	$(CLEANFILES)

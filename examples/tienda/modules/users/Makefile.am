@@ -1,9 +1,9 @@
-GLADE_GEN = $(top_srcdir)/tools/glade-catalogger
+GLADE_GEN = ../../../../tools/glade-catalogger
 
 GLADE_FILES = users-glade-catalog.xml
 
 plugin_in_files = users.plugin.in
-%.plugin: %.plugin.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+%.plugin: %.plugin.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_srcdir)/po/.intltool-merge-cache
 
 resources.c: module.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies --sourcedir=$(top_srcdir)/examples/tienda/modules/users/ $(top_srcdir)/examples/tienda/modules/users/module.gresource.xml)
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(top_srcdir)/examples/tienda/modules/users/ --generate-source $<
@@ -27,8 +27,8 @@ libusers_la_SOURCES = \
 
 libusers_la_CFLAGS = \
 	$(LIBRUBRIC_GTK_CFLAGS) \
-	-I$(top_builddir)/librubric \
-	-I$(top_builddir)/librubric-gtk \
+	-I$(top_srcdir)/librubric \
+	-I$(top_srcdir)/librubric-gtk \
 	`pkg-config --cflags --libs $(pkg_gtk_modules) gio-2.0` \
 	-shared
 
@@ -49,15 +49,17 @@ libusers_la_VALAFLAGS = \
 	--gir=Users-1.0.gir \
 	-g
 
-users-glade-catalog.xml: Users-1.0.gir
+users-glade-catalog.xml: $(top_srcdir)/examples/tienda/modules/users/Users-1.0.gir
 	$(GLADE_GEN) $<
 	
 CLEANFILES = \
 	$(libusers_la_SOURCES:.vala=.c) \
-	users.plugin \
-	Users-1.0.gir \
-	users-1.0.vapi \
-	$(GLADE_FILES)
+	$(GLADE_FILES) \
+	*.plugin \
+	*.h \
+	*.gir \
+	*.vapi \
+	*.stamp
 
 EXTRA_DIST = \
 	$(plugin_in_files)	

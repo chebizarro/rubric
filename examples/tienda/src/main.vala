@@ -38,7 +38,7 @@ namespace Tienda {
 		
 		application.startup.connect(() => {
 			var adapter = new Gom.Adapter ();
-			var uri = "/home/bizarro/Documents/projects/valadate.org/valarade/valarade/rubric/examples/tienda/modules/stock/stock.db";
+			var uri = "/home/bizarro/Documents/projects/valadate.org/rubric/examples/tienda/modules/stock/stock.db";
 
 			try {
 				adapter.open_sync (uri);

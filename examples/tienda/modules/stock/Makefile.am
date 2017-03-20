@@ -1,4 +1,4 @@
-GLADE_GEN = $(top_srcdir)/tools/glade-catalogger
+GLADE_GEN = $(top_builddir)/tools/glade-catalogger
 
 GLADE_FILES = stock-glade-catalog.xml
 
@@ -27,13 +27,13 @@ libstock_la_SOURCES = \
 
 libstock_la_CFLAGS = \
 	$(LIBRUBRIC_GTK_CFLAGS) \
-	-I$(top_builddir)/librubric \
-	-I$(top_builddir)/librubric-gtk \
+	-I$(top_srcdir)/librubric \
+	-I$(top_srcdir)/librubric-gtk \
 	`pkg-config --cflags --libs $(pkg_gtk_modules) gio-2.0 gom-1.0 sqlite3` \
 	-shared
 
 libstock_la_VALAFLAGS = \
-	--gresources $(top_srcdir)/examples/tienda/modules/stock/module.gresource.xml \
+	--gresources module.gresource.xml \
 	--pkg gio-2.0 \
 	--pkg gee-0.8 \
 	--pkg libxml-2.0 \
@@ -52,15 +52,17 @@ libstock_la_VALAFLAGS = \
 	--gir=Stock-1.0.gir \
 	-g
 
-stock-glade-catalog.xml: Stock-1.0.gir
+stock-glade-catalog.xml: $(top_srcdir)/examples/tienda/modules/stock/Stock-1.0.gir
 	$(GLADE_GEN) $<
 	
 CLEANFILES = \
 	$(libstock_la_SOURCES:.vala=.c) \
-	stock.plugin \
-	Stock-1.0.gir \
-	stock-1.0.vapi \
-	$(GLADE_FILES)
+	$(GLADE_FILES) \
+	*.plugin \
+	*.h \
+	*.gir \
+	*.vapi \
+	*.stamp
 
 EXTRA_DIST = \
 	$(plugin_in_files)	

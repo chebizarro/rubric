@@ -31,8 +31,8 @@ librubric_gtk_la_VALAFLAGS = \
 	--pkg libpeas-1.0 \
 	--pkg libpeas-gtk-1.0 \
 	--pkg rubric-1.0 \
-	--vapidir=$(top_builddir)/librubric \
-	--girdir=$(top_builddir)/librubric \
+	--vapidir=$(top_srcdir)/librubric \
+	--girdir=$(top_srcddir)/librubric \
 	--library rubric-gtk \
 	--vapi rubric-gtk-1.0.vapi \
 	--target-glib=2.40.0 \
@@ -57,10 +57,10 @@ librubric_gtk_la_LIBADD = \
 	
 
 librubric_gtk_la_CFLAGS = \
+	-I$(top_srcdir)/librubric \
 	$(LIBRUBRIC_GTK_CFLAGS)
 
 librubric_gtk_la_CPPFLAGS = \
-	-I$(top_builddir)/librubric \
 	`pkg-config --cflags --libs $(pkg_rubric_modules) gio-2.0` \
 	-DRUBRIC_LIB_DIR=\""$(LIBRUBRIC_GTK_LIB_DIR)"\" \
 	-include $(CONFIG_HEADER)
@@ -84,13 +84,13 @@ if HAVE_INTROSPECTION
 
 RubricGtk-1.0.typelib: RubricGtk-1.0.gir
 	g-ir-compiler \
-		--includedir=$(top_builddir)/librubric \
+		--includedir=$(top_srcdir)/librubric \
 		--shared-library=librubric-gtk.so.0 \
 		--output=$@ \
 		$<
 
 girdir = $(datadir)/gir-1.0
-gir_DATA = RubricGtk-1.0.gir
+gir_DATA = $(top_srcdir)/librubric-gtk/RubricGtk-1.0.gir
 
 typelibdir = $(libdir)/girepository-1.0
 typelib_DATA = RubricGtk-1.0.typelib
@@ -105,7 +105,9 @@ CLEANFILES += \
 	$(librubric_gtk_la_SOURCES:.vala=.c) \
 	*.vapi \
 	*.h \
-	*.pc
+	*.pc \
+	*.gir \
+	*.stamp
 
 MAINTAINERCLEANFILES = \
 	$(CLEANFILES)

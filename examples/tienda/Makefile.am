@@ -43,13 +43,14 @@ tienda_LDADD = \
 	
 tienda_CFLAGS = \
 	$(LIBRUBRIC_GTK_CFLAGS) \
-	-I$(top_builddir)/librubric \
-	-I$(top_builddir)/librubric-gtk \
-	-I$(top_builddir)/librubric-gom \
+	-I$(top_srcdir)/librubric \
+	-I$(top_srcdir)/librubric-gtk \
+	-I$(top_srcdir)/librubric-gom \
 	`pkg-config --cflags --libs $(pkg_gtk_modules) gio-2.0 gom-1.0`
 
 CLEANFILES = \
 	$(tienda_SOURCES:.vala=.c) \
-	$(BUILT_SOURCES)
+	$(BUILT_SOURCES) \
+	*.stamp
 
 include $(top_srcdir)/git.mk
