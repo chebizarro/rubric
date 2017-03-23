@@ -1,4 +1,3 @@
-# --- librubric ---
 lib_LTLIBRARIES = librubric-gtk.la
 
 librubric_gtk_la_SOURCES = \
@@ -7,8 +6,6 @@ librubric_gtk_la_SOURCES = \
 	src/application/shell.vala \
 	src/application/menu-adapter-factory.vala \
 	src/container/gtk-builder-resource-handler.vala \
-	src/modularity/module-manager.vala \
-	src/modularity/base-module.vala \
 	src/presentation/view-model.vala \
 	src/presentation/base-view.vala \
 	src/presentation/gtk-dialog-service.vala \
@@ -31,13 +28,13 @@ librubric_gtk_la_VALAFLAGS = \
 	--pkg libpeas-1.0 \
 	--pkg libpeas-gtk-1.0 \
 	--pkg rubric-1.0 \
-	--vapidir=$(top_srcdir)/librubric \
+	--vapidir=$(top_builddir)/librubric \
 	--girdir=$(top_srcddir)/librubric \
-	--library rubric-gtk \
-	--vapi rubric-gtk-1.0.vapi \
+	--library=rubric-gtk \
+	--vapi=rubric-gtk-1.0.vapi \
 	--target-glib=2.40.0 \
 	--gir=RubricGtk-1.0.gir \
-	-H rubric-gtk.h
+	--header=rubric-gtk.h
 
 if ENABLE_DEVELOPMENT_MODE
 
@@ -61,23 +58,31 @@ librubric_gtk_la_CFLAGS = \
 	$(LIBRUBRIC_GTK_CFLAGS)
 
 librubric_gtk_la_CPPFLAGS = \
-	`pkg-config --cflags --libs $(pkg_rubric_modules) gio-2.0` \
+	`pkg-config --cflags --libs $(pkg_gtk_modules) gio-2.0` \
 	-DRUBRIC_LIB_DIR=\""$(LIBRUBRIC_GTK_LIB_DIR)"\" \
 	-include $(CONFIG_HEADER)
 
-librubric_gtk_la_includedir = $(includedir)/rubric
-librubric_gtk_la_include_HEADERS = rubric-gtk.h
+librubric_gtk_la_headerdir = $(includedir)/rubric
+librubric_gtk_la_header_HEADERS = $(srcdir)/rubric-gtk.h
 
-pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = rubric-gtk-1.0.pc
+librubric_gtk_la_pkgconfigdir = $(libdir)/pkgconfig
+librubric_gtk_la_pkgconfig_DATA = rubric-gtk-1.0.pc
 
-# vapis
-vapidir = $(datadir)/vala/vapi
+librubric_gtk_la_vapidir = $(datadir)/vala/vapi
+librubric_gtk_la_vapi_DATA = $(srcdir)/rubric-gtk-1.0.vapi
 
-dist_vapi_DATA = \
-	rubric-gtk-1.0.vapi
+MAINTAINERCLEANFILES = \
+	$(librubric_gtk_la_pkgconfig_DATA) \
+	$(librubric_gtk_la_header_HEADERS) \
+	$(librubric_gtk_la_vapi_DATA) \
+	$(librubric_gtk_la_SOURCES:.vala=.c)
 
-CLEANFILES =
+EXTRA_DIST = \
+	$(librubric_gtk_la_vapi_DATA) \
+	$(librubric_gtk_la_header_HEADERS)
+	
+DISTCLEANFILES = \
+	$(librubric_gtk_la_pkgconfig_DATA)
 
 -include $(INTROSPECTION_MAKEFILE)
 if HAVE_INTROSPECTION
@@ -89,27 +94,25 @@ RubricGtk-1.0.typelib: RubricGtk-1.0.gir
 		--output=$@ \
 		$<
 
-girdir = $(datadir)/gir-1.0
-gir_DATA = $(top_srcdir)/librubric-gtk/RubricGtk-1.0.gir
+librubric_gtk_la_girdir = $(datadir)/gir-1.0
+librubric_gtk_la_gir_DATA = $(srcdir)/RubricGtk-1.0.gir
 
-typelibdir = $(libdir)/girepository-1.0
-typelib_DATA = RubricGtk-1.0.typelib
+librubric_gtk_la_typelibdir = $(libdir)/girepository-1.0
+librubric_gtk_la_typelib_DATA = RubricGtk-1.0.typelib
 
-CLEANFILES += \
-	$(gir_DATA) \
-	$(typelib_DATA)
+CLEANFILES = \
+	$(librubric_gtk_la_typelib_DATA)
+
+GITIGNOREFILES = \
+	$(librubric_gtk_la_gir_DATA)
+
+EXTRA_DIST += \
+	$(librubric_gtk_la_gir_DATA) \
+	$(librubric_gtk_la_pkgconfig_DATA)
+
+MAINTAINERCLEANFILES += \
+	$(EXTRA_DIST)
 
 endif
-
-CLEANFILES += \
-	$(librubric_gtk_la_SOURCES:.vala=.c) \
-	*.vapi \
-	*.h \
-	*.pc \
-	*.gir \
-	*.stamp
-
-MAINTAINERCLEANFILES = \
-	$(CLEANFILES)
 
 -include $(top_srcdir)/git.mk

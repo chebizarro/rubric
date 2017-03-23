@@ -1,7 +1,7 @@
 SUBDIRS = . data modules
 
-data/resources.c: data/tienda.gresource.xml $(shell glib-compile-resources --sourcedir=$(top_srcdir)/examples/tienda/data/ --generate-dependencies data/tienda.gresource.xml)
-	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(top_srcdir)/examples/tienda/data/ --generate-source $<
+data/resources.c: $(srcdir)/data/tienda.gresource.xml $(shell glib-compile-resources --sourcedir=$(srcdir)/data/ --generate-dependencies $(srcdir)/data/tienda.gresource.xml)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir)/data/ --generate-source $<
 
 BUILT_SOURCES = \
 	data/resources.c
@@ -21,10 +21,10 @@ tienda_VALAFLAGS = \
 	--pkg rubric-1.0 \
 	--pkg rubric-gtk-1.0 \
 	--pkg gom-1.0 \
-	--gresources data/tienda.gresource.xml \
-	--vapidir=$(top_srcdir)/librubric \
-	--vapidir=$(top_srcdir)/librubric-gtk \
-	--vapidir=$(top_srcdir)/vapi \
+	--gresources $(srcdir)/data/tienda.gresource.xml \
+	--vapidir=$(top_builddir)/librubric \
+	--vapidir=$(top_builddir)/librubric-gtk \
+	--vapidir=$(top_builddir)/vapi \
 	--target-glib=2.40.0 \
 	-g
 
@@ -47,10 +47,5 @@ tienda_CFLAGS = \
 	-I$(top_srcdir)/librubric-gtk \
 	-I$(top_srcdir)/librubric-gom \
 	`pkg-config --cflags --libs $(pkg_gtk_modules) gio-2.0 gom-1.0`
-
-CLEANFILES = \
-	$(tienda_SOURCES:.vala=.c) \
-	$(BUILT_SOURCES) \
-	*.stamp
 
 include $(top_srcdir)/git.mk

@@ -19,25 +19,26 @@
  * 
  * 
  */
+ 
+using Rubric;
 using Rubric.PM;
-using Rubric.Collections;
+using Rubric.Regions;
+ 
+namespace RubricWeb {
 
-namespace Rubric.Regions {
-	
-	public interface ViewRegistry : Object {
+	public class Shell : Object, View, Rubric.Shell  {
 
-		public abstract HashTable<string, List<string>> views {get;set;}
+		public Container container {get;construct set;}
 
-		public abstract Iterator<View> get_contents(string region_name);
+		public string name {get;set;}
 
-		public virtual void register_view<T>(string region_name) {
-			register_view_type(typeof(T), region_name);
+		public RegionManager region_manager {get;construct set;}
+
+		public ViewModel view_model {get;set;}
+
+		public void present() {
+			
 		}
 
-		public abstract void register_view_type(Type view_type, string region_name);
-
-		public abstract void register_view_resolver(string region_name, owned Resolver<View> resolver);
-
 	}
-	
 }

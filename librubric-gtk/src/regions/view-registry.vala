@@ -120,7 +120,7 @@ namespace RubricGtk.Regions {
 
 		}
 
-		public void register_view_resolver(string region_name, Rubric.Resolver<View> resolver) {
+		public void register_view_resolver(string region_name, owned Rubric.Resolver<View> resolver) {
 			if(!_content.has_key(region_name)) {
 				_content.set(region_name, new Gee.ArrayList<Resolver>());
 			}

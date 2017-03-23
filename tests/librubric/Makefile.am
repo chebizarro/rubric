@@ -14,7 +14,7 @@ gschemas.compiled: $(schema_file)
 
 all: gschemas.compiled
 
-data/resources.c: data/test.gresource.xml $(shell glib-compile-resources --sourcedir=$(top_srcdir)/tests/librubric/data/ --generate-dependencies data/test.gresource.xml)
+data/resources.c: $(top_srcdir)/tests/librubric/data/test.gresource.xml $(shell glib-compile-resources --sourcedir=$(top_srcdir)/tests/librubric/data/ --generate-dependencies  $(top_srcdir)/tests/librubric/data/test.gresource.xml)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(top_srcdir)/tests/librubric/data/ --generate-source $<
 
 BUILT_SOURCES += \
@@ -23,7 +23,7 @@ BUILT_SOURCES += \
 TESTS_ENVIRONMENT += \
 	G_MESSAGES_DEBUG=all \
 	G_SLICE=debug-blocks \
-	GSETTINGS_SCHEMA_DIR=$(abs_top_builddir)/tests/librubric/data/
+	GSETTINGS_SCHEMA_DIR=$(top_srcdir)/tests/librubric/data/
 
 test_programs = test-librubric-1.0
 
@@ -40,13 +40,14 @@ test_librubric_1_0_VALAFLAGS = \
 	--library test-librubric \
 	--gir test-librubric-1.0.gir \
 	--pkg gee-0.8 \
+	--pkg libpeas-1.0 \
 	--pkg valadate-1.0 \
 	--pkg libxml-2.0 \
 	--pkg rubric-1.0 \
 	--pkg config \
 	--vapidir=$(top_builddir)/librubric \
 	--vapidir=$(top_builddir)/vapi \
-	--gresources data/test.gresource.xml
+	--gresources $(top_srcdir)/tests/librubric/data/test.gresource.xml
 
 test_librubric_1_0_LDADD = \
 	$(LIBRUBRIC_LIBS) \
@@ -59,7 +60,7 @@ test_librubric_1_0_CPPFLAGS = \
 test_librubric_1_0_CFLAGS = \
 	$(LIBRUBRIC_CFLAGS) \
 	$(TESTS_CFLAGS) \
-	-I$(top_builddir)/librubric \
+	-I$(top_srcdir)/librubric \
 	-shared \
 	-pie \
 	-g
@@ -74,6 +75,7 @@ CLEANFILES += \
 	*.vapi \
 	*.gir \
 	*.stamp \
+	*.stamp-t \
 	data/*.c
 
 DISTCLEANFILES += $(CLEANFILES)

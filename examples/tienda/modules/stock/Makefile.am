@@ -43,9 +43,9 @@ libstock_la_VALAFLAGS = \
 	--pkg rubric-gtk-1.0 \
 	--pkg gom-1.0 \
 	--pkg sqlite3 \
-	--vapidir=$(top_srcdir)/librubric \
-	--vapidir=$(top_srcdir)/librubric-gtk \
-	--vapidir=$(top_srcdir)/vapi \
+	--vapidir=$(top_builddir)/librubric \
+	--vapidir=$(top_builddir)/librubric-gtk \
+	--vapidir=$(top_builddir)/vapi \
 	--target-glib=2.40.0 \
 	--library stock \
 	--vapi stock-1.0.vapi \

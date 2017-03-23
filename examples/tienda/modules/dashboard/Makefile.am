@@ -54,8 +54,8 @@ libdash_la_VALAFLAGS = \
 	--pkg rubric-1.0 \
 	--pkg libpeas-1.0 \
 	--pkg rubric-gtk-1.0 \
-	--vapidir=$(top_srcdir)/librubric \
-	--vapidir=$(top_srcdir)/librubric-gtk \
+	--vapidir=$(top_builddir)/librubric \
+	--vapidir=$(top_builddir)/librubric-gtk \
 	--target-glib=2.40.0 \
 	--shared-library=libdashboard.so \
 	--library=dash \
@@ -100,8 +100,8 @@ libdashboard_la_VALAFLAGS = \
 	--pkg rubric-gtk-1.0 \
 	--pkg dash-1.0 \
 	--vapidir=. \
-	--vapidir=$(top_srcdir)/librubric \
-	--vapidir=$(top_srcdir)/librubric-gtk \
+	--vapidir=$(top_builddir)/librubric \
+	--vapidir=$(top_builddir)/librubric-gtk \
 	--target-glib=2.40.0 \
 	-g
 

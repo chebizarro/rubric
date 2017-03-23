@@ -33,7 +33,7 @@ libusers_la_CFLAGS = \
 	-shared
 
 libusers_la_VALAFLAGS = \
-	--gresources $(top_srcdir)/examples/tienda/modules/users/module.gresource.xml \
+	--gresources module.gresource.xml \
 	--pkg gio-2.0 \
 	--pkg gee-0.8 \
 	--pkg libxml-2.0 \
@@ -41,8 +41,8 @@ libusers_la_VALAFLAGS = \
 	--pkg libpeas-1.0 \
 	--pkg rubric-1.0 \
 	--pkg rubric-gtk-1.0 \
-	--vapidir=$(top_srcdir)/librubric \
-	--vapidir=$(top_srcdir)/librubric-gtk \
+	--vapidir=$(top_builddir)/librubric \
+	--vapidir=$(top_builddir)/librubric-gtk \
 	--target-glib=2.40.0 \
 	--library users \
 	--vapi users-1.0.vapi \

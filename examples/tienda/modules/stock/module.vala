@@ -22,7 +22,7 @@
 
 using Rubric;
 using Rubric.Regions;
-using RubricGtk.Modularity;
+using Rubric.Modularity;
 
 namespace Tienda.Modules.Stock {
 	

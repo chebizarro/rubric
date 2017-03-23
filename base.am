@@ -32,31 +32,13 @@ TESTS_VALAFLAGS = \
 	--vapidir $(top_builddir)/librubric
 	
 CLEANFILES = \
-	*.stamp \
-	*.o \
 	*.gcda \
 	*.gcno
 
-DISTCLEANFILES = \
-	$(CLEANFILES) \
-	*.log
-
-GITIGNOREFILES = \
-	autom4te.cache \
-	aclocal.m4 \
-	ar-lib \
-	build/autotools/libtool.m4 \
-	build/autotools/ltoptions.m4 \
-	build/autotools/ltsugar.m4 \
-	build/autotools/ltversion.m4 \
-	build/autotools/lt~obsolete.m4 \
-	compile \
-	config.guess \
-	config.sub \
-	depcomp \
-	install-sh \
-	ltmain.sh \
-	missing
+MAINTAINERCLEANFILES = \
+	$(GITIGNORE_MAINTAINERCLEANFILES_TOPLEVEL) \
+	$(GITIGNORE_MAINTAINERCLEANFILES_MAKEFILE_IN) \
+	$(GITIGNORE_MAINTAINERCLEANFILES_M4_LIBTOOL)
 
 if ENABLE_GCOV
 # use recursive makes in order to ignore errors during check/perf

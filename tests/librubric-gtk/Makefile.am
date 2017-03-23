@@ -22,6 +22,7 @@ test_librubric_gtk_1_0_VALAFLAGS = \
 	--pkg valadate-1.0 \
 	--pkg gtk+-3.0 \
 	--pkg libxml-2.0 \
+	--pkg libpeas-1.0 \
 	--pkg rubric-1.0 \
 	--pkg config \
 	--vapidir=$(top_builddir)/librubric \
@@ -38,7 +39,7 @@ test_librubric_gtk_1_0_CPPFLAGS = \
 test_librubric_gtk_1_0_CFLAGS = \
 	$(LIBRUBRIC_GTK_CFLAGS) \
 	$(TESTS_CFLAGS) \
-	-I$(top_builddir)/librubric \
+	-I$(top_srcdir)/librubric \
 	-shared \
 	-pie \
 	-g

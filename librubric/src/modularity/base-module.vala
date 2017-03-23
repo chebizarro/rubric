@@ -18,8 +18,9 @@
  */
 
 using Rubric;
+using Rubric.Regions;
 
-namespace RubricGtk.Modularity {
+namespace Rubric.Modularity {
 
 	public abstract class BaseModule : GLib.Object, Assembly, Rubric.Modularity.Module {
 
@@ -40,11 +41,30 @@ namespace RubricGtk.Modularity {
 		public virtual void activate() {
 			if(assembly_id != null)
 				resource_path = "/%s/".printf(assembly_id.replace(".","/"));
+			setup_preferences();
 			load_resources();
 		}
 		
 		public virtual void deactivate() { }
+		
 		public virtual void update_state() { }
+	
+	
+		public virtual void setup_preferences() {
+			if(FileUtils.test ("%s/gschemas.compiled".printf(Path.get_dirname(this.binary)), FileTest.EXISTS)) {
+				try {
+					var appid = container.resolve<Rubric.Application>().assembly_id;
+					var appprefs = container.resolve<Preferences>(appid);
+					var prefs = new Preferences.from_directory(this.assembly_id, Path.get_dirname(this.binary),appprefs);
+					var dec = new PreferencesDecorator(container, prefs);
+					container.add_extension(dec);
+					var vr = container.resolve<ViewRegistry>();
+					prefs.apply(vr, "views");
+				} catch (GLib.Error e) {
+					debug(e.message);
+				}
+			}
+		}
 	
 	}
 }

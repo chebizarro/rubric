@@ -19,9 +19,9 @@
 
 using Rubric;
 using Rubric.Modularity;
-using RubricGtk.Regions;
+using Rubric.Regions;
 
-namespace RubricGtk.Modularity {
+namespace Rubric {
 
 	public class ModuleManager : Peas.Engine, Rubric.Modularity.ModuleManager {
 	
@@ -36,11 +36,7 @@ namespace RubricGtk.Modularity {
 			extension_set = new Peas.ExtensionSet(this, typeof(Rubric.Modularity.Module), "container", container);
 		}
 		
-		public ModuleManager(Container container) {
-			GLib.Object(container : container);
-		}
-
-		public void run() {
+		public virtual void run() {
 			rescan_plugins();
 
 			foreach (var plug in get_plugin_list ()) {
@@ -70,26 +66,13 @@ namespace RubricGtk.Modularity {
 			extension_set.foreach((s, i, e) => {
 				var mod = e as Rubric.Modularity.Module;
 				mod.binary = "%s/lib%s.la".printf(i.get_module_dir(), i.get_module_name());
-				if(FileUtils.test ("%s/gschemas.compiled".printf(i.get_module_dir()), FileTest.EXISTS)) {
-					try {
-						var appid = container.resolve<Rubric.Application>().assembly_id;
-						var appprefs = container.resolve<Preferences>(appid);
-						var prefs = new Preferences.from_directory(mod.assembly_id, i.get_module_dir(),appprefs);
-						var dec = new PreferencesDecorator(container, prefs);
-						container.add_extension(dec);
-						var vr = container.resolve<ViewRegistry>();
-						prefs.apply(vr, "views");
-					} catch (Error e) {
-						debug(e.message);
-					}
-				}
 				mod.activate ();
 			});				
 			
 		}
 
 
-		public void load_module(string module_name) {
+		public virtual void load_module(string module_name) {
 			
 		}
 	

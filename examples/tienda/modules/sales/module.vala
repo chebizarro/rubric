@@ -20,7 +20,7 @@
  * 
  */
 
-using RubricGtk.Modularity;
+using Rubric.Modularity;
 
 namespace Tienda.Modules.Sales {
 	

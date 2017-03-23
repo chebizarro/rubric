@@ -4,27 +4,42 @@ ACLOCAL_AMFLAGS  = -I build/autotools ${ACLOCAL_FLAGS}
 AUTOMAKE_OPTIONS = subdir-objects
 
 INTLTOOL_FILES = \
-	build/autotools/intltool.m4 \
 	intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in
 
+DISTCLEANFILES = \
+	$(INTLTOOL_FILES)
+		
 EXTRA_DIST = \
-	$(noinst_DATA) \
-	$(INTLTOOL_FILES) \
 	autogen.sh
 
-CLEANFILES += *.stamp
+GITIGNOREFILES = \
+	autom4te.cache \
+	aclocal.m4 \
+	ar-lib \
+	build/autotools/intltool.m4 \
+	build/autotools/libtool.m4 \
+	build/autotools/ltoptions.m4 \
+	build/autotools/ltsugar.m4 \
+	build/autotools/ltversion.m4 \
+	build/autotools/lt~obsolete.m4 \
+	compile \
+	config.guess \
+	config.sub \
+	depcomp \
+	ltmain.sh \
+	missing
 
-DISTCLEANFILES += \
-	$(INTLTOOL_FILES) \
-	po/.intltool-merge-cache
+MAINTAINERCLEANFILES += \
+	$(INTLTOOL_FILES)
 
 SUBDIRS = \
 	build \
 	po \
 	librubric \
 	librubric-gtk \
+	librubric-web \
 	tools \
 	tests \
 	examples
@@ -33,4 +48,4 @@ if ENABLE_DOCS
 SUBDIRS += docs
 endif
 
-include $(top_srcdir)/git.mk
+-include $(top_srcdir)/git.mk

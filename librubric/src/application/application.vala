@@ -35,11 +35,6 @@ namespace Rubric {
 	public interface Application : Object, Assembly {
 
 		/**
-		 * The default container for the application
-		 */
-		public abstract Container container { get; construct set; }
-
-		/**
 		 * The application's shell
 		 */
 		public abstract Shell shell { get; set; }
@@ -52,12 +47,14 @@ namespace Rubric {
 		/**
 		 * Set up logging for the application
 		 */
-		public abstract void setup_logging();
-
-		/**
-		 * Load the application's preferences
-		 */
-		public abstract void setup_preferences();
+		public virtual void setup_logging() {
+			var logger = new DebugLogger();
+			try {
+				container.register_instance<Logger>(logger);
+			} catch (Error e) {
+				warning(e.message);
+			}
+		}
 
 		/**
 		 * Set up the application's regions
@@ -73,7 +70,6 @@ namespace Rubric {
 		 */
 		public abstract void setup_actions();
 
-	
 	
 		/**
 		 * Set up the default container for the application
@@ -94,7 +90,28 @@ namespace Rubric {
 		 * Set up the application's shell
 		 */
 		public abstract void setup_shell();
-		
+
+
+		public virtual void setup_module_manager() {
+			
+			try {
+				container.register<Rubric.Modularity.ModuleCatalog, Rubric.Modularity.ModuleCatalog>();
+				container.register<Rubric.ModuleManager, Rubric.ModuleManager>();
+				
+				var mmanager = container.resolve<Rubric.ModuleManager>();
+				var modpath = "%s_MODULE_DIR".printf(assembly_id.replace(".","_").ascii_up());
+				var moddir = Environment.get_variable(modpath);
+
+				if(moddir != null)
+					mmanager.add_search_path(moddir, null);
+			
+				container.register_instance<Rubric.Modularity.ModuleManager>(mmanager);
+			} catch (Error e) {
+				warning(e.message);
+			}
+		}
+
+
 	}
 
 }

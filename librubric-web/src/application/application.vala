@@ -22,13 +22,11 @@
 
 using Rubric;
 using Rubric.PM;
-using RubricGtk.PM;
 using Rubric.Logging;
-using RubricGtk.Regions;
 
-namespace RubricGtk {
+namespace RubricWeb {
 
-	public class Application : Gtk.Application, Assembly, Rubric.Application {
+	public class Application : GLib.Application, Assembly, Rubric.Application {
 
 		public Container container { get; construct set; }
 		public string namespace {get;set;}
@@ -45,7 +43,7 @@ namespace RubricGtk {
 			this.binary = args[0];
 			assembly_id = application_id = app_id;
 			resource_path = "/%s/".printf(app_id.replace(".","/"));
-			register_session = true;
+
 		}
 
 		public override void startup () {
@@ -68,7 +66,6 @@ namespace RubricGtk {
 
 		public virtual void setup_container() {
 			container = new Container(false);
-			container.add_extension(new GtkBuilderResourceHandler(container));
 			container.add_extension(new GirResourceHandler(container));
 			container_registered(container);
 		}
@@ -76,8 +73,7 @@ namespace RubricGtk {
 		
 		public virtual void register_assembly() {
 			try {
-				container.register_instance<RubricGtk.Application>(this);
-				container.register_instance<Gtk.Application>(this);
+				container.register_instance<RubricWeb.Application>(this);
 				container.register_instance<Rubric.Application>(this);
 			} catch (Error e) {
 				error(e.message);
@@ -87,6 +83,7 @@ namespace RubricGtk {
 		public virtual void setup_region_manager() {
 			
 			try {
+				/*
 				container.register<Rubric.Regions.ViewRegistry, ViewRegistry>();
 				var registry = container.resolve<Rubric.Regions.ViewRegistry>();
 				container.register<Rubric.Regions.RegionManager, RegionManager>();
@@ -97,6 +94,7 @@ namespace RubricGtk {
 				container.register_instance<RubricGtk.Regions.ViewRegistry>(registry as RubricGtk.Regions.ViewRegistry);
 				container.register_instance<Rubric.Regions.RegionManager>(region_manager);
 				container.register_instance<Rubric.Regions.AdapterFactory>(adapter_factory);
+				*/
 			} catch (Error e) {
 				error(e.message);
 			}
@@ -106,8 +104,6 @@ namespace RubricGtk {
 			try {
 				var mm = new MenuManager();
 				container.register_instance<Rubric.MenuManager>(mm);
-				var af = new RubricGtk.MenuAdapterFactory();
-				container.register_instance<Rubric.MenuAdapterFactory>(af);
 
 			} catch (Error e) {
 				debug(e.message);
@@ -118,12 +114,7 @@ namespace RubricGtk {
 		public virtual void setup_shell() {
 
 			try {
-				var appwindow = container.resolve<Shell> ("shell") as Gtk.ApplicationWindow;
-				shell = appwindow as Rubric.Shell;
-				((Shell)appwindow).region_manager = container.resolve<Rubric.Regions.RegionManager>();
-				appwindow.application = this;
-				container.register_instance<Gtk.ApplicationWindow>(shell as Gtk.ApplicationWindow);
-				container.register_instance<Rubric.Shell>(shell);
+
 
 			} catch(Error e) {
 				error(e.message);
@@ -132,7 +123,7 @@ namespace RubricGtk {
 
 		public virtual void setup_modules() {
 			try {
-				var mmanager = container.resolve<Rubric.Modularity.ModuleManager>();
+				var mmanager = container.resolve<ModuleManager>();
 				mmanager.run();
 			} catch (Error e) {
 				debug(e.message);
@@ -147,9 +138,6 @@ namespace RubricGtk {
 				var mm = container.resolve<MenuManager>();
 				var app_menu = mm.find_menu ("appmenu") as GLib.MenuModel;
 
-				if(app_menu != null)
-					set_app_menu (app_menu);
-
 			} catch (Error e) {
 				debug(e.message);
 			}
@@ -159,7 +147,6 @@ namespace RubricGtk {
 			var action = new GLib.SimpleAction ("quit", null);
 			action.activate.connect (quit);
 			add_action (action);
-			set_accels_for_action ("app.quit", {"<Ctrl>Q"});
 		}
 
 		/**
@@ -167,8 +154,6 @@ namespace RubricGtk {
 		 */
 		public virtual void setup_dialog_service() {
 			try {
-				var ds = new GtkDialogService(container);
-				container.register_instance<DialogService>(ds);
 			} catch (Error e) {
 				debug(e.message);
 			}

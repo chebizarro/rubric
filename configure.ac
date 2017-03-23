@@ -94,7 +94,7 @@ GLIB_REQUIRED=2.40.0
 LIBRUBRIC_LIB_DIR=[${PWD}/librubric]
 AC_SUBST(LIBRUBRIC_LIB_DIR)
 
-pkg_modules="glib-2.0 gobject-2.0 gee-0.8 libxml-2.0 gobject-introspection-1.0"
+pkg_modules="glib-2.0 gobject-2.0 gee-0.8 libxml-2.0 gobject-introspection-1.0 libpeas-1.0"
 
 PKG_CHECK_MODULES([LIBRUBRIC], [$pkg_modules])
 
@@ -110,7 +110,7 @@ GTK_REQUIRED=3.10.0
 LIBRUBRIC_GTK_LIB_DIR=[${PWD}/librubric-gtk]
 AC_SUBST(LIBRUBRIC_GTK_LIB_DIR)
 
-pkg_gtk_modules="$pkg_modules gtk+-3.0 libpeas-1.0 libpeas-gtk-1.0"
+pkg_gtk_modules="$pkg_modules gtk+-3.0 libpeas-gtk-1.0"
 
 PKG_CHECK_MODULES([LIBRUBRIC_GTK], [$pkg_gtk_modules])
 
@@ -118,6 +118,20 @@ PKG_CHECK_MODULES([LIBRUBRIC_GTK], [$pkg_gtk_modules])
 AC_SUBST(pkg_gtk_modules)
 AC_SUBST(LIBRUBRIC_GTK_CFLAGS)
 AC_SUBST(LIBRUBRIC_GTK_LIBS)
+
+dnl === librubric-web ==================================================
+
+LIBRUBRIC_WEB_LIB_DIR=[${PWD}/librubric-gtk]
+AC_SUBST(LIBRUBRIC_WEB_LIB_DIR)
+
+pkg_web_modules="$pkg_modules libpeas-1.0"
+
+PKG_CHECK_MODULES([LIBRUBRIC_WEB], [$pkg_web_modules])
+
+# for older pkg-config macros (<0.24)
+AC_SUBST(pkg_web_modules)
+AC_SUBST(LIBRUBRIC_WEB_CFLAGS)
+AC_SUBST(LIBRUBRIC_WEB_LIBS)
 
 dnl === Tests ==========================================================
 
@@ -179,6 +193,7 @@ if test "x$enable_development" = "xyes"; then
 	dnl Remove all optimization flags from CFLAGS
 	LIBRUBRIC_CFLAGS="-Og $LIBRUBRIC_CFLAGS"
 	LIBRUBRIC_GTK_CFLAGS="-Og $LIBRUBRIC_GTK_CFLAGS"
+	LIBRUBRIC_WEB_CFLAGS="-Og $LIBRUBRIC_WEB_CFLAGS"
 	TESTS_CFLAGS="-Og $TESTS_CFLAGS"
 else
 	development_mode="no"
@@ -289,6 +304,8 @@ AC_CONFIG_FILES([
 	librubric/rubric-1.0.pc
 	librubric-gtk/Makefile
 	librubric-gtk/rubric-gtk-1.0.pc
+	librubric-web/Makefile
+	librubric-web/rubric-web-1.0.pc
 	librubric-orm/Makefile
 	librubric-orm/rubric-orm-1.0.pc
 	tools/Makefile

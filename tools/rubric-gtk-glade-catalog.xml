@@ -1,6 +1,5 @@
 <glade-catalog name="rubric-gtk" library="librubric-gtk.so" depends="gtk+">
 	<glade-widget-classes>
-		<glade-widget-class name="RubricGtkModularityModuleManager" generic-name="ModularityModuleManager" title="ModularityModuleManager"  parent="PeasEngine"/>
 		<glade-widget-class name="RubricGtkPMViewModel" generic-name="PMViewModel" title="PMViewModel"  top-level="True"/>
 		<glade-widget-class name="RubricGtkPMGtkDialogService" generic-name="PMGtkDialogService" title="PMGtkDialogService"  top-level="True"/>
 		<glade-widget-class name="RubricGtkRegionsRegionManager" generic-name="RegionsRegionManager" title="RegionsRegionManager"  top-level="True"/>
@@ -20,7 +19,6 @@
 	</glade-widget-classes>
 
 	<glade-widget-group name="rubric-gtk-widgets" title="RubricGtk Widgets">
-		<glade-widget-class-ref name="RubricGtkModularityModuleManager" />
 		<glade-widget-class-ref name="RubricGtkPMViewModel" />
 		<glade-widget-class-ref name="RubricGtkPMGtkDialogService" />
 		<glade-widget-class-ref name="RubricGtkRegionsRegionManager" />

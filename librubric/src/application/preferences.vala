@@ -79,7 +79,7 @@ namespace Rubric {
 				}
 			}
 		
-			foreach(string key in localsettings.list_keys()) {
+			foreach(string key in sschema.list_keys()) {
 				var pspec = objclass.find_property(key);
 				if (pspec != null) {
 					if((pspec.flags & ParamFlags.WRITABLE) != ParamFlags.WRITABLE)

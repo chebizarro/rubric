@@ -27,7 +27,7 @@ libsaleslib_la_CFLAGS = \
 	-shared
 
 libsaleslib_la_VALAFLAGS = \
-	--gresources $(top_srcdir)/examples/tienda/modules/sales/module.gresource.xml \
+	--gresources module.gresource.xml \
 	--pkg gio-2.0 \
 	--pkg gee-0.8 \
 	--pkg libxml-2.0 \
@@ -37,9 +37,9 @@ libsaleslib_la_VALAFLAGS = \
 	--pkg rubric-gtk-1.0 \
 	--pkg gom-1.0 \
 	--pkg sqlite3 \
-	--vapidir=$(top_srcdir)/librubric \
-	--vapidir=$(top_srcdir)/librubric-gtk \
-	--vapidir=$(top_srcdir)/vapi \
+	--vapidir=$(top_builddir)/librubric \
+	--vapidir=$(top_builddir)/librubric-gtk \
+	--vapidir=$(top_builddir)/vapi \
 	--target-glib=2.40.0 \
 	--library saleslib \
 	-H saleslib.h \
@@ -47,7 +47,7 @@ libsaleslib_la_VALAFLAGS = \
 	--gir=Sales-1.0.gir \
 	-g
 
-sales-resources.c: sales-module.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies --sourcedir=$(top_srcdir)/examples/tienda/modules/sales/ $(top_srcdir)/examples/tienda/modules/sales/sales-module.gresource.xml) libsaleslib.la
+sales-resources.c: sales-module.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies --sourcedir=$(top_srcdir)/examples/tienda/modules/sales/ $(top_srcdir)/examples/tienda/modules/sales/sales-module.gresource.xml)
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(top_srcdir)/examples/tienda/modules/sales/ --generate-source $<
 
 sales_moduledir = $(datadir)/tienda/modules/sales
@@ -75,7 +75,7 @@ libsales_la_CFLAGS = \
 	-shared
 
 libsales_la_VALAFLAGS = \
-	--gresources $(top_srcdir)/examples/tienda/modules/sales/module.gresource.xml \
+	--gresources sales-module.gresource.xml \
 	--pkg gio-2.0 \
 	--pkg gee-0.8 \
 	--pkg libxml-2.0 \
@@ -87,9 +87,9 @@ libsales_la_VALAFLAGS = \
 	--pkg sqlite3 \
 	--pkg saleslib-1.0 \
 	--vapidir=. \
-	--vapidir=$(top_srcdir)/librubric \
-	--vapidir=$(top_srcdir)/librubric-gtk \
-	--vapidir=$(top_srcdir)/vapi \
+	--vapidir=$(top_builddir)/librubric \
+	--vapidir=$(top_builddir)/librubric-gtk \
+	--vapidir=$(top_builddir)/vapi \
 	--target-glib=2.40.0 \
 	--library sales \
 	-g

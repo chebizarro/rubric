@@ -85,6 +85,21 @@ namespace Rubric {
 				recurse_resources(resource_path);
 		}
 
+		/**
+		 * Load the assembly's preferences
+		 */
+		public virtual void setup_preferences() {
+			try {
+				var prefs = new Preferences(this.assembly_id);
+				container.register_instance<Preferences>(prefs, this.assembly_id);
+				var prefdec = new PreferencesDecorator(container, prefs);
+				container.add_extension(prefdec);
+			} catch (Error e) {
+				debug(e.message);
+			}
+		}	
+
+
 		
 	}
 	

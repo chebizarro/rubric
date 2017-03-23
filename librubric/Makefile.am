@@ -33,6 +33,8 @@ librubric_la_SOURCES = \
 	src/modularity/module-catalog.vala \
 	src/modularity/module-manager.vala \
 	src/modularity/module-catalog-info.vala \
+	src/modularity/base-module.vala \
+	src/modularity/rubric-module-manager.vala \
 	src/navigation/navigable.vala \
 	src/navigation/navigator.vala \
 	src/navigation/navigation-service.vala \
@@ -58,10 +60,11 @@ librubric_la_VALAFLAGS = \
 	--pkg gee-0.8 \
 	--pkg gmodule-2.0 \
 	--pkg libxml-2.0 \
+	--pkg libpeas-1.0 \
 	--pkg gobject-introspection-1.0 \
-	--library rubric \
-	--shared-library librubric.so \
-	--vapi rubric-1.0.vapi \
+	--library=rubric \
+	--shared-library=librubric.so \
+	--vapi=rubric-1.0.vapi \
 	--target-glib=2.40.0 \
 	--gir=Rubric-1.0.gir \
 	--vapi-comments \
@@ -76,7 +79,8 @@ librubric_la_VALAFLAGS += \
 endif
 
 librubric_la_LDFLAGS = \
-	-shared
+	-shared \
+	-export-dynamic
 
 librubric_la_LIBADD = \
 	$(LIBRUBRIC_LIBS)
@@ -84,50 +88,54 @@ librubric_la_LIBADD = \
 librubric_la_CFLAGS = \
 	$(LIBRUBRIC_CFLAGS)
 
-librubric_la_includedir = $(includedir)/rubric
-librubric_la_include_HEADERS =  $(top_srcdir)/librubric/rubric.h
+librubric_la_headerdir = $(includedir)/rubric
+librubric_la_header_HEADERS = $(srcdir)/rubric.h
 
-pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = rubric-1.0.pc
+librubric_la_pkgconfigdir = $(libdir)/pkgconfig
+librubric_la_pkgconfig_DATA = rubric-1.0.pc
 
-# vapis
-vapidir = $(datadir)/vala/vapi
+librubric_la_vapidir = $(prefix)/share/vala/vapi
+librubric_la_vapi_DATA = $(srcdir)/rubric-1.0.vapi
 
-dist_vapi_DATA = \
-	rubric-1.0.vapi
+MAINTAINERCLEANFILES = \
+	$(librubric_la_pkgconfig_DATA) \
+	$(librubric_la_header_HEADERS) \
+	$(librubric_la_vapi_DATA)
 
-CLEANFILES =
+EXTRA_DIST = \
+	$(librubric_la_vapi_DATA) \
+	$(librubric_la_header_HEADERS)
+
+DISTCLEANFILES = \
+ 	$(librubric_la_pkgconfig_DATA)
 
 -include $(INTROSPECTION_MAKEFILE)
 if HAVE_INTROSPECTION
 
 Rubric-1.0.typelib: Rubric-1.0.gir
 	g-ir-compiler \
+		--includedir=$(top_builddir)/librubric \
 		--shared-library=librubric.so \
 		--output=$@ \
 		$<
 
-girdir = $(datadir)/gir-1.0
-gir_DATA = $(top_srcdir)/librubric/Rubric-1.0.gir
+librubric_la_girdir = $(datadir)/gir-1.0
+librubric_la_gir_DATA = $(srcdir)/Rubric-1.0.gir
 
-typelibdir = $(libdir)/girepository-1.0
-typelib_DATA = Rubric-1.0.typelib
+librubric_la_typelibdir = $(libdir)/girepository-1.0
+librubric_la_typelib_DATA = Rubric-1.0.typelib
 
-CLEANFILES += \
-	$(gir_DATA) \
-	$(typelib_DATA)
+CLEANFILES = $(librubric_la_typelib_DATA)
+
+GITIGNOREFILES = $(librubric_la_gir_DATA)
+
+EXTRA_DIST += \
+	$(librubric_la_gir_DATA)
+
+MAINTAINERCLEANFILES += \
+	$(librubric_la_gir_DATA) \
+	$(librubric_la_pkgconfig_DATA)
 
 endif
-
-CLEANFILES += \
-	$(librubric_la_SOURCES:.vala=.c) \
-	*.vapi \
-	*.gir \
-	*.h \
-	*.pc \
-	*.stamp
-
-MAINTAINERCLEANFILES = \
-	$(CLEANFILES)
 
 -include $(top_srcdir)/git.mk

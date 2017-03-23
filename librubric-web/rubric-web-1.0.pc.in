@@ -1,0 +1,14 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+datarootdir=@datarootdir@
+datadir=@datadir@
+includedir=@includedir@/rubric
+
+Name: Rubric Web
+Description: The Rubric Framework Web Extensions
+URL: https://github.com/valadate-project/rubric
+Version: @VERSION@
+Requires: @pkg_web_modules@
+Libs: -L${libdir} -lrubric-web-1.0
+Cflags: -I${includedir}
