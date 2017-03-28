@@ -19,13 +19,15 @@
 
 namespace Rubric.Messaging {
 
-	public errordomain Error {
+	//[GIR (name = "MessagingError")]
+	public errordomain MessagingError {
 		TYPE
 	}
 
+
 	public interface Observable : Object {
 		
-		public abstract T get_observer<T>() throws Messaging.Error;
+		public abstract T get_observer<T>() throws MessagingError;
 		
 	}
 

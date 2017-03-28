@@ -450,13 +450,13 @@ namespace Rubric {
 			return resolve_type(typeof(T), name, params).peek_pointer();
 		}
 
-		public Object resolvep(string typename, string? name = null) throws ContainerError {
-			return resolve_type_name(typename, name).get_object();
+		public Object resolvep(string tname, string? name = null) throws ContainerError {
+			return resolve_type_name(tname, name).get_object();
 		}
 
-		public Value resolve_type_name(string typename, string? name = null, Parameter[]? params = null)
+		public Value resolve_type_name(string tname, string? name = null, Parameter[]? params = null)
 			throws ContainerError {
-			return resolve_type(Type.from_name(typename), name, params);
+			return resolve_type(Type.from_name(tname), name, params);
 		}
 
 

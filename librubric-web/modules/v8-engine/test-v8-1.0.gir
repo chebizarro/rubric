@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<repository version="1.2" xmlns="http://www.gtk.org/introspection/core/1.0" xmlns:c="http://www.gtk.org/introspection/c/1.0" xmlns:glib="http://www.gtk.org/introspection/glib/1.0">
+<include name="Valadate" version="1.0"/>
+<include name="RubricWebV8" version="1.0"/>
+<package name="test-v8"/>
+<c:include name="tests/v8.h"/>
+<c:include name="v8-engine.h"/>
+<namespace name="test-v8" version="1.0" c:prefix="RubricWebV8">
+	<attribute name="ccode.gir-version" value="1.0"/>
+	<attribute name="ccode.lower-case-cprefix" value="rubric_web_v8_"/>
+	<attribute name="ccode.cprefix" value="RubricWebV8"/>
+	<attribute name="ccode.gir-namespace" value="RubricWebV8"/>
+	<class name="TestsV8JSEngine" c:type="RubricWebV8TestsV8JSEngine" glib:type-name="RubricWebV8TestsV8JSEngine" glib:get-type="rubric_web_v8_tests_v8_js_engine_get_type" glib:type-struct="TestsV8JSEngineClass" parent="Valadate.TestCase">
+		<field name="parent_instance">
+			<type name="Valadate.TestCase" c:type="ValadateFrameworkTestCase"/>
+		</field>
+		<field name="priv">
+			<type name="TestsV8JSEnginePrivate" c:type="RubricWebV8TestsV8JSEnginePrivate*"/>
+		</field>
+		<method name="test_new_engine" c:identifier="rubric_web_v8_tests_v8_js_engine_test_new_engine">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<constructor name="new" c:identifier="rubric_web_v8_tests_v8_js_engine_new">
+			<return-value transfer-ownership="full">
+				<type name="RubricWebV8.V8JSEngine" c:type="RubricWebV8TestsV8JSEngine*"/>
+			</return-value>
+		</constructor>
+	</class>
+	<record name="TestsV8JSEngineClass" c:type="RubricWebV8TestsV8JSEngineClass" glib:is-gtype-struct-for="V8JSEngine">
+		<field name="parent_class">
+			<type name="Valadate.TestCaseClass" c:type="ValadateFrameworkTestCaseClass"/>
+		</field>
+	</record>
+	<record name="TestsV8JSEnginePrivate" c:type="RubricWebV8TestsV8JSEnginePrivate" disguised="1"/>
+</namespace>
+</repository>

@@ -22,7 +22,7 @@
 
 namespace Rubric.Serialization.XmlSerializer {
 	
-	public errordomain Error {
+	public errordomain XmlError {
 		PROPERTY
 	}
 	
@@ -46,7 +46,7 @@ namespace Rubric.Serialization.XmlSerializer {
 		deserialize_methods.set(type, new MethodAdapter((owned)method));
 	}
 	
-	public static Value deserialize(Type type, Xml.Node* node, Container? container = null) throws Error {
+	public static Value deserialize(Type type, Xml.Node* node, Container? container = null) throws XmlError {
 		var ocl = (ObjectClass)type.class_ref();
 		var cntx = new Xml.XPath.Context (node->doc);
 		var basepath = node->get_path();
@@ -63,7 +63,7 @@ namespace Rubric.Serialization.XmlSerializer {
 				res->nodesetval->length() > 0) {
 
 				if (res->nodesetval->length() > 1)
-					throw new Error.PROPERTY("Multipe elements founds for property: %s", pspec.name);
+					throw new XmlError.PROPERTY("Multipe elements founds for property: %s", pspec.name);
 				
 				var objnode = res->nodesetval->item(0);
 				Value setval;

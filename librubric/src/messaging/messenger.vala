@@ -25,11 +25,11 @@ namespace Rubric.Messaging {
 		
 		private HashMap<Type, Observer> observers = new HashMap<Type, Observer>();
 		
-		public T get_observer<T>() throws Messaging.Error {
+		public T get_observer<T>() throws MessagingError {
 			Type t = typeof(T);
 			
 			if(!t.is_a(typeof(Observer)))
-				throw new Messaging.Error.TYPE("Type: %s is not an Event type", t.name());
+				throw new MessagingError.TYPE("Type: %s is not an Event type", t.name());
 			
 			lock(observers) {
 				if(!observers.has_key(t)) {

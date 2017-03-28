@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<repository version="1.2" xmlns="http://www.gtk.org/introspection/core/1.0" xmlns:c="http://www.gtk.org/introspection/c/1.0" xmlns:glib="http://www.gtk.org/introspection/glib/1.0">
+<include name="Valadate" version="1.0"/>
+<include name="RubricWebV8" version="1.0"/>
+<package name="test-v8"/>
+<c:include name="v8.h"/>
+<c:include name="v8-engine.h"/>
+<namespace name="test-v8" version="1.0" c:prefix="RubricWebV8">
+	<attribute name="ccode.gir-version" value="1.0"/>
+	<attribute name="ccode.lower-case-cprefix" value="rubric_web_v8_"/>
+	<attribute name="ccode.cprefix" value="RubricWebV8"/>
+	<attribute name="ccode.gir-namespace" value="RubricWebV8"/>
+	<class name="TestsV8JSEngine" c:type="RubricWebV8TestsV8JSEngine" glib:type-name="RubricWebV8TestsV8JSEngine" glib:get-type="rubric_web_v8_tests_v8_js_engine_get_type" glib:type-struct="TestsV8JSEngineClass" parent="Valadate.TestCase">
+		<field name="parent_instance">
+			<type name="Valadate.TestCase" c:type="ValadateFrameworkTestCase"/>
+		</field>
+		<field name="priv">
+			<type name="TestsV8JSEnginePrivate" c:type="RubricWebV8TestsV8JSEnginePrivate*"/>
+		</field>
+		<method name="test_new_engine" c:identifier="rubric_web_v8_tests_v8_js_engine_test_new_engine">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_eval_expression_null_result" c:identifier="rubric_web_v8_tests_v8_js_engine_test_eval_expression_null_result">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_eval_expression_bool_result" c:identifier="rubric_web_v8_tests_v8_js_engine_test_eval_expression_bool_result">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_eval_expression_integer_result" c:identifier="rubric_web_v8_tests_v8_js_engine_test_eval_expression_integer_result">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_eval_expression_double_result" c:identifier="rubric_web_v8_tests_v8_js_engine_test_eval_expression_double_result">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_eval_expression_string_result" c:identifier="rubric_web_v8_tests_v8_js_engine_test_eval_expression_string_result">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_eval_expression_unicode_string_result" c:identifier="rubric_web_v8_tests_v8_js_engine_test_eval_expression_unicode_string_result">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_execution_of_code" c:identifier="rubric_web_v8_tests_v8_js_engine_test_execution_of_code">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_execution_of_file" c:identifier="rubric_web_v8_tests_v8_js_engine_test_execution_of_file">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_calling_of_function_without_parameters" c:identifier="rubric_web_v8_tests_v8_js_engine_test_calling_of_function_without_parameters">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_calling_of_function_with_undefined_result" c:identifier="rubric_web_v8_tests_v8_js_engine_test_calling_of_function_with_undefined_result">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_calling_of_function_with_null_result" c:identifier="rubric_web_v8_tests_v8_js_engine_test_calling_of_function_with_null_result">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_calling_of_function_with_boolean_result" c:identifier="rubric_web_v8_tests_v8_js_engine_test_calling_of_function_with_boolean_result">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_calling_of_function_with_integer_result" c:identifier="rubric_web_v8_tests_v8_js_engine_test_calling_of_function_with_integer_result">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_calling_of_function_with_double_result" c:identifier="rubric_web_v8_tests_v8_js_engine_test_calling_of_function_with_double_result">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_calling_of_function_with_string_result" c:identifier="rubric_web_v8_tests_v8_js_engine_test_calling_of_function_with_string_result">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_calling_of_function_with_unicode_string_result" c:identifier="rubric_web_v8_tests_v8_js_engine_test_calling_of_function_with_unicode_string_result">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_calling_of_function_with_many_parameters" c:identifier="rubric_web_v8_tests_v8_js_engine_test_calling_of_function_with_many_parameters">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_calling_of_function_with_many_parameters_and_boolean_result" c:identifier="rubric_web_v8_tests_v8_js_engine_test_calling_of_function_with_many_parameters_and_boolean_result">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_calling_of_function_with_many_parameters_and_integer_result" c:identifier="rubric_web_v8_tests_v8_js_engine_test_calling_of_function_with_many_parameters_and_integer_result">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_calling_of_function_with_many_parameters_and_double_result" c:identifier="rubric_web_v8_tests_v8_js_engine_test_calling_of_function_with_many_parameters_and_double_result">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_calling_of_function_with_many_parameters_and_string_result" c:identifier="rubric_web_v8_tests_v8_js_engine_test_calling_of_function_with_many_parameters_and_string_result">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_calling_of_function_with_many_parameters_and_unicode_string_result" c:identifier="rubric_web_v8_tests_v8_js_engine_test_calling_of_function_with_many_parameters_and_unicode_string_result">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_setting_and_getting_variable_with_undefined" c:identifier="rubric_web_v8_tests_v8_js_engine_test_setting_and_getting_variable_with_undefined">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_setting_and_getting_variable_with_null" c:identifier="rubric_web_v8_tests_v8_js_engine_test_setting_and_getting_variable_with_null">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_setting_and_getting_variable_with_boolean" c:identifier="rubric_web_v8_tests_v8_js_engine_test_setting_and_getting_variable_with_boolean">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_setting_and_getting_variable_with_integer" c:identifier="rubric_web_v8_tests_v8_js_engine_test_setting_and_getting_variable_with_integer">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_setting_and_getting_variable_with_double" c:identifier="rubric_web_v8_tests_v8_js_engine_test_setting_and_getting_variable_with_double">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_setting_and_getting_variable_with_string" c:identifier="rubric_web_v8_tests_v8_js_engine_test_setting_and_getting_variable_with_string">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_setting_and_getting_variable_with_unicode_string" c:identifier="rubric_web_v8_tests_v8_js_engine_test_setting_and_getting_variable_with_unicode_string">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_removing_variable" c:identifier="rubric_web_v8_tests_v8_js_engine_test_removing_variable">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_garbage_collection" c:identifier="rubric_web_v8_tests_v8_js_engine_test_garbage_collection">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<constructor name="new" c:identifier="rubric_web_v8_tests_v8_js_engine_new">
+			<return-value transfer-ownership="full">
+				<type name="RubricWebV8.V8JSEngine" c:type="RubricWebV8TestsV8JSEngine*"/>
+			</return-value>
+		</constructor>
+	</class>
+	<record name="TestsV8JSEngineClass" c:type="RubricWebV8TestsV8JSEngineClass" glib:is-gtype-struct-for="V8JSEngine">
+		<field name="parent_class">
+			<type name="Valadate.TestCaseClass" c:type="ValadateFrameworkTestCaseClass"/>
+		</field>
+	</record>
+	<record name="TestsV8JSEnginePrivate" c:type="RubricWebV8TestsV8JSEnginePrivate" disguised="1"/>
+</namespace>
+</repository>

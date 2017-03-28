@@ -30,7 +30,7 @@ librubric_gtk_la_VALAFLAGS = \
 	--pkg rubric-1.0 \
 	--vapidir=$(top_builddir)/librubric \
 	--girdir=$(top_srcddir)/librubric \
-	--library=rubric-gtk \
+	--library=rubric-gtk-1.0 \
 	--vapi=rubric-gtk-1.0.vapi \
 	--target-glib=2.40.0 \
 	--gir=RubricGtk-1.0.gir \

@@ -63,12 +63,12 @@ namespace RubricGtk.Regions {
 			}
 		}
 
-		public Rubric.Regions.RegionManager add_to_region(string name, Rubric.PM.View view) throws Rubric.Regions.Error {
+		public Rubric.Regions.RegionManager add_to_region(string name, Rubric.PM.View view) throws RegionError {
 			if (_regions.contains(name)) {
 				var region = _regions.get(name);
 				return region.add_view(view);
 			}
-			throw new Rubric.Regions.Error.NOT_FOUND("The Region %s could not be located", name);
+			throw new RegionError.NOT_FOUND("The Region %s could not be located", name);
 		}
 		
 

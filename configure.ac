@@ -23,6 +23,7 @@ AM_PROG_AR
 AM_PATH_GLIB_2_0
 AC_PROG_CC
 AM_PROG_CC_C_O
+AC_PROG_CXX
 AC_PATH_PROG(VALAC, valac, valac)
 AC_SUBST(VALAC)
 
@@ -124,7 +125,7 @@ dnl === librubric-web ==================================================
 LIBRUBRIC_WEB_LIB_DIR=[${PWD}/librubric-gtk]
 AC_SUBST(LIBRUBRIC_WEB_LIB_DIR)
 
-pkg_web_modules="$pkg_modules libpeas-1.0"
+pkg_web_modules="$pkg_modules libpeas-1.0 valum-0.4"
 
 PKG_CHECK_MODULES([LIBRUBRIC_WEB], [$pkg_web_modules])
 
@@ -144,13 +145,15 @@ AC_SUBST(pkg_tests_modules)
 AC_SUBST(TESTS_CFLAGS)
 AC_SUBST(TESTS_LIBS)
 
-dnl === Check for Introspection/Test/Settings ==========================
+dnl === Check for Introspection/Test/Settings/Vapigen ==================
 
 GLIB_TESTS
 
 GOBJECT_INTROSPECTION_CHECK([1.38.0])
 
 GLIB_GSETTINGS
+
+VAPIGEN_CHECK()
 
 dnl === Documentation with Valadoc =====================================
 
@@ -308,10 +311,16 @@ AC_CONFIG_FILES([
 	librubric-web/rubric-web-1.0.pc
 	librubric-orm/Makefile
 	librubric-orm/rubric-orm-1.0.pc
+	librubric-web/modules/Makefile
+	librubric-web/modules/mujs-engine/Makefile
+	librubric-web/modules/mujs-engine/tests/Makefile
+	librubric-web/modules/v8-engine/Makefile
+	librubric-web/modules/v8-engine/tests/Makefile
 	tools/Makefile
 	tests/Makefile
 	tests/librubric/Makefile
 	tests/librubric-gtk/Makefile
+	tests/librubric-web/Makefile
 	po/Makefile.in
 	examples/Makefile
 	examples/tienda/Makefile
@@ -321,6 +330,8 @@ AC_CONFIG_FILES([
 	examples/tienda/modules/dashboard/Makefile
 	examples/tienda/modules/stock/Makefile
 	examples/tienda/modules/sales/Makefile
+	examples/travel-booker/Makefile
+
 ])
 
 AC_OUTPUT

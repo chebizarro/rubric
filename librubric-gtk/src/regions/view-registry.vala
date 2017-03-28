@@ -24,6 +24,7 @@ using Rubric.PM;
 using Rubric.Collections;
 using Rubric.Regions;
 
+[CCode (gir_namespace = "RubricGtk", gir_version = "1.0")]
 namespace RubricGtk.Regions {
 	
 	public class ViewRegistry : Object, Rubric.Regions.ViewRegistry {

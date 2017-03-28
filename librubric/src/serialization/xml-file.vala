@@ -62,8 +62,8 @@ namespace Rubric {
 			context = new Xml.XPath.Context (document);
 		}
 		
-		public void register_ns(string prefix, string namespace) {
-			context.register_ns(prefix, namespace);
+		public void register_ns(string prefix, string ns) {
+			context.register_ns(prefix, ns);
 		}
 
 		public XmlFile eval(string expression) {

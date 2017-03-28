@@ -23,6 +23,9 @@
 using Rubric;
 using Rubric.PM;
 using Rubric.Logging;
+using RubricWeb.Regions;
+using Valum;
+using VSGI;
 
 namespace RubricWeb {
 
@@ -83,18 +86,17 @@ namespace RubricWeb {
 		public virtual void setup_region_manager() {
 			
 			try {
-				/*
 				container.register<Rubric.Regions.ViewRegistry, ViewRegistry>();
 				var registry = container.resolve<Rubric.Regions.ViewRegistry>();
 				container.register<Rubric.Regions.RegionManager, RegionManager>();
 				var region_manager = container.resolve<Rubric.Regions.RegionManager>();
-				container.register<Rubric.Regions.AdapterFactory, AdapterFactory>();
-				var adapter_factory = container.resolve<Rubric.Regions.AdapterFactory>();
+				//container.register<Rubric.Regions.AdapterFactory, AdapterFactory>();
+				//var adapter_factory = container.resolve<Rubric.Regions.AdapterFactory>();
 				container.register_instance<Rubric.Regions.ViewRegistry>(registry);
-				container.register_instance<RubricGtk.Regions.ViewRegistry>(registry as RubricGtk.Regions.ViewRegistry);
+				container.register_instance<RubricWeb.Regions.ViewRegistry>(registry as RubricWeb.Regions.ViewRegistry);
 				container.register_instance<Rubric.Regions.RegionManager>(region_manager);
-				container.register_instance<Rubric.Regions.AdapterFactory>(adapter_factory);
-				*/
+				container.register_instance<RegionManager>(region_manager as RegionManager);
+				//container.register_instance<Rubric.Regions.AdapterFactory>(adapter_factory);
 			} catch (Error e) {
 				error(e.message);
 			}
@@ -162,7 +164,9 @@ namespace RubricWeb {
 
 		public override void activate () {
 			try {
-				container.resolve<Rubric.Shell>().present();
+				var region_manager = container.resolve<RegionManager>();
+				Server.new("http", handler : region_manager.router).run();
+				
 			} catch (Error e) {
 				error(e.message);
 			}

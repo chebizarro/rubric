@@ -13,7 +13,6 @@ librubric_la_SOURCES = \
 	src/application/preferences.vala \
 	src/collections/iterator.vala \
 	src/collections/observable-collection.vala \
-	src/collections/observable.vala \
 	src/collections/node.vala \
 	src/container/container.vala \
 	src/container/container-extension.vala \
@@ -62,7 +61,7 @@ librubric_la_VALAFLAGS = \
 	--pkg libxml-2.0 \
 	--pkg libpeas-1.0 \
 	--pkg gobject-introspection-1.0 \
-	--library=rubric \
+	--library=rubric-1.0 \
 	--shared-library=librubric.so \
 	--vapi=rubric-1.0.vapi \
 	--target-glib=2.40.0 \

@@ -1,9 +1,17 @@
+SUBDIRS = . modules
+
 lib_LTLIBRARIES = librubric-web.la
 
 librubric_web_la_SOURCES = \
 	assemblyinfo.vala \
 	src/application/application.vala \
-	src/application/shell.vala
+	src/application/shell.vala \
+	src/js/engine.vala \
+	src/js/base-engine.vala \
+	src/regions/region-manager.vala \
+	src/regions/view-registry.vala \
+	src/presentation/base-view.vala \
+	src/presentation/html-view.vala
 	
 librubric_web_la_VALAFLAGS = \
 	--pkg gio-2.0 \
@@ -11,9 +19,10 @@ librubric_web_la_VALAFLAGS = \
 	--pkg libxml-2.0 \
 	--pkg libpeas-1.0 \
 	--pkg rubric-1.0 \
+	--pkg valum-0.4 \
 	--vapidir=$(top_builddir)/librubric \
 	--girdir=$(top_builddir)/librubric \
-	--library rubric-web \
+	--library rubric-web-1.0 \
 	--vapi rubric-web-1.0.vapi \
 	--target-glib=2.40.0 \
 	--gir=RubricWeb-1.0.gir \
@@ -53,12 +62,12 @@ librubric_web_la_pkgconfigdir = $(libdir)/pkgconfig
 librubric_web_la_pkgconfig_DATA = rubric-web-1.0.pc
 
 librubric_web_la_vapidir = $(datadir)/vala/vapi
-librubric_web_la_vapi_DATA = rubric-web-1.0.vapi
+librubric_web_la_vapi_DATA = rubric-web-1.0.vapi rubric-web-1.0.deps
 
 MAINTAINERCLEANFILES = \
+	rubric-web-1.0.vapi \
 	$(librubric_web_la_pkgconfig_DATA) \
 	$(librubric_web_la_header_HEADERS) \
-	$(librubric_web_la_vapi_DATA) \
 	$(librubric_web_la_SOURCES:.vala=.c)
 	
 EXTRA_DIST = \
@@ -74,6 +83,7 @@ if HAVE_INTROSPECTION
 
 RubricWeb-1.0.typelib: RubricWeb-1.0.gir
 	g-ir-compiler \
+		--includedir=$(datadir)/gir-1.0 \
 		--includedir=$(top_srcdir)/librubric \
 		--shared-library=librubric-web.so.0 \
 		--output=$@ \
@@ -95,8 +105,7 @@ EXTRA_DIST += \
 	$(librubric_web_la_gir_DATA)
 	
 MAINTAINERCLEANFILES += \
-	$(librubric_web_la_gir_DATA) \
-	$(librubric_web_la_pkgconfig_DATA)
+	$(librubric_web_la_gir_DATA)
 
 endif
 

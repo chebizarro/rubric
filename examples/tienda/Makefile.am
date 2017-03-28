@@ -25,13 +25,13 @@ tienda_VALAFLAGS = \
 	--vapidir=$(top_builddir)/librubric \
 	--vapidir=$(top_builddir)/librubric-gtk \
 	--vapidir=$(top_builddir)/vapi \
-	--target-glib=2.40.0 \
-	-g
+	--target-glib=2.40.0
 
 if ENABLE_DEVELOPMENT_MODE
 
 tienda_VALAFLAGS += \
-	-D ENABLE_DEVELOPMENT_MODE
+	-D ENABLE_DEVELOPMENT_MODE \
+	-g
 
 endif
 

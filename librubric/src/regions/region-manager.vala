@@ -27,7 +27,7 @@ public delegate T Rubric.Resolver<T>();
 
 namespace Rubric.Regions {
 
-	public errordomain Error {
+	public errordomain RegionError {
 		NOT_FOUND
 	}
 	
@@ -36,7 +36,7 @@ namespace Rubric.Regions {
 		
 		public abstract RegionCollection regions {get;}
 
-		public abstract RegionManager add_to_region(string name, View view) throws Rubric.Regions.Error;
+		public abstract RegionManager add_to_region(string name, View view) throws RegionError;
 		
 		public virtual RegionManager register_view<T>(string regionname) {
 			return register_view_type(typeof(T), regionname);
