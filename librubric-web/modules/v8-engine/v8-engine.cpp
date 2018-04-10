@@ -72,13 +72,13 @@ static gpointer rubric_web_v8_engine_real_evaluate (RubricWebJSEngine* base, GTy
 static void rubric_web_v8_engine_real_execute (RubricWebJSEngine* base, const gchar* code, const gchar* doc_name, GError** error);
 static void rubric_web_v8_engine_real_execute_file (RubricWebJSEngine* base, const gchar* path, const gchar* encoding, GError** error);
 static void rubric_web_v8_engine_real_execute_resource (RubricWebJSEngine* base, const gchar* resource_name, GError** error);
-static gpointer rubric_web_v8_engine_real_call_function (RubricWebJSEngine* base, GType t_type, GBoxedCopyFunc t_dup_func, GDestroyNotify t_destroy_func, const gchar* function_name, GValue** args, int args_length1, GValue* _this);
+static gpointer rubric_web_v8_engine_real_call_function (RubricWebJSEngine* base, GType t_type, GBoxedCopyFunc t_dup_func, GDestroyNotify t_destroy_func, const gchar* function_name, GValue** args, int args_length1, GValue* _this, GError** error);
 static gboolean rubric_web_v8_engine_real_has_variable (RubricWebJSEngine* base, const gchar* name);
 static gpointer rubric_web_v8_engine_real_get_variable (RubricWebJSEngine* base, GType t_type, GBoxedCopyFunc t_dup_func, GDestroyNotify t_destroy_func, const gchar* name);
 static void rubric_web_v8_engine_real_set_variable (RubricWebJSEngine* base, const gchar* name, GValue* value);
 static void rubric_web_v8_engine_real_remove_variable (RubricWebJSEngine* base, const gchar* name);
-static void rubric_web_v8_engine_real_embed_host_object (RubricWebJSEngine* base, const gchar* name, GObject* value);
-static void rubric_web_v8_engine_real_embed_host_type (RubricWebJSEngine* base, const gchar* name, GType type);
+static void rubric_web_v8_engine_real_embed_host_object (RubricWebJSEngine* base, const gchar* name, GValue* value);
+static void rubric_web_v8_engine_real_embed_host_type (RubricWebJSEngine* base, GType t_type, GBoxedCopyFunc t_dup_func, GDestroyNotify t_destroy_func, const gchar* name);
 static void rubric_web_v8_engine_real_collect_garbage (RubricWebJSEngine* base);
 RubricWebV8Engine* rubric_web_v8_engine_new (void);
 RubricWebV8Engine* rubric_web_v8_engine_construct (GType object_type);
@@ -158,9 +158,6 @@ static gpointer rubric_web_v8_engine_real_evaluate (RubricWebJSEngine* base, GTy
 	Local<Context> context = v8::Local<v8::Context>::New(self->priv->isolate, self->priv->context);
 	Context::Scope context_scope(context);
 
-	if (context.IsEmpty())
-		fprintf(stderr, "Error creating context\n");
-
 	Local<String> source =
 		String::NewFromUtf8(self->priv->isolate, expression,
 							NewStringType::kNormal).ToLocalChecked();
@@ -201,8 +198,8 @@ static gpointer rubric_web_v8_engine_real_evaluate (RubricWebJSEngine* base, GTy
 
 static void rubric_web_v8_engine_real_execute (RubricWebJSEngine* base, const gchar* code, const gchar* doc_name, GError** error) {
 	RubricWebV8Engine * self;
-
 	self = (RubricWebV8Engine*) base;
+
 	g_return_if_fail (code != NULL);
 
 	rubric_web_v8_engine_real_evaluate(base, -1, NULL, NULL, code, NULL, error);
@@ -212,7 +209,6 @@ static void rubric_web_v8_engine_real_execute_file (RubricWebJSEngine* base, con
 	RubricWebV8Engine * self;
 	GError * _inner_error_ = NULL;
 	gchar* contents = NULL;
-	
 	self = (RubricWebV8Engine*) base;
 
 	g_return_if_fail (path != NULL);
@@ -227,18 +223,25 @@ static void rubric_web_v8_engine_real_execute_file (RubricWebJSEngine* base, con
 
 static void rubric_web_v8_engine_real_execute_resource (RubricWebJSEngine* base, const gchar* resource_name, GError** error) {
 	RubricWebV8Engine * self;
-
+	GError * _inner_error_ = NULL;
 	self = (RubricWebV8Engine*) base;
 
 	g_return_if_fail (resource_name != NULL);
+	
+	if(g_str_has_prefix(resource_name, "resource:///")) {
+		rubric_web_v8_engine_real_execute_file(base, resource_name, error);
+	} else {
+		const char* contents = g_strdup_printf("resource:///%s", resource_name);
+		rubric_web_v8_engine_real_execute_file(base, contents, error);
+		g_free(contents);
+	}
 }
 
-static gpointer rubric_web_v8_engine_real_call_function (RubricWebJSEngine* base, GType t_type, GBoxedCopyFunc t_dup_func, GDestroyNotify t_destroy_func, const gchar* function_name, GValue** args, int args_length1, GValue* _this) {
+static gpointer rubric_web_v8_engine_real_call_function (RubricWebJSEngine* base, GType t_type, GBoxedCopyFunc t_dup_func, GDestroyNotify t_destroy_func, const gchar* function_name, GValue** args, int args_length1, GValue* _this, GError** error) {
 	RubricWebV8Engine * self;
 	gpointer result = NULL;
 	GError * _inner_error_ = NULL;
 	gint nargs = 0;
-
 	self = (RubricWebV8Engine*) base;
 
 	g_return_val_if_fail (function_name != NULL, NULL);
@@ -280,8 +283,8 @@ static gpointer rubric_web_v8_engine_real_call_function (RubricWebJSEngine* base
 	js_result = func->Call(global, args_length1, fargs);
 
 	if (try_catch.HasCaught()) {
-		//_inner_error_ = report_exception(self->priv->isolate, &try_catch);
-		//g_propagate_error (error, _inner_error_);
+		_inner_error_ = report_exception(self->priv->isolate, &try_catch);
+		g_propagate_error (error, _inner_error_);
 		return NULL;
 	} else {
 		if (js_result->IsNull()) {
@@ -311,7 +314,6 @@ static gpointer rubric_web_v8_engine_real_call_function (RubricWebJSEngine* base
 static gboolean rubric_web_v8_engine_real_has_variable (RubricWebJSEngine* base, const gchar* name) {
 	RubricWebV8Engine * self;
 	gboolean result = FALSE;
-
 	self = (RubricWebV8Engine*) base;
 
 	g_return_val_if_fail (name != NULL, FALSE);
@@ -339,7 +341,6 @@ static gboolean rubric_web_v8_engine_real_has_variable (RubricWebJSEngine* base,
 static gpointer rubric_web_v8_engine_real_get_variable (RubricWebJSEngine* base, GType t_type, GBoxedCopyFunc t_dup_func, GDestroyNotify t_destroy_func, const gchar* name) {
 	RubricWebV8Engine * self;
 	gpointer result = NULL;
-
 	self = (RubricWebV8Engine*) base;
 
 	g_return_val_if_fail (name != NULL, NULL);
@@ -381,7 +382,6 @@ static gpointer rubric_web_v8_engine_real_get_variable (RubricWebJSEngine* base,
 
 static void rubric_web_v8_engine_real_set_variable (RubricWebJSEngine* base, const gchar* name, GValue* value) {
 	RubricWebV8Engine * self;
-
 	self = (RubricWebV8Engine*) base;
 
 	g_return_if_fail (name != NULL);
@@ -417,11 +417,9 @@ static void rubric_web_v8_engine_real_set_variable (RubricWebJSEngine* base, con
 
 static void rubric_web_v8_engine_real_remove_variable (RubricWebJSEngine* base, const gchar* name) {
 	RubricWebV8Engine * self;
-
 	self = (RubricWebV8Engine*) base;
 
 	g_return_if_fail (name != NULL);
-
 
 	Isolate::Scope isolateScope(self->priv->isolate);
 	HandleScope handle_scope(self->priv->isolate);
@@ -440,22 +438,25 @@ static void rubric_web_v8_engine_real_remove_variable (RubricWebJSEngine* base, 
 }
 
 
-static void rubric_web_v8_engine_real_embed_host_object (RubricWebJSEngine* base, const gchar* name, GObject* value) {
+static void rubric_web_v8_engine_real_embed_host_object (RubricWebJSEngine* base, const gchar* name, GValue* value) {
 	RubricWebV8Engine * self;
-
 	self = (RubricWebV8Engine*) base;
 
 	g_return_if_fail (name != NULL);
-
 	g_return_if_fail (value != NULL);
+
+
+
 
 }
 
 
-static void rubric_web_v8_engine_real_embed_host_type (RubricWebJSEngine* base, const gchar* name, GType type) {
+static void rubric_web_v8_engine_real_embed_host_type (RubricWebJSEngine* base, GType t_type, GBoxedCopyFunc t_dup_func, GDestroyNotify t_destroy_func, const gchar* name) {
 	RubricWebV8Engine * self;
-
 	self = (RubricWebV8Engine*) base;
+
+
+
 
 	g_return_if_fail (name != NULL);
 }
@@ -530,7 +531,6 @@ static void rubric_web_v8_engine_class_init (RubricWebV8EngineClass * klass) {
 	 * RubricWebV8Engine:supports-gc:
 	 */
 	g_object_class_install_property (G_OBJECT_CLASS (klass), RUBRIC_WEB_V8_ENGINE_SUPPORTS_GC, g_param_spec_boolean ("supports-gc", "supports-gc", "supports-gc", FALSE, G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB | G_PARAM_READABLE));
-
 
 	/* Initialize the V8 ICU */
 	V8::InitializeICU();

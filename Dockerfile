@@ -33,6 +33,9 @@ RUN echo "deb	http://www.valadate.org/repos/debian valadate main" >> /etc/apt/so
 # Get the latest version of vala	
 RUN add-apt-repository ppa:vala-team
 
+# Get the v8 5.2 build
+RUN add-apt-repository ppa:pinepain/libv8-5.2
+
 RUN apt-get update && apt-get install -y --fix-missing \
 	git \
     python3-pip \
@@ -65,7 +68,8 @@ RUN apt-get update && apt-get install -y --fix-missing \
 	libgom-1.0-dev \
 	libfcgi-dev \
     libglib2.0-dev \
-    libsoup2.4-dev
+    libsoup2.4-dev \
+    libmozjs-24-dev
 	
 RUN pip3 install gcovr meson
 

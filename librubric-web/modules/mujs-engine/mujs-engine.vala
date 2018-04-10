@@ -26,6 +26,17 @@ namespace RubricWeb.Mujs {
 	
 	public class Engine : Object, RubricWeb.JSEngine {
 		
+		private class Wrapper {
+			public Value object;
+			public Type gtype;
+			
+			public Wrapper(Value object) {
+				this.object = object;
+				gtype = object.type();
+			}
+		}
+		
+		
 		private const string _name = "MuJSEngine"; 
 
 		private const string _version = "1.0"; 
@@ -104,7 +115,7 @@ namespace RubricWeb.Mujs {
 			}
 		}
 		
-		public T call_function<T>(string function_name, Value?[]? args = null, Value? _this = null) {
+		public T call_function<T>(string function_name, Value?[]? args = null, Value? _this = null) throws EngineError {
 			
 			state.get_global(function_name);
 
@@ -241,12 +252,178 @@ namespace RubricWeb.Mujs {
 		public void remove_variable(string name) {
 			state.del_property(-1, name);
 		}
-		
-		public void embed_host_object(string name, Object value) {
+
+
+		private static void new_object(State state) {
+			
+			Value obj;
+			
+			obj = state.to_userdata(1, "object");
+			
+			if(obj.type().is_a(typeof(Type))) {
+				
+			} else {
+				
+			}
+			stderr.puts("---- Calling constructor\n");
+			
+			state.current_function();
+			state.get_property(-1, "prototype");
+			state.new_userdata("object", &obj, finalize_object);
+			
+		}
+
+		private static void finalize_object(State state) {
+			
+		}
+
+
+		private static void get_struct_field(State state) {
+			stderr.puts("---- Calling field ----------\n");
+			var obj = state.to_userdata(0, "object") as Wrapper;
+
+			state.current_function();
+			state.get_property(-1, "name");
+			
+			var fieldname = state.to_string(-1);
+			
+			var t = obj.gtype;
+			var repo = GI.Repository.get_default();
+			var info = repo.find_by_gtype(t);
+
+			if(info == null) {
+				foreach (var ns in repo.get_loaded_namespaces()) {
+					for(int i = 0; i < repo.get_n_infos(ns); i++) {
+						var nsinfo = repo.get_info(ns, i);
+						if(t.name() == ns + nsinfo.get_name()) {
+							info = (owned) nsinfo;
+							break;
+						}
+					}
+					if(info != null)
+						break;
+				}
+			}
+
+			if(info != null) {
+				var field = ((GI.StructInfo)info).find_field(fieldname);
+				if(field != null) {
+					GI.Argument arg = {};
+					if(field.get_field(obj.object.peek_pointer(), ref arg) ) {
+						debug("Field %s = %d", fieldname, (int)arg.v_pointer);
+						state.push_number((int)arg.v_pointer);
+					} else {
+						state.push_undefined();
+					}
+				}
+			}
+			
+		}
+
+		private static void set_struct_field(State state) {
+			var obj = state.to_userdata(0, "object") as Wrapper;
+			
+			var value = state.to_integer(1);
+			
+			state.current_function();
+			state.get_property(-1, "name");
+			
+			var fieldname = state.to_string(-1);
+			
+			var t = obj.gtype;
+			var repo = GI.Repository.get_default();
+			var info = repo.find_by_gtype(t);
+
+			if(info == null) {
+				foreach (var ns in repo.get_loaded_namespaces()) {
+					for(int i = 0; i < repo.get_n_infos(ns); i++) {
+						var nsinfo = repo.get_info(ns, i);
+						if(t.name() == ns + nsinfo.get_name()) {
+							info = (owned) nsinfo;
+							break;
+						}
+					}
+					if(info != null)
+						break;
+				}
+			}
+
+			if(info != null) {
+				var field = ((GI.StructInfo)info).find_field(fieldname);
+				if(field != null) {
+					GI.Argument arg = {};
+					arg.v_pointer = value.to_pointer();
+					
+					debug("%s", ((field.get_flags() & GI.FieldInfoFlags.WRITABLE) == 0).to_string());
+					
+					if(field.set_field(obj.object.peek_pointer(), arg))
+						debug("%s:%s", arg.v_uint32.to_string(), field.get_type().get_tag().to_string());
+					
+				}
+			}
+
+			//var t = obj.gtype;
+			//var info = repo.find_by_gtype(t);
+			
+			//stderr.printf("Setting field on %s\n", t.name());
 			
 		}
 		
-		public void embed_host_type(string name, Type type) {
+		public void embed_host_object(string name, Value value) {
+			
+			var repo = GI.Repository.get_default();
+			var t = value.type();
+			
+			state.get_global("Object");
+			state.get_property(-1, "prototype");
+			state.new_userdata("object", new Wrapper(value), finalize_object);
+
+			var info = repo.find_by_gtype(t);
+
+			if(info == null) {
+				foreach (var ns in repo.get_loaded_namespaces()) {
+					for(int i = 0; i < repo.get_n_infos(ns); i++) {
+						var nsinfo = repo.get_info(ns, i);
+						if(t.name() == ns + nsinfo.get_name()) {
+							info = (owned) nsinfo;
+							break;
+						}
+					}
+					if(info != null)
+						break;
+				}
+			}
+
+			if(info != null) {
+				var infotype = info.get_type();
+				switch (infotype) {
+					
+					case GI.InfoType.STRUCT :
+						for (int i=0; i < ((GI.StructInfo)info).get_n_fields(); i++) {
+							var field = ((GI.StructInfo)info).get_field(i);
+						
+							state.new_cfunction(get_struct_field,
+								"%s.prototype.%s".printf(name, field.get_name()), 0);
+							state.push_string(field.get_name());
+							state.set_property(-2, "name");
+							
+							state.new_cfunction(set_struct_field,
+								"%s.prototype.%s".printf(name, field.get_name()), 1);
+							state.push_string(field.get_name());
+							state.set_property(-2, "name");
+							
+							state.def_accessor(-3, field.get_name(), PropertyAttributeFlags.DONTENUM | PropertyAttributeFlags.DONTCONF );
+						}
+						break;
+						
+					default:
+						break;
+				}
+			}
+			state.def_global(name, PropertyAttributeFlags.DONTENUM);
+		}
+		
+		public void embed_host_type<T>(string name) {
 			
 		}
 		

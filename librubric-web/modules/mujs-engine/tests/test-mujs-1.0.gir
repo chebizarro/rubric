@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<repository version="1.2" xmlns="http://www.gtk.org/introspection/core/1.0" xmlns:c="http://www.gtk.org/introspection/c/1.0" xmlns:glib="http://www.gtk.org/introspection/glib/1.0">
+<include name="Valadate" version="1.0"/>
+<include name="RubricWeb" version="1.0"/>
+<package name="test-mujs"/>
+<c:include name="rubric-web.h"/>
+<c:include name="embed.h"/>
+<namespace name="test-mujs" version="1.0" c:prefix="RubricWeb">
+	<attribute name="ccode.gir-version" value="1.0"/>
+	<attribute name="ccode.gir-namespace" value="RubricWeb"/>
+	<class name="MujsTestsEmbededObjects" c:type="RubricWebMujsTestsEmbededObjects" glib:type-name="RubricWebMujsTestsEmbededObjects" glib:get-type="rubric_web_mujs_tests_embeded_objects_get_type" glib:type-struct="MujsTestsEmbededObjectsClass" parent="Valadate.TestCase">
+		<field name="parent_instance">
+			<type name="Valadate.TestCase" c:type="ValadateFrameworkTestCase"/>
+		</field>
+		<field name="priv">
+			<type name="MujsTestsEmbededObjectsPrivate" c:type="RubricWebMujsTestsEmbededObjectsPrivate*"/>
+		</field>
+		<method name="test_embedding_of_instance_of_custom_value_type_with_fields" c:identifier="rubric_web_mujs_tests_embeded_objects_test_embedding_of_instance_of_custom_value_type_with_fields">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_embedding_of_instance_of_custom_reference_type_with_fields" c:identifier="rubric_web_mujs_tests_embeded_objects_test_embedding_of_instance_of_custom_reference_type_with_fields">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="_test_embedding_of_instance_of_builtin_value_type_with_properties" c:identifier="_rubric_web_mujs_tests_embeded_objects_test_embedding_of_instance_of_builtin_value_type_with_properties">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="_test_embedding_of_instance_of_builtin_reference_type_with_properties" c:identifier="_rubric_web_mujs_tests_embeded_objects_test_embedding_of_instance_of_builtin_reference_type_with_properties">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_embedding_of_instance_of_custom_value_type_with_properties" c:identifier="rubric_web_mujs_tests_embeded_objects_test_embedding_of_instance_of_custom_value_type_with_properties">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_embedding_of_instance_of_custom_reference_type_with_properties" c:identifier="rubric_web_mujs_tests_embeded_objects_test_embedding_of_instance_of_custom_reference_type_with_properties">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_embedding_of_instance_of_builtin_value_type_with_methods" c:identifier="rubric_web_mujs_tests_embeded_objects_test_embedding_of_instance_of_builtin_value_type_with_methods">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_embedding_of_instance_of_builtin_reference_type_with_method" c:identifier="rubric_web_mujs_tests_embeded_objects_test_embedding_of_instance_of_builtin_reference_type_with_method">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_embedding_of_instance_of_custom_value_type_with_method" c:identifier="rubric_web_mujs_tests_embeded_objects_test_embedding_of_instance_of_custom_value_type_with_method">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="_test_embedding_of_instance_of_custom_reference_type_with_method" c:identifier="_rubric_web_mujs_tests_embeded_objects_test_embedding_of_instance_of_custom_reference_type_with_method">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="_test_embedding_of_instance_of_delegate_without_parameters" c:identifier="_rubric_web_mujs_tests_embeded_objects_test_embedding_of_instance_of_delegate_without_parameters">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="_test_embedding_of_instance_of_delegate_with_one_parameter" c:identifier="_rubric_web_mujs_tests_embeded_objects_test_embedding_of_instance_of_delegate_with_one_parameter">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="_test_embedding_of_instance_of_delegate_with_two_parameters" c:identifier="_rubric_web_mujs_tests_embeded_objects_test_embedding_of_instance_of_delegate_with_two_parameters">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_creating_an_instance_of_embedded_builtin_value_type" c:identifier="rubric_web_mujs_tests_embeded_objects_test_creating_an_instance_of_embedded_builtin_value_type">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="_test_creating_an_instance_of_embedded_builtin_reference_type" c:identifier="_rubric_web_mujs_tests_embeded_objects_test_creating_an_instance_of_embedded_builtin_reference_type">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_creating_an_instance_of_embedded_custom_value_type" c:identifier="rubric_web_mujs_tests_embeded_objects_test_creating_an_instance_of_embedded_custom_value_type">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_creating_an_instance_of_embedded_custom_reference_type" c:identifier="rubric_web_mujs_tests_embeded_objects_test_creating_an_instance_of_embedded_custom_reference_type">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="_test_embedding_of_builtin_reference_type_with_constants" c:identifier="_rubric_web_mujs_tests_embeded_objects_test_embedding_of_builtin_reference_type_with_constants">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_embedding_of_custom_value_type_with_constants" c:identifier="rubric_web_mujs_tests_embeded_objects_test_embedding_of_custom_value_type_with_constants">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_embedding_of_custom_reference_type_with_constant" c:identifier="rubric_web_mujs_tests_embeded_objects_test_embedding_of_custom_reference_type_with_constant">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="_test_embedding_of_builtin_value_type_with_field" c:identifier="_rubric_web_mujs_tests_embeded_objects_test_embedding_of_builtin_value_type_with_field">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="_test_embedding_of_builtin_reference_type_with_field" c:identifier="_rubric_web_mujs_tests_embeded_objects_test_embedding_of_builtin_reference_type_with_field">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_embedding_of_custom_value_type_with_field" c:identifier="rubric_web_mujs_tests_embeded_objects_test_embedding_of_custom_value_type_with_field">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_embedding_of_custom_reference_type_with_field" c:identifier="rubric_web_mujs_tests_embeded_objects_test_embedding_of_custom_reference_type_with_field">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="_test_embedding_of_builtin_value_type_with_property" c:identifier="_rubric_web_mujs_tests_embeded_objects_test_embedding_of_builtin_value_type_with_property">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="_test_embedding_of_builtin_reference_type_with_property" c:identifier="_rubric_web_mujs_tests_embeded_objects_test_embedding_of_builtin_reference_type_with_property">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_embedding_of_custom_value_type_with_property" c:identifier="rubric_web_mujs_tests_embeded_objects_test_embedding_of_custom_value_type_with_property">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="_test_embedding_of_custom_reference_type_with_property" c:identifier="_rubric_web_mujs_tests_embeded_objects_test_embedding_of_custom_reference_type_with_property">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_embedding_of_builtin_value_type_with_method" c:identifier="rubric_web_mujs_tests_embeded_objects_test_embedding_of_builtin_value_type_with_method">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="_test_embedding_of_builtin_reference_type_with_method" c:identifier="_rubric_web_mujs_tests_embeded_objects_test_embedding_of_builtin_reference_type_with_method">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_embedding_of_custom_value_type_with_method" c:identifier="rubric_web_mujs_tests_embeded_objects_test_embedding_of_custom_value_type_with_method">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<method name="test_embedding_of_custom_reference_type_with_method" c:identifier="rubric_web_mujs_tests_embeded_objects_test_embedding_of_custom_reference_type_with_method">
+			<return-value transfer-ownership="full">
+				<type name="none"/>
+			</return-value>
+		</method>
+		<constructor name="new" c:identifier="rubric_web_mujs_tests_embeded_objects_new">
+			<return-value transfer-ownership="full">
+				<type name="RubricWeb.EmbededObjects" c:type="RubricWebMujsTestsEmbededObjects*"/>
+			</return-value>
+		</constructor>
+	</class>
+	<record name="MujsTestsEmbededObjectsClass" c:type="RubricWebMujsTestsEmbededObjectsClass" glib:is-gtype-struct-for="EmbededObjects">
+		<field name="parent_class">
+			<type name="Valadate.TestCaseClass" c:type="ValadateFrameworkTestCaseClass"/>
+		</field>
+	</record>
+	<record name="MujsTestsEmbededObjectsPrivate" c:type="RubricWebMujsTestsEmbededObjectsPrivate" disguised="1"/>
+</namespace>
+</repository>

@@ -316,6 +316,7 @@ AC_CONFIG_FILES([
 	librubric-web/modules/mujs-engine/tests/Makefile
 	librubric-web/modules/v8-engine/Makefile
 	librubric-web/modules/v8-engine/tests/Makefile
+	librubric-web/modules/rubric-react/Makefile
 	tools/Makefile
 	tests/Makefile
 	tests/librubric/Makefile

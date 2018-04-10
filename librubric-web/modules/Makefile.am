@@ -1,1 +1,1 @@
-SUBDIRS = mujs-engine v8-engine
+SUBDIRS = mujs-engine v8-engine #rubric-react

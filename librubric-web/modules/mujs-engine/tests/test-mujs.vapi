@@ -4,66 +4,41 @@
 namespace RubricWeb {
 	namespace Mujs {
 		namespace Tests {
-			[CCode (cheader_filename = "mujs.h")]
-			public class Es5 : Valadate.Framework.TestCase {
-				public Es5 ();
-				public void _test_date_now_method_is_supported ();
-				public void test_array_every_method_is_supported ();
-				public void test_array_filter_method_is_supported ();
-				public void test_array_for_each_method_is_supported ();
-				public void test_array_index_of_method_is_supported ();
-				public void test_array_is_array_method_is_supported ();
-				public void test_array_last_index_of_method_is_supported ();
-				public void test_array_map_method_is_supported ();
-				public void test_array_reduce_method_is_supported ();
-				public void test_array_reduce_right_method_is_supported ();
-				public void test_array_some_method_is_supported ();
-				public void test_date_to_iso_string_method_is_supported ();
-				public void test_function_bind_is_supported ();
-				public void test_json_parse_method_is_supported ();
-				public void test_json_stringify_method_is_supported ();
-				public void test_object_create_method_is_supported ();
-				public void test_object_keys_method_is_supported ();
-				public void test_string_split_method ();
-				public void test_string_trim_method_is_supported ();
-			}
-			[CCode (cheader_filename = "mujs.h")]
-			public class MujsEngine : Valadate.Framework.TestCase {
-				public MujsEngine ();
-				public void _test_garbage_collection ();
-				public void test_calling_of_function_with_boolean_result ();
-				public void test_calling_of_function_with_double_result ();
-				public void test_calling_of_function_with_integer_result ();
-				public void test_calling_of_function_with_many_parameters ();
-				public void test_calling_of_function_with_many_parameters_and_boolean_result ();
-				public void test_calling_of_function_with_many_parameters_and_double_result ();
-				public void test_calling_of_function_with_many_parameters_and_integer_result ();
-				public void test_calling_of_function_with_many_parameters_and_string_result ();
-				public void test_calling_of_function_with_many_parameters_and_unicode_string_result ();
-				public void test_calling_of_function_with_null_result ();
-				public void test_calling_of_function_with_string_result ();
-				public void test_calling_of_function_with_undefined_result ();
-				public void test_calling_of_function_with_unicode_string_result ();
-				public void test_calling_of_function_without_parameters ();
-				public void test_eval_expression_bool_result ();
-				public void test_eval_expression_double_result ();
-				public void test_eval_expression_integer_result ();
-				public void test_eval_expression_null_result ();
-				public void test_eval_expression_string_result ();
-				public void test_eval_expression_unicode_string_result ();
-				public void test_execution_of_code ();
-				public void test_execution_of_file ();
-				public void test_mapping_error_during_evaluation_of_expression ();
-				public void test_mapping_error_during_execution_of_code ();
-				public void test_new_engine ();
-				public void test_removing_variable ();
-				public void test_setting_and_getting_variable_with_boolean ();
-				public void test_setting_and_getting_variable_with_double ();
-				public void test_setting_and_getting_variable_with_integer ();
-				public void test_setting_and_getting_variable_with_null ();
-				public void test_setting_and_getting_variable_with_string ();
-				public void test_setting_and_getting_variable_with_undefined ();
-				public void test_setting_and_getting_variable_with_unicode_string ();
+			[CCode (cheader_filename = "embed.h")]
+			public class EmbededObjects : Valadate.Framework.TestCase {
+				public EmbededObjects ();
+				public void _test_creating_an_instance_of_embedded_builtin_reference_type ();
+				public void _test_embedding_of_builtin_reference_type_with_constants ();
+				public void _test_embedding_of_builtin_reference_type_with_field ();
+				public void _test_embedding_of_builtin_reference_type_with_method ();
+				public void _test_embedding_of_builtin_reference_type_with_property ();
+				public void _test_embedding_of_builtin_value_type_with_field ();
+				public void _test_embedding_of_builtin_value_type_with_property ();
+				public void _test_embedding_of_custom_reference_type_with_property ();
+				public void _test_embedding_of_instance_of_builtin_reference_type_with_properties ();
+				public void _test_embedding_of_instance_of_builtin_value_type_with_properties ();
+				public void _test_embedding_of_instance_of_custom_reference_type_with_method ();
+				public void _test_embedding_of_instance_of_delegate_with_one_parameter ();
+				public void _test_embedding_of_instance_of_delegate_with_two_parameters ();
+				public void _test_embedding_of_instance_of_delegate_without_parameters ();
+				public void test_creating_an_instance_of_embedded_builtin_value_type ();
+				public void test_creating_an_instance_of_embedded_custom_reference_type ();
+				public void test_creating_an_instance_of_embedded_custom_value_type ();
+				public void test_embedding_of_builtin_value_type_with_method ();
+				public void test_embedding_of_custom_reference_type_with_constant ();
+				public void test_embedding_of_custom_reference_type_with_field ();
+				public void test_embedding_of_custom_reference_type_with_method ();
+				public void test_embedding_of_custom_value_type_with_constants ();
+				public void test_embedding_of_custom_value_type_with_field ();
+				public void test_embedding_of_custom_value_type_with_method ();
+				public void test_embedding_of_custom_value_type_with_property ();
+				public void test_embedding_of_instance_of_builtin_reference_type_with_method ();
+				public void test_embedding_of_instance_of_builtin_value_type_with_methods ();
+				public void test_embedding_of_instance_of_custom_reference_type_with_fields ();
+				public void test_embedding_of_instance_of_custom_reference_type_with_properties ();
+				public void test_embedding_of_instance_of_custom_value_type_with_fields ();
+				public void test_embedding_of_instance_of_custom_value_type_with_method ();
+				public void test_embedding_of_instance_of_custom_value_type_with_properties ();
 			}
 		}
 	}

@@ -8,6 +8,7 @@ librubric_web_la_SOURCES = \
 	src/application/shell.vala \
 	src/js/engine.vala \
 	src/js/base-engine.vala \
+	src/js/base-engine-set-property.c \
 	src/regions/region-manager.vala \
 	src/regions/view-registry.vala \
 	src/presentation/base-view.vala \

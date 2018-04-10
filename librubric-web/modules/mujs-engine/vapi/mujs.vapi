@@ -43,7 +43,6 @@ namespace Mujs {
 	[CCode (cname = "js_Delete", has_target = false)]
 	public delegate int Delete(State J, void *p, string name);
 
-
 	[CCode (cname = "js_State", free_function = "js_freestate")]
 	[Compact]
 	public class State {
@@ -264,7 +263,7 @@ namespace Mujs {
 		[CCode (cname = "js_newcfunction")]
 		public void new_cfunction(CFunction fun, string name, int length);
 
-		[CCode (cname = "jsnewcconstructor")]
+		[CCode (cname = "js_newcconstructor")]
 		public void new_cconstructor(CFunction fun, CFunction con, string name, int length);
 
 		[CCode (cname = "js_newuserdata")]
@@ -406,9 +405,6 @@ namespace Mujs {
 		public int strict_equal();
 
 		[CCode (cname = "js_instanceof")]
-		public int instance_of();
-		
-		
+		public int instance_of();	
 	}
-
 }

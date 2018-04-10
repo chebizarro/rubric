@@ -25,7 +25,8 @@ namespace RubricWeb {
 	public errordomain EngineError {
 		EVAL,
 		EXEC,
-		RESOURCE
+		RESOURCE,
+		FUNCTION
 	}
 	
 	public class Undefined {
@@ -61,7 +62,7 @@ namespace RubricWeb {
 		
 		public abstract void execute_resource(string resource_name) throws EngineError;
 		
-		public abstract T call_function<T>(string function_name, Value?[]? args = null, Value? _this = null);
+		public abstract T call_function<T>(string function_name, Value?[]? args = null, Value? _this = null) throws EngineError;
 		
 		public abstract bool has_variable(string name);
 		
@@ -71,9 +72,9 @@ namespace RubricWeb {
 		
 		public abstract void remove_variable(string name);
 		
-		public abstract void embed_host_object(string name, Object value);
+		public abstract void embed_host_object(string name, Value value);
 		
-		public abstract void embed_host_type(string name, Type type);
+		public abstract void embed_host_type<T>(string name);
 		
 		public abstract void collect_garbage(); 
 		

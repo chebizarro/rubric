@@ -1,0 +1,17 @@
+[Plugin]
+Module=gecko-engine
+Depends=
+Loader=C
+_Name=Dashboard
+_Description=This module provides the Dashboard for the Tienda application
+Authors=Chris Daley <chebizarro@gmail.com>
+_Copyright=Copyright © 20016 Chris Daley
+Website=https://github.com/valadate-project/rubric
+Help=
+Help-GNOME=
+Help-Windows=
+Help-MacOS-X=
+Hidden=true
+Icon=
+Builtin=false
+Version=1.0
